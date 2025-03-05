@@ -1,2 +1,2 @@
-export { Chat } from './ui/Chat/Chat'
-export { ChatInput } from './ui/ChatInput/ChatInput'
+export { ChatMessage } from './chatMessage/ui/ChatMessage'
+export { ChatInput } from './chatInput/ui/ChatInput'

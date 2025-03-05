@@ -1,10 +1,10 @@
-import { ChatDto } from '../../types'
+import { ChatMessageDto } from '../../types'
 
-interface ChatProps {
-  chat: ChatDto
+interface ChatMessageProps {
+  chat: ChatMessageDto
 }
 
-export function Chat(props: ChatProps) {
+export function ChatMessage(props: ChatMessageProps) {
   const { chat } = props
   const { senderId, content } = chat
   return (
