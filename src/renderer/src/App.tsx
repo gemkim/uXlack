@@ -1,5 +1,11 @@
+import { MainPage } from './pages/main'
+
 function App(): JSX.Element {
-  return <></>
+  return (
+    <>
+      <MainPage />
+    </>
+  )
 }
 
 export default App
