@@ -12,7 +12,7 @@ export function ChatSection(props: ChatSectionProps) {
       {/* 채팅 내용 영역 */}
       <div className="gap-6 flex flex-col max-w-[90%]">
         {chatList.map((chat) => (
-          <ChatMessage chat={chat} key={chat.chatId} />
+          <ChatMessage chat={chat} key={chat.id} />
         ))}
       </div>
       {/* 채팅 입력 영역 */}
