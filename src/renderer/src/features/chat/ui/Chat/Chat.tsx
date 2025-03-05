@@ -1,4 +1,4 @@
-import { ChatDto } from '../types'
+import { ChatDto } from '../../types'
 
 interface ChatProps {
   chat: ChatDto

@@ -1,5 +1,5 @@
-import { ChatDto } from '@renderer/features/chat/ui/Chat/types'
-import { Chat } from '@renderer/features/chat/ui/Chat/ui/Chat'
+import { Chat, ChatInput } from '@renderer/features/chat'
+import { ChatDto } from '@renderer/features/chat/types'
 
 const TEMP_CHAT_LIST: ChatDto[] = [
   {
@@ -51,11 +51,16 @@ const TEMP_CHAT_LIST: ChatDto[] = [
 
 export function ChatSection() {
   return (
-    <div className="bg-black flex-1 text-white p-4 overflow-y-auto">
-      <div className="gap-6 flex flex-col">
+    <div className="bg-black flex-1 text-white p-4 overflow-y-auto flex flex-col">
+      {/* 채팅 내용 영역 */}
+      <div className="gap-6 flex flex-col max-w-[90%]">
         {TEMP_CHAT_LIST.map((chat) => (
           <Chat chat={chat} key={chat.chatId} />
         ))}
+      </div>
+      {/* 채팅 입력 영역 */}
+      <div className="mt-auto">
+        <ChatInput />
       </div>
     </div>
   )
