@@ -7,7 +7,8 @@ interface ProjectStore {
   actions: {
     addProject: (project: Project) => void
     removeProject: (projectId: string) => void
-    setSelectedProject: (projectId: string | null) => void
+    setProjectList: (projectList: Project[]) => void
+    setSelectedProjectId: (projectId: string | null) => void
   }
 }
 
@@ -20,9 +21,11 @@ const useProjectStore = create<ProjectStore>((set) => ({
       set((state) => ({
         projectList: state.projectList.filter((project) => project.id !== projectId)
       })),
-    setSelectedProject: (projectId) => set({ selectedProjectId: projectId })
+    setProjectList: (projectList) => set({ projectList }),
+    setSelectedProjectId: (projectId) => set({ selectedProjectId: projectId })
   }
 }))
 
 export const useProjectList = () => useProjectStore((state) => state.projectList)
+export const useSelectedProjectId = () => useProjectStore((state) => state.selectedProjectId)
 export const useProjectActions = () => useProjectStore((state) => state.actions)
