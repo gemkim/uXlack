@@ -1,0 +1,24 @@
+{
+  "user": [],
+  "project": [
+    {
+      "id": "0",
+      "name": "Genesis",
+      "memberList": [],
+      "timeStamp": 21323213
+    },
+    {
+      "id": "1",
+      "name": "Hyundai",
+      "memberList": [],
+      "timeStamp": 21323213
+    },
+    {
+      "id": "2",
+      "name": "WorldWide",
+      "memberList": [],
+      "timeStamp": 21323213
+    }
+  ],
+  "chat": []
+}
