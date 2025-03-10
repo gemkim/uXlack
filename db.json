@@ -1,23 +1,11 @@
 {
-  "user": [],
-  "project": [
+  "user": [
     {
-      "id": "0",
-      "name": "Genesis",
-      "memberList": [],
-      "timeStamp": 21323213
-    },
-    {
-      "id": "1",
-      "name": "Hyundai",
-      "memberList": [],
-      "timeStamp": 21323213
-    },
-    {
-      "id": "2",
-      "name": "WorldWide",
-      "memberList": [],
-      "timeStamp": 21323213
+      "id": "1741567726457",
+      "registerAt": 1741567726457,
+      "account": "ㅁㄴㅇ",
+      "password": "ㅁㄴㅁㄴㅇ",
+      "name": "ㅁㄴㅇㅁㄴㅇ"
     }
   ],
   "chat": []

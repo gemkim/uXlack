@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import { MainPage } from './pages/main'
-import { useFetch } from './shared/hooks/useFetch'
 import { Project, useProjectActions } from './entities/project'
+import { LandingPage } from './pages/landing'
+import { useFetch } from './shared/hooks/useFetch'
 
 function App(): JSX.Element {
   const { data: projectData } = useFetch<Project[]>('project')
@@ -22,7 +22,8 @@ function App(): JSX.Element {
 
   return (
     <>
-      <MainPage />
+      {/* <MainPage /> */}
+      <LandingPage />
     </>
   )
 }
