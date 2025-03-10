@@ -1,11 +1,23 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
-import { join } from 'path'
-import { electronApp, optimizer, is } from '@electron-toolkit/utils'
+import { electronApp, is, optimizer } from '@electron-toolkit/utils'
+import { BrowserWindow, app, ipcMain } from 'electron'
+import path, { join } from 'path'
 import icon from '../../resources/icon.png?asset'
+
+let mainWindow
+
+if (process.defaultApp) {
+  if (process.argv.length >= 2) {
+    app.setAsDefaultProtocolClient('electron-fiddle', process.execPath, [
+      path.resolve(process.argv[1])
+    ])
+  } else {
+    app.setAsDefaultProtocolClient('electron-fiddle')
+  }
+}
 
 function createWindow(): void {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 900,
     height: 670,
     show: false,
@@ -21,11 +33,20 @@ function createWindow(): void {
     mainWindow.show()
   })
 
-  mainWindow.webContents.setWindowOpenHandler((details) => {
-    shell.openExternal(details.url)
-    return { action: 'deny' }
-  })
+  // mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+  //   // 구글 인증 관련 URL 허용
+  //   console.log(url)
+  //   if (
+  //     url.includes('accounts.google.com') ||
+  //     url.includes('googleapis.com') ||
+  //     url.includes('slack-68d4d.firebaseapp.com')
+  //   ) {
+  //     return { action: 'allow' }
+  //   }
+  //   return { action: 'deny' }
+  // })
 
+  console.log(is.dev)
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
