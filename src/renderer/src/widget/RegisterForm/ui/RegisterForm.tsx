@@ -18,6 +18,7 @@ export function RegisterForm() {
       alert('회원가입 실패')
     }
   }
+
   return (
     <div>
       <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
