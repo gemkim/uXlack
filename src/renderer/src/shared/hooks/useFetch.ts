@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { fetchApi } from '../lib/api'
 
 type Endpoint = 'project'
 
-export function useFetch<T>(endpoint: Endpoint) {
+export function useFetch<T>(endpoint: Endpoint, deps: React.DependencyList = []) {
   const [data, setData] = useState<T | null>(null)
 
   useEffect(() => {
     let ignore = false
+    if (ignore) return
 
     fetchApi.get(`/${endpoint}`).then((res) => {
       if (!ignore) {
@@ -18,7 +19,7 @@ export function useFetch<T>(endpoint: Endpoint) {
     return () => {
       ignore = true
     }
-  }, [endpoint])
+  }, [endpoint, ...deps])
 
   return { data }
 }
