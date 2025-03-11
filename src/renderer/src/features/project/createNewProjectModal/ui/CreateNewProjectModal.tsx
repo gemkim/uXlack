@@ -16,7 +16,8 @@ export function CreateNewProjectModal(props: OverlayProps) {
       ...data,
       id: new Date().getTime().toString(),
       timeStamp: new Date().getTime(),
-      memberList: [user.id]
+      memberList: [user.id],
+      messageList: []
     }
 
     await createProject(newProject)

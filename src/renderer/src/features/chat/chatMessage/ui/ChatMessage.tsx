@@ -1,4 +1,4 @@
-import { ChatMessageDto } from '../../types'
+import { ChatMessageDto } from '@renderer/entities/chat'
 
 interface ChatMessageProps {
   chat: ChatMessageDto

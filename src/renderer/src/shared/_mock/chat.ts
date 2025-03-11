@@ -1,4 +1,4 @@
-import { ChatMessageDto } from '@renderer/features/chat/types'
+import { ChatMessageDto } from '@renderer/entities/chat/types'
 
 export const TEMP_CHAT_LIST: ChatMessageDto[] = [
   {
