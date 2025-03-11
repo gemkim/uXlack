@@ -21,7 +21,9 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
 
     if (!ignore) {
       setProjectList(projectData)
-      setSelectedProjectId(projectData[0].id)
+      if (projectData[0]) {
+        setSelectedProjectId(projectData[0].id)
+      }
     }
 
     return () => {
