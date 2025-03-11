@@ -1,4 +1,4 @@
-export interface Project {
+export interface ProjectDto {
   id: string
   name: string
   memberList: unknown[]

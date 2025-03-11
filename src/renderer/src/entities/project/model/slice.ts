@@ -1,13 +1,13 @@
 import { create } from 'zustand'
-import type { Project } from './types'
+import type { ProjectDto } from './types'
 
 interface ProjectStore {
-  projectList: Project[]
+  projectList: ProjectDto[]
   selectedProjectId: string | null
   actions: {
-    addProject: (project: Project) => void
+    addProject: (project: ProjectDto) => void
     removeProject: (projectId: string) => void
-    setProjectList: (projectList: Project[]) => void
+    setProjectList: (projectList: ProjectDto[]) => void
     setSelectedProjectId: (projectId: string | null) => void
   }
 }
