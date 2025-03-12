@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-const express = require('express')
-const http = require('http')
-const socketIo = require('socket.io')
+import express from 'express'
+import http from 'http'
+import { Server } from 'socket.io'
 
 const app = express()
 const server = http.createServer(app)
-const io = socketIo(server, {
+const io = new Server(server, {
   cors: {
     origin: '*',
     methods: ['GET', 'POST']
@@ -20,6 +20,9 @@ io.on('connection', (socket) => {
 
   socket.on('user_join', (username) => {
     users[socket.id] = username
+
+    console.log('userId :', username)
+
     io.emit('user_joined', { username, users: Object.values(users) })
   })
 
@@ -29,12 +32,6 @@ io.on('connection', (socket) => {
       sender: users[socket.id],
       timestamp: new Date().toISOString()
     })
-  })
-
-  socket.on('disconnect', () => {
-    const username = users[socket.id]
-    delete users[socket.id]
-    io.emit('user_left', { username, users: Object.values(users) })
   })
 })
 
