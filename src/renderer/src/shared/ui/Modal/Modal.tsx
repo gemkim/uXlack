@@ -21,7 +21,7 @@ export function Modal(props: OverlayProps) {
     <div
       onClick={handleBackgroundClick}
       className={cn(
-        'fixed cursor-pointer w-screen h-screen transition-all bg-black/50 left-0 top-0 flex justify-center items-center',
+        'fixed  w-screen h-screen transition-all bg-black/50 left-0 top-0 flex justify-center items-center',
         !isOpen && 'opacity-0 pointer-events-none'
       )}
     >

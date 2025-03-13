@@ -7,7 +7,7 @@ export function ProjectIcon(props: ProjectIconProps) {
   return (
     <button
       className={cn(
-        'size-[50px] bg-amber-50  cursor-pointer transition-all rounded-[25px] hover:rounded-2xl hover:bg-blue-400 duration-200',
+        'size-[50px] bg-amber-50   transition-all rounded-[25px] hover:rounded-2xl hover:bg-blue-400 duration-200',
         className
       )}
       {...attrs}

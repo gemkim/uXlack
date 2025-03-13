@@ -23,10 +23,7 @@ export function MainNavigator() {
 
   return (
     <div className="py-4 h-screen bg-black flex flex-col">
-      <button
-        onClick={handleNewProjectClick}
-        className="text-white p-2 border text-sm cursor-pointer "
-      >
+      <button onClick={handleNewProjectClick} className="text-white p-2 border text-sm  ">
         새 프로젝트
       </button>
       <div className="my-4 w-full h-1 border-t border-white"></div>
