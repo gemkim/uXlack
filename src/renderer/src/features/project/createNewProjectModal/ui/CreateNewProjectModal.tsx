@@ -1,4 +1,6 @@
 import { useUser } from '@renderer/entities/auth'
+import { useSocket } from '@renderer/entities/chat'
+import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
 import { ProjectDto, createProject, useProjectActions } from '@renderer/entities/project'
 import { Form, FormField, Modal, OverlayProps } from '@renderer/shared/ui'
 
@@ -8,20 +10,25 @@ export function CreateNewProjectModal(props: OverlayProps) {
   const { close } = props
   const user = useUser()
   const { addProject } = useProjectActions()
+  const socket = useSocket()
 
   async function onSubmit(data: ProjectDto) {
     if (!user) return
+    if (!socket) return
+
+    const idNumb = new Date().getTime()
 
     const newProject: ProjectDto = {
       ...data,
-      id: new Date().getTime().toString(),
-      timeStamp: new Date().getTime(),
+      id: idNumb.toString(),
+      timeStamp: idNumb,
       memberList: [user.id],
       messageList: []
     }
 
     await createProject(newProject)
     addProject(newProject)
+    socket.emit(SOCKET_EVENT.join, [idNumb.toString()])
     close()
   }
   return (
