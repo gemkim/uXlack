@@ -4,6 +4,14 @@
 @import 'tailwindcss/preflight.css' layer(base);
 @import 'tailwindcss/utilities.css' layer(utilities);
 
+:root {
+  --frame-height: 30px;
+}
+@theme {
+  --height-screen: calc(100vh - var(--frame-height));
+  --height-frame: var(--frame-height);
+}
+
 @layer base {
   button {
     cursor: pointer;
