@@ -7,6 +7,7 @@ interface ChatMessageProps {
 export function ChatMessage(props: ChatMessageProps) {
   const { chat } = props
   const { senderId, content } = chat
+
   return (
     <div className="flex w-full gap-4 text-sm">
       {/* 프사 */}

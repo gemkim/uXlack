@@ -13,6 +13,72 @@
       "account": "test",
       "password": "test123",
       "name": "테스트"
+    },
+    {
+      "id": "1741761970242",
+      "registerAt": 1741761970242,
+      "account": "test2",
+      "password": "123",
+      "name": "윤"
+    }
+  ],
+  "project": [
+    {
+      "id": "1741668802089",
+      "name": "현대닷컴",
+      "timeStamp": 1741668802089,
+      "memberList": ["1741570348500"],
+      "messageList": [
+        {
+          "id": "msg_001",
+          "chatId": "1741668802089",
+          "senderId": "user_001",
+          "content": "현대닷컴 입니다 ",
+          "timeStamp": 1709635200,
+          "types": "text",
+          "status": "sent"
+        }
+      ]
+    },
+    {
+      "id": "1741668821813",
+      "name": "제네시스",
+      "timeStamp": 1741668821813,
+      "memberList": ["1741570348500"],
+      "messageList": [
+        {
+          "id": "msg_001",
+          "chatId": "1741668821813",
+          "senderId": "user_001",
+          "content": "제네시스 입니다 ",
+          "timeStamp": 170935200,
+          "types": "text",
+          "status": "sent"
+        },
+        {
+          "id": "msg_001",
+          "chatId": "1741668821813",
+          "senderId": "user_001",
+          "content": "제네시스 입니다 ",
+          "timeStamp": 170963520,
+          "types": "text",
+          "status": "sent"
+        }
+      ]
+    },
+    {
+      "id": "1741668827351",
+      "name": "따따엔",
+      "timeStamp": 1741668827351,
+      "memberList": ["1741570348500"],
+      "messageList": []
+    },
+    {
+      "id": "1741669143189",
+      "name": "기아",
+      "timeStamp": 1741669143189,
+      "memberList": ["1741570348500"],
+      "messageList": []
     }
   ],
   "chat": []
