@@ -28,9 +28,11 @@ export function LoginForm() {
   }
 
   return (
-    <div>
+    <div className="h-full">
       <Form fieldList={FORM_FIELD_LIST} onSubmit={onSubmit}>
-        <Button type="submit">로그인</Button>
+        <Button type="submit" className="mt-auto mb-8">
+          로그인
+        </Button>
       </Form>
     </div>
   )

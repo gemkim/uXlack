@@ -7,7 +7,7 @@ export function Form(props: FormProps) {
   const { register, handleSubmit } = useForm()
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="h-full flex flex-col gap-4">
       {fieldList.map((field, idx) => (
         <div className="flex flex-col" key={idx}>
           <label>{field.displayName}</label>
