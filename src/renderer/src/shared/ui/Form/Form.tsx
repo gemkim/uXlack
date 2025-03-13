@@ -11,7 +11,7 @@ export function Form(props: FormProps) {
       {fieldList.map((field, idx) => (
         <div className="flex flex-col" key={idx}>
           <label>{field.displayName}</label>
-          <Input {...register(field.registerName)} type={field.type ? field.type : 'text'} />
+          <Input register={register(field.registerName)} type={field.type ? field.type : 'text'} />
         </div>
       ))}
       {children ? (
