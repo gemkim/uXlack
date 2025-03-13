@@ -20,7 +20,8 @@
     "build:mac": "electron-vite build && electron-builder --mac",
     "build:linux": "electron-vite build && electron-builder --linux",
     "db": "npx json-server --watch db.json",
-    "server": "ts-node ./backend/server.js"
+    "server": "ts-node ./backend/server.js",
+    "all": "concurrently \"npm run dev\" \"npm run db\" \"npm run server\""
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
@@ -47,6 +48,7 @@
     "@types/react-dom": "^18.3.5",
     "@types/webpack-env": "^1.18.8",
     "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
     "electron": "^34.2.0",
     "electron-builder": "^25.1.8",
     "electron-vite": "^3.0.0",
