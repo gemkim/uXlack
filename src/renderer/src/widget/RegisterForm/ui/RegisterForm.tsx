@@ -1,8 +1,13 @@
 import { RegisterDto, UserDto, createUserAccount } from '@renderer/entities/auth'
-import { useForm } from 'react-hook-form'
-export function RegisterForm() {
-  const { register, handleSubmit } = useForm<RegisterDto>()
+import { Button, Form, FormField } from '@renderer/shared/ui'
 
+const FORM_FIELD_LIST: FormField[] = [
+  { displayName: '계정', registerName: 'account' },
+  { displayName: '비밀번호', registerName: 'password', type: 'password' },
+  { displayName: '이름', registerName: 'name' }
+]
+
+export function RegisterForm() {
   async function onSubmit(data: RegisterDto) {
     const newUser: UserDto = {
       id: new Date().getTime().toString(),
@@ -21,17 +26,9 @@ export function RegisterForm() {
 
   return (
     <div>
-      <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-        <span>아이디</span>
-        <input className="bg-white rounded-2xl" {...register('account')} />
-        <span>패스워드</span>
-        <input className="bg-white rounded-2xl" {...register('password')} />
-        <span>이름</span>
-        <input className="bg-white rounded-2xl" {...register('name')} />
-        <button type="submit" className="cursor-pointer">
-          회원가입
-        </button>
-      </form>
+      <Form fieldList={FORM_FIELD_LIST} onSubmit={onSubmit}>
+        <Button type="submit">회원가입</Button>
+      </Form>
     </div>
   )
 }

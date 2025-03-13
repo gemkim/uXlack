@@ -7,10 +7,15 @@ export function LandingPage() {
 
   return (
     <div className="bg-linear-to-r from-sky-600 to-pink-100 w-screen h-screen flex flex-col justify-center items-center">
-      <div>{isRegistering ? <RegisterForm /> : <LoginForm />}</div>
-      <button onClick={() => setIsRegistering((prev) => !prev)} className="mt-4 cursor-pointer">
-        {isRegistering ? '로그인 하기' : '회원가입 하기'}{' '}
-      </button>
+      <div className="bg-white min-w-[350px] min-h-[400px] px-4 py-8 rounded-sm shadow-md flex flex-col">
+        <div>{isRegistering ? <RegisterForm /> : <LoginForm />}</div>
+        <button
+          onClick={() => setIsRegistering((prev) => !prev)}
+          className="mt-auto mx-auto cursor-pointer text-sm text-sky-500 hover:text-sky-600 transition-colors"
+        >
+          {isRegistering ? '로그인' : '회원가입'}{' '}
+        </button>
+      </div>
     </div>
   )
 }
