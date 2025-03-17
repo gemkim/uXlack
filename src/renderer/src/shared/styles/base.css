@@ -10,10 +10,26 @@
 @theme {
   --height-screen: calc(100vh - var(--frame-height));
   --height-frame: var(--frame-height);
+
+  --color-stone-850: #37352f;
+
+  --animate-fadeIn: fadeIn 0.4s ease-in-out;
 }
 
 @layer base {
   button {
     cursor: pointer;
+  }
+  * {
+    color: #5f5e5b;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

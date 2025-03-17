@@ -1,4 +1,4 @@
-import './shared/base.css'
+import './shared/styles/base.css'
 
 import { OverlayProvider } from 'overlay-kit'
 import ReactDOM from 'react-dom/client'
