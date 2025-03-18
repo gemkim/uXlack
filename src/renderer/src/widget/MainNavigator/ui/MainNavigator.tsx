@@ -1,7 +1,9 @@
 import { useProjectActions, useProjectList, useSelectedProjectId } from '@renderer/entities/project'
 import { CreateNewProjectModal } from '@renderer/features/project/createNewProjectModal/ui/CreateNewProjectModal'
+import { IconBell, IconFolder, IconHome, IconSearch } from '@renderer/shared/assets/svgs'
+
 import { cn } from '@renderer/shared/lib'
-import { ProjectIcon } from '@renderer/shared/ui'
+import { Button } from '@renderer/shared/ui'
 import { overlay } from 'overlay-kit'
 
 export function MainNavigator() {
@@ -9,11 +11,11 @@ export function MainNavigator() {
   const selectedProjectId = useSelectedProjectId()
   const { setSelectedProjectId } = useProjectActions()
 
-  function handleNewProjectClick() {
-    overlay.open(({ isOpen, close, unmount }) => (
-      <CreateNewProjectModal isOpen={isOpen} close={close} unmount={unmount} />
-    ))
-  }
+  // function handleNewProjectClick() {
+  //   overlay.open(({ isOpen, close, unmount }) => (
+  //     <CreateNewProjectModal isOpen={isOpen} close={close} unmount={unmount} />
+  //   ))
+  // }
 
   function handleProjectClick(id: string) {
     setSelectedProjectId(id)
@@ -22,25 +24,43 @@ export function MainNavigator() {
   const isSelectedProject = (id: string) => id === selectedProjectId
 
   return (
-    <div className="py-4 h-screen bg-black flex flex-col">
-      <button onClick={handleNewProjectClick} className="text-white p-2 border text-sm  ">
-        새 프로젝트
-      </button>
-      <div className="my-4 w-full h-1 border-t border-white"></div>
-      <div className="flex flex-col gap-2">
-        {projectList.map((project) => (
-          <div key={project.id} className="relative px-2 flex justify-center">
-            {isSelectedProject(project.id) && (
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 size-[8px] bg-blue-200"></div>
-            )}
-            <ProjectIcon
-              className={cn(isSelectedProject(project.id) && '!rounded-2xl')}
-              onClick={() => handleProjectClick(project.id)}
-            >
-              {project.name[0]}
-            </ProjectIcon>
+    <div className="h-screen flex flex-col min-w-[180px] border-r z-10">
+      <div
+        className="w-full p-4 border-b"
+        style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}
+      >
+        <h1 className="text-stone-850 font-bold">uXlack</h1>
+      </div>
+      <div className="shadow-md h-full">
+        {/* 퀵메뉴 */}
+        <div className="flex flex-col mt-4 px-4 gap-0.5">
+          <Button>
+            <IconHome />홈
+          </Button>
+          <Button>
+            <IconSearch /> 검색
+          </Button>
+          <Button>
+            <IconBell />
+            알림
+          </Button>
+        </div>
+        {/* 프로젝트 */}
+        <div className="mt-6 px-4">
+          <label className="text-xs text-stone-850/65 font-bold">프로젝트</label>
+          <div className="flex flex-col gap-2 mt-2">
+            {projectList.map((project) => (
+              <Button
+                key={project.id}
+                className={cn(isSelectedProject(project.id) && 'bg-neutral-200')}
+                onClick={() => handleProjectClick(project.id)}
+              >
+                <IconFolder />
+                {project.name}
+              </Button>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </div>
   )

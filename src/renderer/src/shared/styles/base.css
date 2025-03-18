@@ -4,15 +4,18 @@
 @import 'tailwindcss/preflight.css' layer(base);
 @import 'tailwindcss/utilities.css' layer(utilities);
 
-:root {
-  --frame-height: 30px;
-}
 @theme {
-  --height-screen: calc(100vh - var(--frame-height));
-  --height-frame: var(--frame-height);
-
+  /* color */
+  /* border */
+  --color-stone-150: #e9e9e7;
+  /* 연한색의 텍스트 */
+  --color-stone-650: #5f5e5b;
+  /* 진한색의 텍스트 / 캡션등 더 연한 텍스트는 해당 컬러의 투명도를 0.65 */
   --color-stone-850: #37352f;
-
+  /* text */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  /* animate */
   --animate-fadeIn: fadeIn 0.4s ease-in-out;
 }
 
@@ -21,7 +24,7 @@
     cursor: pointer;
   }
   * {
-    color: #5f5e5b;
+    @apply text-stone-650 text-sm border-stone-150;
   }
 }
 

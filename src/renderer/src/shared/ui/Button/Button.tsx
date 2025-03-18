@@ -13,7 +13,7 @@ export function Button(props: ButtonProps) {
     <button
       className={cn(
         className,
-        'w-full p-2 mt-2 bg-sky-500 text-white font-semibold rounded-sm hover:bg-sky-600 transition-colors'
+        'flex items-center transition-colors gap-2 py-1 px-1.5 rounded-sm hover:bg-neutral-200'
       )}
       {...attrs}
     >

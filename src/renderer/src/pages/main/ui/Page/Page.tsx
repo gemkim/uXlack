@@ -4,7 +4,7 @@ import { MainNavigator } from '@renderer/widget/MainNavigator'
 
 export function MainPage() {
   return (
-    <div className="flex">
+    <div className="flex animate-fadeIn">
       <MainNavigator />
       <ChatNavigator />
       <ChatSection />

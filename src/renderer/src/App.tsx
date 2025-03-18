@@ -6,12 +6,7 @@ import { MainPage } from './pages/main'
 function App(): JSX.Element {
   const user = useUser()
 
-  return (
-    <>
-      <TitleFrame />
-      {user ? <MainPage /> : <LandingPage />}
-    </>
-  )
+  return <div>{user ? <MainPage /> : <LandingPage />}</div>
 }
 
 export default App

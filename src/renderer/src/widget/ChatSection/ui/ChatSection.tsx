@@ -61,10 +61,17 @@ export function ChatSection() {
 
   const currentProjectChatList = currentChatList.filter((chat) => chat.chatId === selectedProjectId)
   return (
-    <div className="bg-black flex-1 text-white p-4 overflow-y-auto flex flex-col">
-      <>
-        {/* 채팅 내용 영역 */}
-        <div className="gap-6 flex flex-col max-w-[90%] size-full">
+    <div className="flex-1 h-screen overflow-y-auto flex flex-col rounded-sm bg-zinc-50">
+      {/* 드래그 탭 */}
+      <div
+        className="w-full p-4 border-b bg-white"
+        style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}
+      >
+        &nbsp;
+      </div>
+      {/* 채팅 내용 */}
+      <div className="flex-1 overflow-auto mb-4">
+        <div className="gap-6 flex flex-col max-w-[90%] size-full p-4">
           {currentProjectChatList.map((chat) => (
             <ChatMessage chat={chat} key={`${selectedProjectId}-${chat.timeStamp}`} />
           ))}
@@ -75,13 +82,19 @@ export function ChatSection() {
             </div>
           )}
         </div>
-      </>
-      {/* 채팅 입력 영역 */}
-      <div className="mt-auto">
+      </div>
+      {/* 입력창 */}
+      <div className="mt-auto p-4 !pt-0 w-full ">
         <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
-          <input className="w-full p-2 bg-gray-400 rounded-md outline-0" {...register('message')} />
+          <input
+            className="w-full p-2 bg-white/20 border shadow-md rounded-md outline-0"
+            {...register('message')}
+          />
         </form>
       </div>
     </div>
   )
+}
+{
+  /* 채팅 입력 영역 */
 }

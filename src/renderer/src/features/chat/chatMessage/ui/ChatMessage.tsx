@@ -9,11 +9,11 @@ export function ChatMessage(props: ChatMessageProps) {
   const { senderId, content } = chat
 
   return (
-    <div className="flex w-full gap-4 text-sm">
+    <div className="flex w-full gap-4 text-sm bg-white border p-4 rounded-sm shadow-sm">
       {/* 프사 */}
       <div>
-        <div className="size-[40px] flex justify-center items-center bg-yellow-50 rounded-full text-black">
-          <span>{senderId[7]}</span>
+        <div className="size-[40px] flex justify-center items-center bg-stone-600 rounded-full">
+          <span className="text-white">{senderId[7]}</span>
         </div>
       </div>
       {/* 메세지 영역 */}

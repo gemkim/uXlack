@@ -6,7 +6,7 @@ export function LandingPage() {
   const [isRegistering, setIsRegistering] = useState(false)
 
   return (
-    <div className="bg-linear-to-r from-sky-600 to-pink-100 w-screen h-screen flex flex-col justify-center items-center">
+    <div className="w-screen h-screen flex flex-col justify-center items-center">
       <div className="bg-white min-w-[350px] min-h-[400px] px-4 py-8 rounded-sm shadow-md flex flex-col">
         <div className="flex-1">{isRegistering ? <RegisterForm /> : <LoginForm />}</div>
         <button
