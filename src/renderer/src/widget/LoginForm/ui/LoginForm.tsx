@@ -30,7 +30,7 @@ export function LoginForm() {
   return (
     <div className="h-full">
       <Form fieldList={FORM_FIELD_LIST} onSubmit={onSubmit}>
-        <Button type="submit" className="mt-auto mb-8">
+        <Button type="submit" className="mt-auto ml-auto">
           로그인
         </Button>
       </Form>

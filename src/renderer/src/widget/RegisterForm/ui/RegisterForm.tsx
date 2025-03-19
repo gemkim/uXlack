@@ -27,7 +27,9 @@ export function RegisterForm() {
   return (
     <div>
       <Form fieldList={FORM_FIELD_LIST} onSubmit={onSubmit}>
-        <Button type="submit">회원가입</Button>
+        <Button type="submit" className="ml-auto ">
+          회원가입
+        </Button>
       </Form>
     </div>
   )
