@@ -6,3 +6,7 @@ export interface OverlayProps {
   close: () => void
   unmount?: () => void
 }
+
+export interface PopoverProps extends OverlayProps {
+  triggerRect: DOMRect
+}

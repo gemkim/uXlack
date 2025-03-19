@@ -2,12 +2,12 @@ import { useUser } from '@renderer/entities/auth'
 import { useSocket } from '@renderer/entities/chat'
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
 import { ProjectDto, createProject, useProjectActions } from '@renderer/entities/project'
-import { OverlayProps } from '@renderer/shared/types/overlayProps'
-import { Form, FormField, Modal } from '@renderer/shared/ui'
+import { PopoverProps } from '@renderer/shared/types/overlayProps'
+import { Form, FormField, Popover } from '@renderer/shared/ui'
 
 const FORM_FIELD_LIST: FormField[] = [{ displayName: '프로젝트 이름', registerName: 'name' }]
 
-export function CreateNewProjectModal(props: OverlayProps) {
+export function CreateNewProjectPopover(props: PopoverProps) {
   const { close } = props
   const user = useUser()
   const { addProject } = useProjectActions()
@@ -33,10 +33,10 @@ export function CreateNewProjectModal(props: OverlayProps) {
     close()
   }
   return (
-    <Modal {...props}>
-      <div className="p-2 text-white/70 text-sm">
+    <Popover {...props}>
+      <div className="text-white/70 text-sm w-[300px]">
         <Form fieldList={FORM_FIELD_LIST} onSubmit={onSubmit} />
       </div>
-    </Modal>
+    </Popover>
   )
 }

@@ -1,11 +1,7 @@
 import useOnOutsideClick from '@renderer/shared/hooks/useOnOutsideClick'
 import { cn } from '@renderer/shared/lib'
-import { OverlayProps } from '@renderer/shared/types/overlayProps'
+import { PopoverProps } from '@renderer/shared/types/overlayProps'
 import { AnimatePresence, Variants, motion } from 'motion/react'
-
-interface PopoverProps extends OverlayProps {
-  triggerRect: DOMRect
-}
 
 const popoverVariants: Variants = {
   initial: (option) => ({
@@ -65,7 +61,7 @@ export function Popover(props: PopoverProps) {
             animate="animate"
             exit="exit" // ✅ exit 애니메이션 실행
             className={cn(
-              'p-4 bg-white rounded-md max-w-[50%] max-h-[50%] pointer-events-auto shadow-md border transition-opacity'
+              'p-4 bg-white rounded-md max-w-[50%] w-max max-h-[50%] pointer-events-auto shadow-md border transition-opacity'
             )}
             style={margins}
           >

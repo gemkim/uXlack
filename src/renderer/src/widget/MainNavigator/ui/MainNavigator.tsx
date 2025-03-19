@@ -1,9 +1,9 @@
 import { useProjectActions, useProjectList, useSelectedProjectId } from '@renderer/entities/project'
-import { CreateNewProjectModal } from '@renderer/features/project/createNewProjectModal/ui/CreateNewProjectModal'
+import { CreateNewProjectPopover } from '@renderer/features/project/createNewProjectPopover/ui/createNewProjectPopover'
 import { IconBell, IconFolder, IconHome, IconPlus, IconSearch } from '@renderer/shared/assets/svgs'
 
 import { cn } from '@renderer/shared/lib'
-import { Button, Popover } from '@renderer/shared/ui'
+import { Button } from '@renderer/shared/ui'
 import { overlay } from 'overlay-kit'
 
 export function MainNavigator() {
@@ -14,11 +14,9 @@ export function MainNavigator() {
   function handleNewProjectClick(event: React.MouseEvent<HTMLButtonElement>) {
     const rect = event.currentTarget.getBoundingClientRect()
 
-    // overlay.open(({ isOpen, close, unmount }) => (
-    //   <CreateNewProjectModal isOpen={isOpen} close={close} unmount={unmount} />
-    // ))
-
-    overlay.open((controller) => <Popover {...controller} triggerRect={rect}></Popover>)
+    overlay.open((controller) => (
+      <CreateNewProjectPopover {...controller} triggerRect={rect}></CreateNewProjectPopover>
+    ))
   }
 
   function handleProjectClick(id: string) {
