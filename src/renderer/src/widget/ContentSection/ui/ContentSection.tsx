@@ -7,7 +7,7 @@ import { ChatMessage } from '@renderer/features/chat'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-export function ChatSection() {
+export function ContentSection() {
   const user = useUser()
   const projectList = useProjectList()
   const selectedProjectId = useSelectedProjectId()
