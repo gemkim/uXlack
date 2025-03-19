@@ -3,7 +3,7 @@ import { CreateNewProjectModal } from '@renderer/features/project/createNewProje
 import { IconBell, IconFolder, IconHome, IconPlus, IconSearch } from '@renderer/shared/assets/svgs'
 
 import { cn } from '@renderer/shared/lib'
-import { Button } from '@renderer/shared/ui'
+import { Button, Popover } from '@renderer/shared/ui'
 import { overlay } from 'overlay-kit'
 
 export function MainNavigator() {
@@ -11,10 +11,14 @@ export function MainNavigator() {
   const selectedProjectId = useSelectedProjectId()
   const { setSelectedProjectId } = useProjectActions()
 
-  function handleNewProjectClick() {
-    overlay.open(({ isOpen, close, unmount }) => (
-      <CreateNewProjectModal isOpen={isOpen} close={close} unmount={unmount} />
-    ))
+  function handleNewProjectClick(event: React.MouseEvent<HTMLButtonElement>) {
+    const rect = event.currentTarget.getBoundingClientRect()
+
+    // overlay.open(({ isOpen, close, unmount }) => (
+    //   <CreateNewProjectModal isOpen={isOpen} close={close} unmount={unmount} />
+    // ))
+
+    overlay.open((controller) => <Popover {...controller} triggerRect={rect}></Popover>)
   }
 
   function handleProjectClick(id: string) {
