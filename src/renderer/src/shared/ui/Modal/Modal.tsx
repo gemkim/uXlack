@@ -1,5 +1,5 @@
 import { cn } from '@renderer/shared/lib'
-import { OverlayProps } from './types'
+import { OverlayProps } from '@renderer/shared/types/overlayProps'
 
 export function Modal(props: OverlayProps) {
   const { isOpen, close, children, unmount } = props

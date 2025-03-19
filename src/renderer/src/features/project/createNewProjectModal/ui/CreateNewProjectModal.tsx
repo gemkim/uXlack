@@ -2,7 +2,8 @@ import { useUser } from '@renderer/entities/auth'
 import { useSocket } from '@renderer/entities/chat'
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
 import { ProjectDto, createProject, useProjectActions } from '@renderer/entities/project'
-import { Form, FormField, Modal, OverlayProps } from '@renderer/shared/ui'
+import { OverlayProps } from '@renderer/shared/types/overlayProps'
+import { Form, FormField, Modal } from '@renderer/shared/ui'
 
 const FORM_FIELD_LIST: FormField[] = [{ displayName: '프로젝트 이름', registerName: 'name' }]
 
