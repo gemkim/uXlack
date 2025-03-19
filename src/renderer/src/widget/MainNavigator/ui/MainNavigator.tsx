@@ -1,6 +1,14 @@
 import { useProjectActions, useProjectList, useSelectedProjectId } from '@renderer/entities/project'
 import { CreateNewProjectPopover } from '@renderer/features/project/createNewProjectPopover/ui/createNewProjectPopover'
-import { IconBell, IconFolder, IconHome, IconPlus, IconSearch } from '@renderer/shared/assets/svgs'
+import {
+  IconBell,
+  IconFolder,
+  IconHome,
+  IconPlus,
+  IconQuestion,
+  IconSearch,
+  IconSetting
+} from '@renderer/shared/assets/svgs'
 
 import { cn } from '@renderer/shared/lib'
 import { Button } from '@renderer/shared/ui'
@@ -27,15 +35,17 @@ export function MainNavigator() {
 
   return (
     <div className="h-screen flex flex-col min-w-[180px] border-r z-10">
+      {/* 드래그 탭 */}
       <div
         className="w-full p-4 border-b"
         style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}
       >
         <h1 className="text-stone-850 font-bold">uXlack</h1>
       </div>
-      <div className="shadow-md h-full">
+      {/* 네비 */}
+      <div className="shadow-md h-full flex flex-col py-4">
         {/* 퀵메뉴 */}
-        <div className="flex flex-col mt-4 px-4 gap-0.5">
+        <div className="flex flex-col px-4 gap-0.5">
           <Button>
             <IconHome />홈
           </Button>
@@ -67,6 +77,17 @@ export function MainNavigator() {
               </Button>
             ))}
           </div>
+        </div>
+        {/* 하단매뉴 */}
+        <div className="mt-auto px-4 flex flex-col gap-0.5">
+          <Button className="w-full">
+            <IconQuestion />
+            도움말
+          </Button>
+          <Button className="w-full">
+            <IconSetting />
+            설정
+          </Button>
         </div>
       </div>
     </div>
