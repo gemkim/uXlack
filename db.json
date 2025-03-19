@@ -27,7 +27,9 @@
       "id": "1741668802089",
       "name": "현대닷컴",
       "timeStamp": 1741668802089,
-      "memberList": ["1741570348500"],
+      "memberList": [
+        "1741570348500"
+      ],
       "messageList": [
         {
           "id": "msg_001",
@@ -170,7 +172,9 @@
       "id": "1741668821813",
       "name": "제네시스",
       "timeStamp": 1741668821813,
-      "memberList": ["1741570348500"],
+      "memberList": [
+        "1741570348500"
+      ],
       "messageList": [
         {
           "id": "msg_001",
@@ -196,28 +200,45 @@
       "id": "1741668827351",
       "name": "따따엔",
       "timeStamp": 1741668827351,
-      "memberList": ["1741570348500"],
+      "memberList": [
+        "1741570348500"
+      ],
       "messageList": []
     },
     {
       "id": "1741669143189",
       "name": "기아",
       "timeStamp": 1741669143189,
-      "memberList": ["1741570348500"],
+      "memberList": [
+        "1741570348500"
+      ],
       "messageList": []
     },
     {
       "id": "1741826379233",
       "name": "ㅇㅇㅇ",
       "timeStamp": 1741826379233,
-      "memberList": ["1741570348500"],
+      "memberList": [
+        "1741570348500"
+      ],
       "messageList": []
     },
     {
       "id": "1741826505560",
       "name": "하이",
       "timeStamp": 1741826505560,
-      "memberList": ["1741570348500"],
+      "memberList": [
+        "1741570348500"
+      ],
+      "messageList": []
+    },
+    {
+      "id": "1742346458444",
+      "name": "가나다",
+      "timeStamp": 1742346458444,
+      "memberList": [
+        "1741570348500"
+      ],
       "messageList": []
     }
   ],

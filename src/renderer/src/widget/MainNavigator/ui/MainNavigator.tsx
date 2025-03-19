@@ -1,6 +1,6 @@
 import { useProjectActions, useProjectList, useSelectedProjectId } from '@renderer/entities/project'
 import { CreateNewProjectModal } from '@renderer/features/project/createNewProjectModal/ui/CreateNewProjectModal'
-import { IconBell, IconFolder, IconHome, IconSearch } from '@renderer/shared/assets/svgs'
+import { IconBell, IconFolder, IconHome, IconPlus, IconSearch } from '@renderer/shared/assets/svgs'
 
 import { cn } from '@renderer/shared/lib'
 import { Button } from '@renderer/shared/ui'
@@ -11,11 +11,11 @@ export function MainNavigator() {
   const selectedProjectId = useSelectedProjectId()
   const { setSelectedProjectId } = useProjectActions()
 
-  // function handleNewProjectClick() {
-  //   overlay.open(({ isOpen, close, unmount }) => (
-  //     <CreateNewProjectModal isOpen={isOpen} close={close} unmount={unmount} />
-  //   ))
-  // }
+  function handleNewProjectClick() {
+    overlay.open(({ isOpen, close, unmount }) => (
+      <CreateNewProjectModal isOpen={isOpen} close={close} unmount={unmount} />
+    ))
+  }
 
   function handleProjectClick(id: string) {
     setSelectedProjectId(id)
@@ -47,7 +47,12 @@ export function MainNavigator() {
         </div>
         {/* 프로젝트 */}
         <div className="mt-6 px-4">
-          <label className="text-xs text-stone-850/65 font-bold">프로젝트</label>
+          <div className="flex justify-between items-center">
+            <label className="text-xs text-stone-850/65 font-bold">프로젝트</label>
+            <button onClick={handleNewProjectClick}>
+              <IconPlus className="text-xs hover:fill-stone-850" />
+            </button>
+          </div>
           <div className="flex flex-col gap-2 mt-2">
             {projectList.map((project) => (
               <Button

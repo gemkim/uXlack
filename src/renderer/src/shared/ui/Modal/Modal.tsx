@@ -21,11 +21,11 @@ export function Modal(props: OverlayProps) {
     <div
       onClick={handleBackgroundClick}
       className={cn(
-        'fixed  w-screen h-screen transition-all bg-black/50 left-0 top-0 flex justify-center items-center',
+        'fixed  w-screen h-screen transition-all bg-black/50 left-0 top-0 flex justify-center items-center z-[100]',
         !isOpen && 'opacity-0 pointer-events-none'
       )}
     >
-      <div onClick={stopEvent} className="p-4 bg-gray-600 rounded-sm">
+      <div onClick={stopEvent} className="p-4 bg-white rounded-sm">
         {children}
       </div>
     </div>
