@@ -1,1 +1,1 @@
-export { ChatNavigator } from './ui/ChatNavigator'
+export { SubNavigator } from './ui/SubNavigator'

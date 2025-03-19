@@ -1,14 +1,8 @@
 import { useProjectList, useSelectedProjectId } from '@renderer/entities/project'
-import {
-  IconCalendar,
-  IconFile,
-  IconFolder,
-  IconMessage,
-  IconUser
-} from '@renderer/shared/assets/svgs'
+import { IconCalendar, IconFile, IconMessage, IconUser } from '@renderer/shared/assets/svgs'
 import { Button } from '@renderer/shared/ui'
 
-export function ChatNavigator() {
+export function SubNavigator() {
   const projectList = useProjectList()
   const selectedProjectId = useSelectedProjectId()
 
