@@ -1,21 +1,18 @@
 import { useUser } from '@renderer/entities/auth'
 import { MainNavigator } from '@renderer/widget/MainNavigator'
-import { ReactNode } from 'react'
+import { Outlet } from 'react-router'
 
-interface LayoutProps {
-  children: ReactNode
-}
-
-function Layout(props: LayoutProps) {
-  const { children } = props
+function RootLayout() {
   const user = useUser()
 
   return (
     <div className="flex">
       {user && <MainNavigator />}
-      <div className="flex-1">{children}</div>
+      <div className="flex-1">
+        <Outlet />
+      </div>
     </div>
   )
 }
 
-export default Layout
+export default RootLayout

@@ -13,9 +13,11 @@ import {
 import { cn } from '@renderer/shared/lib'
 import { Button } from '@renderer/shared/ui'
 import { overlay } from 'overlay-kit'
+import { useNavigate } from 'react-router'
 
 export function MainNavigator() {
   const projectList = useProjectList()
+  const navigate = useNavigate()
   const selectedProjectId = useSelectedProjectId()
   const { setSelectedProjectId } = useProjectActions()
 
@@ -46,7 +48,7 @@ export function MainNavigator() {
       <div className="shadow-md h-full flex flex-col py-4">
         {/* 퀵메뉴 */}
         <div className="flex flex-col px-4 gap-0.5">
-          <Button>
+          <Button onClick={() => navigate('/home')}>
             <IconHome />홈
           </Button>
           <Button>
