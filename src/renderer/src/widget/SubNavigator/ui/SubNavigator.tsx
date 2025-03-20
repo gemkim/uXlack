@@ -1,6 +1,6 @@
 import { useProjectList, useSelectedProjectId } from '@renderer/entities/project'
 import { IconCalendar, IconFile, IconMessage, IconUser } from '@renderer/shared/assets/svgs'
-import { Button } from '@renderer/shared/ui'
+import { Button, Frame } from '@renderer/shared/ui'
 
 export function SubNavigator() {
   const projectList = useProjectList()
@@ -10,20 +10,7 @@ export function SubNavigator() {
 
   return (
     <div className="flex flex-col min-w-[220px]">
-      <div
-        className="w-full p-4 border-b"
-        style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}
-      >
-        {selectedProject && (
-          <div className="flex items-center gap-2">
-            {/* <IconFolder /> */}
-            <h1 className="text-stone-850 font-bold">
-              {/* {selectedProject.name} */}
-              &nbsp;
-            </h1>
-          </div>
-        )}
-      </div>
+      <Frame />
       {selectedProject && (
         <>
           <div className="border-r h-full px-4 bg-zinc-50">

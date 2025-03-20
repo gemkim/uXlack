@@ -19,3 +19,4 @@ export { type FormField } from './Form/types'
 export { ProjectIcon } from './ProjectIcon/ProjectIcon'
 
 export { WindowController } from './WindowController/WindowController'
+export { Frame } from './Frame/Frame'

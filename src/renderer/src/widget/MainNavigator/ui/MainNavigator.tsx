@@ -11,7 +11,7 @@ import {
 } from '@renderer/shared/assets/svgs'
 
 import { cn } from '@renderer/shared/lib'
-import { Button } from '@renderer/shared/ui'
+import { Button, Frame } from '@renderer/shared/ui'
 import { overlay } from 'overlay-kit'
 import { useNavigate } from 'react-router'
 
@@ -38,12 +38,9 @@ export function MainNavigator() {
   return (
     <div className="h-screen flex flex-col min-w-[180px] border-r z-10">
       {/* 드래그 탭 */}
-      <div
-        className="w-full p-4 border-b"
-        style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}
-      >
+      <Frame>
         <h1 className="text-stone-850 font-bold">uXlack</h1>
-      </div>
+      </Frame>
       {/* 네비 */}
       <div className="shadow-md h-full flex flex-col py-4">
         {/* 퀵메뉴 */}
