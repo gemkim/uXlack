@@ -7,7 +7,7 @@ function RootLayout() {
 
   return (
     <div className="flex">
-      {user && <MainNavigator />}
+      <MainNavigator />
       <div className="flex-1">
         <Outlet />
       </div>

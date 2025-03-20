@@ -1,10 +1,9 @@
 import { LandingPage } from '@renderer/pages/landing'
 import { createBrowserRouter } from 'react-router'
 
-import ProjectLayout from '../layouts/ProjectLayout'
-import RootLayout from '../layouts/RootLayout'
-import { ProjectPage } from '@renderer/pages/project'
 import { HomePage } from '@renderer/pages/home'
+import { ProjectPage } from '@renderer/pages/project'
+import RootLayout from '../layouts/RootLayout'
 
 export const router = createBrowserRouter([
   {
