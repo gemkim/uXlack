@@ -13,6 +13,8 @@ const popoverVariants: Variants = {
     translateX: 0,
     translateY: option.isToTop ? '-100%' : 0,
     transition: {
+      opacity: { duration: 0.2 },
+      translateX: { duration: 0.2 },
       translateY: { duration: 0 }
     }
   }),
@@ -53,15 +55,15 @@ export function Popover(props: PopoverProps) {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            transition={{ type: 'spring', duration: 0.2, stiffness: 200, damping: 20 }}
+            // transition={{ type: 'spring', duration: 5, stiffness: 200, damping: 20 }}
             variants={popoverVariants}
             ref={ref}
             custom={{ isToLeft, isToTop }}
             initial="initial"
             animate="animate"
-            exit="exit" // ✅ exit 애니메이션 실행
+            exit="exit"
             className={cn(
-              'p-4 bg-white rounded-md max-w-[50%] w-max max-h-[50%] pointer-events-auto shadow-md border transition-opacity'
+              'p-4 bg-white rounded-md max-w-[50%] w-max max-h-[50%] pointer-events-auto shadow-md border'
             )}
             style={margins}
           >
