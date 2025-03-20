@@ -1,4 +1,4 @@
-import { TitleFrame } from './app/layouts/TitleFrame'
+import Layout from './app/layouts/Layout'
 import { useUser } from './entities/auth'
 import { LandingPage } from './pages/landing'
 import { MainPage } from './pages/main'
@@ -6,7 +6,7 @@ import { MainPage } from './pages/main'
 function App(): JSX.Element {
   const user = useUser()
 
-  return <div>{user ? <MainPage /> : <LandingPage />}</div>
+  return <Layout>{user ? <MainPage /> : <LandingPage />}</Layout>
 }
 
 export default App

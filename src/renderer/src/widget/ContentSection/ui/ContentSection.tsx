@@ -64,9 +64,11 @@ export function ContentSection() {
   return (
     <div className="flex-1 h-screen overflow-y-auto flex flex-col rounded-sm bg-zinc-50">
       {/* 드래그 탭 */}
-      <div className="w-full p-4 border-b bg-white flex">
+      <div className="w-full border-b bg-white flex">
         <div className="flex-1 " style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}></div>
-        <WindowController />
+        <div className="p-4">
+          <WindowController />
+        </div>
       </div>
       {/* 채팅 내용 */}
       <div className="flex-1 overflow-auto mb-4">
