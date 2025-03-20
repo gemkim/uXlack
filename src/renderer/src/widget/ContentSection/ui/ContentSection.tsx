@@ -4,6 +4,7 @@ import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
 import { ChatMessageDto } from '@renderer/entities/chat/types'
 import { useProjectList, useSelectedProjectId } from '@renderer/entities/project'
 import { ChatMessage } from '@renderer/features/chat'
+import { WindowController } from '@renderer/shared/ui'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -63,11 +64,9 @@ export function ContentSection() {
   return (
     <div className="flex-1 h-screen overflow-y-auto flex flex-col rounded-sm bg-zinc-50">
       {/* 드래그 탭 */}
-      <div
-        className="w-full p-4 border-b bg-white"
-        style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}
-      >
-        &nbsp;
+      <div className="w-full p-4 border-b bg-white flex">
+        <div className="flex-1 " style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}></div>
+        <WindowController />
       </div>
       {/* 채팅 내용 */}
       <div className="flex-1 overflow-auto mb-4">

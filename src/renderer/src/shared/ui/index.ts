@@ -17,3 +17,5 @@ export { Form } from './Form/Form'
 export { type FormField } from './Form/types'
 
 export { ProjectIcon } from './ProjectIcon/ProjectIcon'
+
+export { WindowController } from './WindowController/WindowController'
