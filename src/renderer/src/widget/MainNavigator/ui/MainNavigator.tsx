@@ -29,6 +29,11 @@ export function MainNavigator() {
     ))
   }
 
+  function handleHomeClick() {
+    setSelectedProjectId(null)
+    navigate('/home')
+  }
+
   function handleProjectClick(id: string) {
     setSelectedProjectId(id)
     navigate(`/project/${id}`)
@@ -46,7 +51,7 @@ export function MainNavigator() {
       <div className="shadow-md h-full flex flex-col py-4">
         {/* 퀵메뉴 */}
         <div className="flex flex-col px-4 gap-0.5">
-          <Button onClick={() => navigate('/home')}>
+          <Button onClick={handleHomeClick}>
             <IconHome />홈
           </Button>
           <Button>

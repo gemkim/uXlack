@@ -17,7 +17,7 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
   const user = useUser()
   // 프로젝트
   const { data: projectData } = useFetch<ProjectDto[]>('project', [user])
-  const { setProjectList, setSelectedProjectId } = useProjectActions()
+  const { setProjectList } = useProjectActions()
 
   // 소켓
   const socket = useSocket()
@@ -31,9 +31,6 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
 
     if (!ignore) {
       setProjectList(projectData)
-      if (projectData[0]) {
-        setSelectedProjectId(projectData[0].id)
-      }
     }
 
     return () => {
