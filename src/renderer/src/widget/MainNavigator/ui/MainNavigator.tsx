@@ -31,6 +31,7 @@ export function MainNavigator() {
 
   function handleProjectClick(id: string) {
     setSelectedProjectId(id)
+    navigate(`/project/${id}`)
   }
 
   const isSelectedProject = (id: string) => id === selectedProjectId
