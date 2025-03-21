@@ -5,7 +5,7 @@ import { ChatMessageDto } from '@renderer/entities/chat/types'
 import { useProjectList, useSelectedProjectId } from '@renderer/entities/project'
 import { ChatMessage } from '@renderer/features/chat'
 import { Frame, WindowController } from '@renderer/shared/ui'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 export function ContentSection() {
@@ -19,6 +19,8 @@ export function ContentSection() {
   const [isEventMount, setIsEventMount] = useState(false)
 
   const { register, handleSubmit, reset } = useForm<{ message: string }>()
+
+  const chatContainerRef = useRef<HTMLDivElement>(null)
 
   function onSubmit(msg: { message: string }) {
     if (!user) return
@@ -61,6 +63,13 @@ export function ContentSection() {
   }, [socket])
 
   const currentProjectChatList = currentChatList.filter((chat) => chat.chatId === selectedProjectId)
+
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight
+    }
+  }, [currentProjectChatList]) // messages가 변경될 때 실행
+
   return (
     <div className="flex-1 h-screen overflow-y-auto flex flex-col rounded-sm bg-zinc-50">
       {/* 드래그 탭 */}
@@ -71,7 +80,7 @@ export function ContentSection() {
         </div>
       </div>
       {/* 채팅 내용 */}
-      <div className="flex-1 overflow-auto mb-4">
+      <div ref={chatContainerRef} className="flex-1 overflow-auto mb-4">
         <div className="gap-6 flex flex-col max-w-[90%] size-full p-4">
           {currentProjectChatList.map((chat) => (
             <ChatMessage chat={chat} key={`${selectedProjectId}-${chat.timeStamp}`} />
