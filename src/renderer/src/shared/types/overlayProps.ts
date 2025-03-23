@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 
 export interface OverlayProps {
   isOpen: boolean
-  children?: ReactNode
+  children: ReactNode
   close: () => void
   unmount?: () => void
 }
