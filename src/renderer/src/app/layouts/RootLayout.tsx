@@ -14,7 +14,7 @@ function RootLayout() {
   }, [user])
 
   return (
-    <div className="flex mt-4">
+    <div className="flex animate-fadeIn">
       <MainNavigator />
       <div className="flex-1">
         <Outlet />

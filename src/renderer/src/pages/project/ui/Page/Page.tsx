@@ -4,7 +4,7 @@ import { ContentSection } from '@renderer/widget/ContentSection'
 
 export function ProjectPage() {
   return (
-    <div className="flex animate-fadeIn">
+    <div className="flex">
       <SubNavigator />
       <ContentSection />
     </div>
