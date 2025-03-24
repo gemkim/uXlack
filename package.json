@@ -28,6 +28,7 @@
     "@electron-toolkit/utils": "^4.0.0",
     "@tailwindcss/vite": "^4.0.9",
     "axios": "^1.8.1",
+    "date-fns": "^4.1.0",
     "electron-updater": "^6.3.9",
     "express": "^4.21.2",
     "motion": "^12.5.0",
