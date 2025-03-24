@@ -1,4 +1,5 @@
 import { ChatMessageDto } from '@renderer/entities/chat'
+import { translateTimeStamp } from '@renderer/shared/lib'
 
 interface ChatMessageProps {
   chat: ChatMessageDto
@@ -6,7 +7,7 @@ interface ChatMessageProps {
 
 export function ChatMessage(props: ChatMessageProps) {
   const { chat } = props
-  const { senderId, content } = chat
+  const { senderId, content, timeStamp } = chat
 
   return (
     <div className="flex w-full gap-4 text-sm bg-white border p-4 rounded-sm shadow-sm">
@@ -21,7 +22,7 @@ export function ChatMessage(props: ChatMessageProps) {
         <div className="flex items-center gap-2">
           <span className="font-semibold">{senderId}</span>
           {/* 이 부분 date-fns로 수정 필요 */}
-          <span className="text-xs opacity-70">오늘 오후 2:24</span>
+          <span className="text-xs opacity-70">{translateTimeStamp(timeStamp)}</span>
         </div>
         <span>{content}</span>
       </div>
