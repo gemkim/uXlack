@@ -6,12 +6,14 @@
 
 @theme {
   /* color */
+  --color-blue-550: #2383e2;
+  --color-blue-650: #0077d4;
   /* border */
   --color-stone-150: #e9e9e7;
   /* 연한색의 텍스트 */
   --color-stone-650: #5f5e5b;
   /* 진한색의 텍스트 / 캡션등 더 연한 텍스트는 해당 컬러의 투명도를 0.65 */
-  --color-stone-850: #37352f;
+  --color-stone-850: #3e3c37;
   /* text */
   --text-xs: 12px;
   --text-sm: 14px;
