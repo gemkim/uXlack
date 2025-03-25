@@ -1,11 +1,11 @@
-import { ChatMessageDto } from '@renderer/entities/chat'
+import { ChatMessageDto } from '@renderer/entities/chat/types'
 import { translateTimeStamp } from '@renderer/shared/lib/date/date'
 
 interface ChatMessageProps {
   chat: ChatMessageDto
 }
 
-export function ChatMessage(props: ChatMessageProps) {
+export default function ChatMessage(props: ChatMessageProps) {
   const { chat } = props
   const { senderId, content, timeStamp } = chat
 

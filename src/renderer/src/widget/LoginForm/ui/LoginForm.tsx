@@ -1,4 +1,5 @@
-import { LoginDto, UserDto, useAuthActions } from '@renderer/entities/auth'
+import { LoginDto, UserDto } from '@renderer/entities/auth/api/types'
+import { useAuthActions } from '@renderer/entities/auth/model/slices'
 import { fetchApi } from '@renderer/shared/lib/api'
 import { Button } from '@renderer/shared/ui/Button/Button'
 import Form from '@renderer/shared/ui/Form/Form'

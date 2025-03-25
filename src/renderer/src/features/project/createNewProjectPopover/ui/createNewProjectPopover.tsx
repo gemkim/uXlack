@@ -1,7 +1,11 @@
-import { useUser } from '@renderer/entities/auth'
-import { useSocket } from '@renderer/entities/chat'
+import { useUser } from '@renderer/entities/auth/model/slices'
+
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
-import { ProjectDto, createProject, useProjectActions } from '@renderer/entities/project'
+import { useSocket } from '@renderer/entities/chat/model/slice'
+import { createProject } from '@renderer/entities/project/api/projectApi'
+import { useProjectActions } from '@renderer/entities/project/model/slice'
+import { ProjectDto } from '@renderer/entities/project/model/types'
+
 import { PopoverProps } from '@renderer/shared/types/overlayProps'
 import Form from '@renderer/shared/ui/Form/Form'
 import { FormField } from '@renderer/shared/ui/Form/types'
@@ -9,7 +13,7 @@ import Popover from '@renderer/shared/ui/Popover/Popover'
 
 const FORM_FIELD_LIST: FormField[] = [{ displayName: '프로젝트 이름', registerName: 'name' }]
 
-export function CreateNewProjectPopover(props: PopoverProps) {
+export default function CreateNewProjectPopover(props: PopoverProps) {
   const { close } = props
   const user = useUser()
   const { addProject } = useProjectActions()

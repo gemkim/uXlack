@@ -1,4 +1,4 @@
-import { useUser } from '@renderer/entities/auth'
+import { useUser } from '@renderer/entities/auth/model/slices'
 import MainNavigator from '@renderer/widget/MainNavigator/ui/MainNavigator'
 
 import { useEffect } from 'react'

@@ -1,12 +1,12 @@
-import { SubNavigator } from '@renderer/widget/SubNavigator'
-import { ContentSection } from '../ContentSection/ContentSection'
-import { useProjectList, useSelectedProjectId } from '@renderer/entities/project'
 import { useState } from 'react'
 import { ProjectContent } from '../../types'
 import WindowController from '@renderer/shared/ui/WindowController/WindowController'
 import Frame from '@renderer/shared/ui/Frame/Frame'
+import SubNavigator from '@renderer/widget/SubNavigator/ui/SubNavigator'
+import { useProjectList, useSelectedProjectId } from '@renderer/entities/project/model/slice'
+import ContentSection from '../ContentSection/ContentSection'
 
-export function ProjectPage() {
+export default function ProjectPage() {
   const [content, setContent] = useState<ProjectContent>('chat')
 
   const projectList = useProjectList()

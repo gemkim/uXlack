@@ -1,11 +1,11 @@
-import { useUser } from '@renderer/entities/auth'
+import { useUser } from '@renderer/entities/auth/model/slices'
 import LoginForm from '@renderer/widget/LoginForm/ui/LoginForm'
+import { RegisterForm } from '@renderer/widget/RegisterForm/ui/RegisterForm'
 
-import { RegisterForm } from '@renderer/widget/RegisterForm'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 
-export function LandingPage() {
+export default function LandingPage() {
   const [isRegistering, setIsRegistering] = useState(false)
 
   const user = useUser()

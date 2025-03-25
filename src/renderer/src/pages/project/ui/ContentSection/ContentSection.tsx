@@ -6,7 +6,7 @@ interface ContentSectionProps {
   content: ProjectContent
 }
 
-export function ContentSection(props: ContentSectionProps) {
+export default function ContentSection(props: ContentSectionProps) {
   const { content } = props
 
   switch (content) {

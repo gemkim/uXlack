@@ -1,7 +1,10 @@
-import { useUser } from '@renderer/entities/auth'
-import { useSocket, useSocketActions } from '@renderer/entities/chat'
+import { useUser } from '@renderer/entities/auth/model/slices'
+
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
-import { ProjectDto, useProjectActions } from '@renderer/entities/project'
+import { useSocket, useSocketActions } from '@renderer/entities/chat/model/slice'
+import { useProjectActions } from '@renderer/entities/project/model/slice'
+import { ProjectDto } from '@renderer/entities/project/model/types'
+
 import { useFetch } from '@renderer/shared/hooks/useFetch'
 import { ReactNode, useEffect } from 'react'
 import { io } from 'socket.io-client'

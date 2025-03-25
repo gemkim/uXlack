@@ -1,4 +1,4 @@
-import { ProjectDto } from '@renderer/entities/project'
+import { ProjectDto } from '@renderer/entities/project/model/types'
 import { ProjectContent } from '@renderer/pages/project/types'
 import { IconCalendar, IconFile, IconMessage, IconUser } from '@renderer/shared/assets/svgs'
 import { Button } from '@renderer/shared/ui/Button/Button'
@@ -10,7 +10,7 @@ interface SubNavigatorProps {
   setContent: React.Dispatch<React.SetStateAction<ProjectContent>>
 }
 
-export function SubNavigator(props: SubNavigatorProps) {
+export default function SubNavigator(props: SubNavigatorProps) {
   const { selectedProject, content, setContent } = props
 
   const isSelectedContent = (c: ProjectContent) => c === content

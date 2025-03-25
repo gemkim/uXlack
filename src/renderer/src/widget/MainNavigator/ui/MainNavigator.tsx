@@ -1,5 +1,9 @@
-import { useProjectActions, useProjectList, useSelectedProjectId } from '@renderer/entities/project'
-import { CreateNewProjectPopover } from '@renderer/features/project/createNewProjectPopover/ui/createNewProjectPopover'
+import {
+  useProjectActions,
+  useProjectList,
+  useSelectedProjectId
+} from '@renderer/entities/project/model/slice'
+import CreateNewProjectPopover from '@renderer/features/project/createNewProjectPopover/ui/createNewProjectPopover'
 import {
   IconBell,
   IconFolder,

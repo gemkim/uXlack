@@ -1,4 +1,5 @@
-import { RegisterDto, UserDto, createUserAccount } from '@renderer/entities/auth'
+import { createUserAccount } from '@renderer/entities/auth/api/authApi'
+import { RegisterDto, UserDto } from '@renderer/entities/auth/api/types'
 import { Button } from '@renderer/shared/ui/Button/Button'
 import Form from '@renderer/shared/ui/Form/Form'
 import { FormField } from '@renderer/shared/ui/Form/types'

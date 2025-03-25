@@ -1,4 +1,4 @@
-import { ChatMessageDto } from '@renderer/entities/chat'
+import { ChatMessageDto } from '@renderer/entities/chat/types'
 import { TaskDto } from '@renderer/entities/task/types'
 
 export interface ProjectDto {

@@ -4,7 +4,7 @@ interface TaskContentProps {}
 
 type TaskView = 'task' | 'calendar'
 
-function TaskContent(props: TaskContentProps) {
+export default function TaskContent(props: TaskContentProps) {
   const {} = props
 
   const [view, setView] = useState<TaskView>('task')
@@ -18,5 +18,3 @@ function TaskContent(props: TaskContentProps) {
     </div>
   )
 }
-
-export default TaskContent
