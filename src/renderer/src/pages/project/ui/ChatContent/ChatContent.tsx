@@ -4,11 +4,10 @@ import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
 import { ChatMessageDto } from '@renderer/entities/chat/types'
 import { useProjectList, useSelectedProjectId } from '@renderer/entities/project'
 import { ChatMessage } from '@renderer/features/chat'
-import { Frame, WindowController } from '@renderer/shared/ui'
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-export function ContentSection() {
+export default function ChatContent() {
   const user = useUser()
   const projectList = useProjectList()
   const selectedProjectId = useSelectedProjectId()
@@ -71,14 +70,7 @@ export function ContentSection() {
   }, [currentProjectChatList]) // messages가 변경될 때 실행
 
   return (
-    <div className="flex-1 h-screen overflow-y-auto flex flex-col rounded-sm bg-zinc-50">
-      {/* 드래그 탭 */}
-      <div className="w-full bg-white flex">
-        <Frame />
-        <div className="p-4 h-[50px] border-b">
-          <WindowController />
-        </div>
-      </div>
+    <div className="flex flex-col flex-1">
       {/* 채팅 내용 */}
       <div ref={chatContainerRef} className="flex-1 overflow-auto mb-4">
         <div className="gap-6 flex flex-col max-w-[90%] size-full p-4">
@@ -104,7 +96,4 @@ export function ContentSection() {
       </div>
     </div>
   )
-}
-{
-  /* 채팅 입력 영역 */
 }

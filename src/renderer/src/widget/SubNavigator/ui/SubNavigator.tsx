@@ -1,13 +1,18 @@
-import { useProjectList, useSelectedProjectId } from '@renderer/entities/project'
+import { ProjectDto } from '@renderer/entities/project'
+import { ProjectContent } from '@renderer/pages/project/types'
 import { IconCalendar, IconFile, IconMessage, IconUser } from '@renderer/shared/assets/svgs'
 import { Button, Frame } from '@renderer/shared/ui'
 
-export function SubNavigator() {
-  const projectList = useProjectList()
-  const selectedProjectId = useSelectedProjectId()
+interface SubNavigatorProps {
+  selectedProject: ProjectDto | undefined
+  content: ProjectContent
+  setContent: React.Dispatch<React.SetStateAction<ProjectContent>>
+}
 
-  const selectedProject = projectList.find((project) => project.id === selectedProjectId)
+export function SubNavigator(props: SubNavigatorProps) {
+  const { selectedProject, content, setContent } = props
 
+  const isSelectedContent = (c: ProjectContent) => c === content
   return (
     <div className="flex flex-col min-w-[220px]">
       <Frame />
@@ -24,13 +29,13 @@ export function SubNavigator() {
               </div>
             </div>
             <div className="flex flex-col mt-4 gap-2">
-              <Button>
-                <IconCalendar />
-                일정
-              </Button>
-              <Button>
+              <Button isActive={isSelectedContent('chat')} onClick={() => setContent('chat')}>
                 <IconMessage />
                 메세지
+              </Button>
+              <Button isActive={isSelectedContent('task')} onClick={() => setContent('task')}>
+                <IconCalendar />
+                일정
               </Button>
               <Button>
                 <IconFile />
