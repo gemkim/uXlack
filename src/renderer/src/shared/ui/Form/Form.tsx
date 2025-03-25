@@ -6,12 +6,19 @@ export default function Form(props: FormProps) {
   const { fieldList, onSubmit, children } = props
   const { register, handleSubmit } = useForm()
 
+  const isRequired = (bool: boolean | undefined) => (bool === undefined ? true : bool)
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="h-full flex flex-col gap-4">
       {fieldList.map((field, idx) => (
         <div className="flex flex-col" key={idx}>
           <label>{field.displayName}</label>
-          <Input register={register(field.registerName)} type={field.type ? field.type : 'text'} />
+          <Input
+            register={register(field.registerName, {
+              required: isRequired(field.required)
+            })}
+            type={field.type ? field.type : 'text'}
+          />
         </div>
       ))}
       {children ? (

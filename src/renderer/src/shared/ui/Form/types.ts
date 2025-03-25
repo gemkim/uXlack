@@ -10,4 +10,5 @@ export interface FormField {
   displayName: string
   registerName: string
   type?: React.HTMLInputTypeAttribute
+  required?: boolean
 }
