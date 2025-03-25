@@ -1,4 +1,5 @@
 import { ChatMessageDto } from '@renderer/entities/chat'
+import { TaskDto } from '@renderer/entities/task/types'
 
 export interface ProjectDto {
   id: string
@@ -7,4 +8,5 @@ export interface ProjectDto {
   timeStamp: number
   src?: string
   messageList: ChatMessageDto[]
+  taskList: TaskDto[]
 }

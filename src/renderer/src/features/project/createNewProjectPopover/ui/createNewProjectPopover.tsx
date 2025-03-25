@@ -24,7 +24,8 @@ export function CreateNewProjectPopover(props: PopoverProps) {
       id: idNumb.toString(),
       timeStamp: idNumb,
       memberList: [user.id],
-      messageList: []
+      messageList: [],
+      taskList: []
     }
 
     await createProject(newProject)
