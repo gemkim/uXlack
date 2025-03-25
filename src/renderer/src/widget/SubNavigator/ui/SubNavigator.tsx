@@ -1,17 +1,18 @@
-import { ProjectDto } from '@renderer/entities/project/model/types'
+import { useSelectedProject } from '@renderer/entities/project/model/slice'
 import { ProjectContent } from '@renderer/pages/project/types'
 import { IconCalendar, IconFile, IconMessage, IconUser } from '@renderer/shared/assets/svgs'
 import { Button } from '@renderer/shared/ui/Button/Button'
 import Frame from '@renderer/shared/ui/Frame/Frame'
 
 interface SubNavigatorProps {
-  selectedProject: ProjectDto | undefined
   content: ProjectContent
   setContent: React.Dispatch<React.SetStateAction<ProjectContent>>
 }
 
 export default function SubNavigator(props: SubNavigatorProps) {
-  const { selectedProject, content, setContent } = props
+  const { content, setContent } = props
+
+  const selectedProject = useSelectedProject()
 
   const isSelectedContent = (c: ProjectContent) => c === content
   return (
