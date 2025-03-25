@@ -73,9 +73,9 @@ export default function ChatContent() {
   }, [currentProjectChatList]) // messages가 변경될 때 실행
 
   return (
-    <div className="flex flex-col flex-1 p-4 relative">
+    <div className="flex flex-col relative max-h-full h-full">
       {/* 채팅 내용 */}
-      <div ref={chatContainerRef} className="flex-1 overflow-auto">
+      <div ref={chatContainerRef} className="flex-1 overflow-auto p-4">
         {/* 메세지가 없을 경우 */}
         {currentProjectChatList.length < 1 && (
           <p className="absolute x-center y-center">새로운 메세지를 작성해보세요!</p>
@@ -87,7 +87,7 @@ export default function ChatContent() {
         </div>
       </div>
       {/* 입력창 */}
-      <div className="mt-auto p-4 !pt-0 w-full ">
+      <div className="flex-0 shrink-0 flex items-end p-4">
         <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
           <input
             className="w-full p-2 bg-white/20 border shadow-md rounded-md outline-0"

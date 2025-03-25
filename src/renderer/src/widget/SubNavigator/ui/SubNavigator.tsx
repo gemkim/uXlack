@@ -2,7 +2,6 @@ import { useSelectedProject } from '@renderer/entities/project/model/slice'
 import { ProjectContent } from '@renderer/pages/project/types'
 import { IconCalendar, IconFile, IconMessage, IconUser } from '@renderer/shared/assets/svgs'
 import { Button } from '@renderer/shared/ui/Button/Button'
-import Frame from '@renderer/shared/ui/Frame/Frame'
 
 interface SubNavigatorProps {
   content: ProjectContent
@@ -16,8 +15,7 @@ export default function SubNavigator(props: SubNavigatorProps) {
 
   const isSelectedContent = (c: ProjectContent) => c === content
   return (
-    <div className="flex flex-col min-w-[220px]">
-      <Frame />
+    <div className="flex flex-col min-w-[220px] h-full">
       {selectedProject && (
         <>
           <div className="border-r h-full px-4 bg-zinc-50">
