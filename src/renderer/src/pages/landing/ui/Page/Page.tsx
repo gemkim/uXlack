@@ -1,5 +1,6 @@
 import { useUser } from '@renderer/entities/auth'
-import { LoginForm } from '@renderer/widget/LoginForm'
+import LoginForm from '@renderer/widget/LoginForm/ui/LoginForm'
+
 import { RegisterForm } from '@renderer/widget/RegisterForm'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'

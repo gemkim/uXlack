@@ -1,10 +1,10 @@
-import { cn } from '@renderer/shared/lib'
+import { cn } from '@renderer/shared/lib/utils/utils'
 import React from 'react'
 
 interface FrameProps
   extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
-export function Frame(props: FrameProps) {
+export default function Frame(props: FrameProps) {
   const { children, className, ...attrs } = props
   return (
     <div

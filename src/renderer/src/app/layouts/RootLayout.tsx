@@ -1,5 +1,6 @@
 import { useUser } from '@renderer/entities/auth'
-import { MainNavigator } from '@renderer/widget/MainNavigator'
+import MainNavigator from '@renderer/widget/MainNavigator/ui/MainNavigator'
+
 import { useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router'
 

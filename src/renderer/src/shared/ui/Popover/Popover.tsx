@@ -1,5 +1,5 @@
 import useOnOutsideClick from '@renderer/shared/hooks/useOnOutsideClick'
-import { cn } from '@renderer/shared/lib'
+import { cn } from '@renderer/shared/lib/utils/utils'
 import { PopoverProps } from '@renderer/shared/types/overlayProps'
 import { AnimatePresence, Variants, motion } from 'motion/react'
 
@@ -24,7 +24,7 @@ const popoverVariants: Variants = {
   })
 }
 
-export function Popover(props: PopoverProps) {
+export default function Popover(props: PopoverProps) {
   const { isOpen, close, unmount, triggerRect, children } = props
   const { x, y } = triggerRect
 

@@ -1,4 +1,4 @@
-import { cn } from '@renderer/shared/lib'
+import { cn } from '@renderer/shared/lib/utils/utils'
 import { UseFormRegisterReturn } from 'react-hook-form'
 
 interface InputProps
@@ -6,7 +6,7 @@ interface InputProps
   register?: UseFormRegisterReturn<string>
 }
 
-export function Input(props: InputProps) {
+export default function Input(props: InputProps) {
   const { className, register, ...attrs } = props
 
   return (

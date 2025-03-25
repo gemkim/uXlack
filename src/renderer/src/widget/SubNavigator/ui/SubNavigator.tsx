@@ -1,7 +1,8 @@
 import { ProjectDto } from '@renderer/entities/project'
 import { ProjectContent } from '@renderer/pages/project/types'
 import { IconCalendar, IconFile, IconMessage, IconUser } from '@renderer/shared/assets/svgs'
-import { Button, Frame } from '@renderer/shared/ui'
+import { Button } from '@renderer/shared/ui/Button/Button'
+import Frame from '@renderer/shared/ui/Frame/Frame'
 
 interface SubNavigatorProps {
   selectedProject: ProjectDto | undefined

@@ -1,6 +1,6 @@
 import { IconClose, IconExpand, IconLine } from '@renderer/shared/assets/svgs'
 
-export function WindowController() {
+export default function WindowController() {
   const handleMinimizeClick = () => window.electron.ipcRenderer.send('window-minimize')
   const handleMaximizeClick = () => window.electron.ipcRenderer.send('window-maximize')
   const handleCloseClick = () => window.electron.ipcRenderer.send('window-close')

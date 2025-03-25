@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form'
 import { FormProps } from './types'
-import { Input } from '../Input/Input'
+import Input from '../Input/Input'
 
-export function Form(props: FormProps) {
+export default function Form(props: FormProps) {
   const { fieldList, onSubmit, children } = props
   const { register, handleSubmit } = useForm()
 

@@ -1,7 +1,7 @@
-import { cn } from '@renderer/shared/lib'
+import { cn } from '@renderer/shared/lib/utils/utils'
 import { OverlayProps } from '@renderer/shared/types/overlayProps'
 
-export function Modal(props: OverlayProps) {
+export default function Modal(props: OverlayProps) {
   const { isOpen, close, children, unmount } = props
 
   function handleBackgroundClick() {

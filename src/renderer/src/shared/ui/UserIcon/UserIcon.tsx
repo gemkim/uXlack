@@ -1,9 +1,9 @@
-import { cn } from '@renderer/shared/lib'
+import { cn } from '@renderer/shared/lib/utils/utils'
 
 interface UserIconProps
   extends React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> {}
 
-export function UserIcon(props: UserIconProps) {
+export default function UserIcon(props: UserIconProps) {
   const { className, src, alt, ...attrs } = props
   return (
     <img

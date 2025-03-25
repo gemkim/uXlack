@@ -1,4 +1,4 @@
-import { cn } from '@renderer/shared/lib'
+import { cn } from '@renderer/shared/lib/utils/utils'
 
 interface ButtonProps
   extends React.DetailedHTMLProps<

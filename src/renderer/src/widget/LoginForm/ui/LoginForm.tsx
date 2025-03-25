@@ -1,13 +1,15 @@
 import { LoginDto, UserDto, useAuthActions } from '@renderer/entities/auth'
 import { fetchApi } from '@renderer/shared/lib/api'
-import { Button, Form, FormField } from '@renderer/shared/ui'
+import { Button } from '@renderer/shared/ui/Button/Button'
+import Form from '@renderer/shared/ui/Form/Form'
+import { FormField } from '@renderer/shared/ui/Form/types'
 
 const FORM_FIELD_LIST: FormField[] = [
   { displayName: '계정', registerName: 'account' },
   { displayName: '비밀번호', registerName: 'password', type: 'password' }
 ]
 
-export function LoginForm() {
+export default function LoginForm() {
   const { setUser } = useAuthActions()
 
   // 아직 제대로된 db가 없기때문에 임시 코드임

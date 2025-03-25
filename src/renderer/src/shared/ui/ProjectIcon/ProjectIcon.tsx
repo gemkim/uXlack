@@ -1,8 +1,8 @@
-import { cn } from '@renderer/shared/lib'
+import { cn } from '@renderer/shared/lib/utils/utils'
 
 interface ProjectIconProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
-export function ProjectIcon(props: ProjectIconProps) {
+export default function ProjectIcon(props: ProjectIconProps) {
   const { children, className, ...attrs } = props
   return (
     <button

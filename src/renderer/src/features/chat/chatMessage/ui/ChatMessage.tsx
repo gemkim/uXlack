@@ -1,5 +1,5 @@
 import { ChatMessageDto } from '@renderer/entities/chat'
-import { translateTimeStamp } from '@renderer/shared/lib'
+import { translateTimeStamp } from '@renderer/shared/lib/date/date'
 
 interface ChatMessageProps {
   chat: ChatMessageDto

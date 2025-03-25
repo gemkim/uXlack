@@ -9,13 +9,15 @@ import {
   IconSearch,
   IconSetting
 } from '@renderer/shared/assets/svgs'
+import { cn } from '@renderer/shared/lib/utils/utils'
 
-import { cn } from '@renderer/shared/lib'
-import { Button, Frame } from '@renderer/shared/ui'
+import { Button } from '@renderer/shared/ui/Button/Button'
+import Frame from '@renderer/shared/ui/Frame/Frame'
+
 import { overlay } from 'overlay-kit'
 import { useNavigate } from 'react-router'
 
-export function MainNavigator() {
+export default function MainNavigator() {
   const projectList = useProjectList()
   const navigate = useNavigate()
   const selectedProjectId = useSelectedProjectId()

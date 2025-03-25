@@ -3,7 +3,9 @@ import { useSocket } from '@renderer/entities/chat'
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
 import { ProjectDto, createProject, useProjectActions } from '@renderer/entities/project'
 import { PopoverProps } from '@renderer/shared/types/overlayProps'
-import { Form, FormField, Popover } from '@renderer/shared/ui'
+import Form from '@renderer/shared/ui/Form/Form'
+import { FormField } from '@renderer/shared/ui/Form/types'
+import Popover from '@renderer/shared/ui/Popover/Popover'
 
 const FORM_FIELD_LIST: FormField[] = [{ displayName: '프로젝트 이름', registerName: 'name' }]
 

@@ -1,5 +1,7 @@
 import { RegisterDto, UserDto, createUserAccount } from '@renderer/entities/auth'
-import { Button, Form, FormField } from '@renderer/shared/ui'
+import { Button } from '@renderer/shared/ui/Button/Button'
+import Form from '@renderer/shared/ui/Form/Form'
+import { FormField } from '@renderer/shared/ui/Form/types'
 
 const FORM_FIELD_LIST: FormField[] = [
   { displayName: '계정', registerName: 'account' },
