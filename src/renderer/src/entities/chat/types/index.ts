@@ -1,5 +1,5 @@
-export type chatType = 'text' | 'images' | 'file'
-export type chatStatus = 'sent' | 'delivered' | 'read'
+export type ChatType = 'text' | 'images' | 'file'
+export type ChatStatus = 'sent' | 'delivered' | 'read'
 
 export interface ChatMessageDto {
   id: string
@@ -7,6 +7,6 @@ export interface ChatMessageDto {
   senderId: string
   content: string
   timeStamp: number
-  types: chatType
-  status: chatStatus
+  types: ChatType
+  status: ChatStatus
 }

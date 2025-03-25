@@ -1,224 +1,23 @@
 {
   "user": [
     {
-      "id": "1741567726457",
-      "registerAt": 1741567726457,
-      "account": "ㅁㄴㅇ",
-      "password": "ㅁㄴㅁㄴㅇ",
-      "name": "ㅁㄴㅇㅁㄴㅇ"
-    },
-    {
-      "id": "1741570348500",
-      "registerAt": 1741570348500,
-      "account": "test",
-      "password": "test123",
-      "name": "테스트"
-    },
-    {
-      "id": "1741761970242",
-      "registerAt": 1741761970242,
-      "account": "test2",
-      "password": "123",
-      "name": "윤"
-    },
-    {
-      "id": "1742347172441",
-      "registerAt": 1742347172441,
-      "account": "",
-      "password": "",
-      "name": ""
-    },
-    {
-      "id": "1742347223529",
-      "registerAt": 1742347223529,
-      "account": "zzz",
-      "password": "123",
-      "name": "yoon"
+      "id": "1742945033941",
+      "registerAt": 1742945033941,
+      "account": "a",
+      "password": "a",
+      "name": "세남"
     }
   ],
   "project": [
     {
-      "id": "1741668802089",
-      "name": "현대닷컴",
-      "timeStamp": 1741668802089,
-      "memberList": ["1741570348500"],
-      "messageList": [
-        {
-          "id": "msg_001",
-          "chatId": "1741668802089",
-          "senderId": "user_001",
-          "content": "현대닷컴 입니다 ",
-          "timeStamp": 1709635200,
-          "types": "text",
-          "status": "sent"
-        },
-        {
-          "id": "msg_001",
-          "chatId": "1741668802089",
-          "senderId": "user_001",
-          "content": "현대닷컴 입니다 ",
-          "timeStamp": 1709635200,
-          "types": "text",
-          "status": "sent"
-        },
-        {
-          "id": "msg_001",
-          "chatId": "1741668802089",
-          "senderId": "user_001",
-          "content": "현대닷컴 입니다 ",
-          "timeStamp": 1709635200,
-          "types": "text",
-          "status": "sent"
-        },
-        {
-          "id": "msg_001",
-          "chatId": "1741668802089",
-          "senderId": "user_001",
-          "content": "현대닷컴 입니다 ",
-          "timeStamp": 1709635200,
-          "types": "text",
-          "status": "sent"
-        },
-        {
-          "id": "msg_001",
-          "chatId": "1741668802089",
-          "senderId": "user_001",
-          "content": "현대닷컴 입니다 ",
-          "timeStamp": 1709635200,
-          "types": "text",
-          "status": "sent"
-        },
-        {
-          "id": "msg_001",
-          "chatId": "1741668802089",
-          "senderId": "user_001",
-          "content": "현대닷컴 입니다 ",
-          "timeStamp": 1709635200,
-          "types": "text",
-          "status": "sent"
-        },
-        {
-          "id": "msg_001",
-          "chatId": "1741668802089",
-          "senderId": "user_001",
-          "content": "현대닷컴 입니다 ",
-          "timeStamp": 1709635200,
-          "types": "text",
-          "status": "sent"
-        },
-        {
-          "id": "msg_001",
-          "chatId": "1741668802089",
-          "senderId": "user_001",
-          "content": "현대닷컴 입니다 ",
-          "timeStamp": 1709635200,
-          "types": "text",
-          "status": "sent"
-        },
-        {
-          "id": "msg_001",
-          "chatId": "1741668802089",
-          "senderId": "user_001",
-          "content": "현대닷컴 입니다 ",
-          "timeStamp": 1709635200,
-          "types": "text",
-          "status": "sent"
-        },
-        {
-          "id": "msg_001",
-          "chatId": "1741668802089",
-          "senderId": "user_001",
-          "content": "현대닷컴 입니다 ",
-          "timeStamp": 1709635200,
-          "types": "text",
-          "status": "sent"
-        },
-        {
-          "id": "msg_001",
-          "chatId": "1741668802089",
-          "senderId": "user_001",
-          "content": "현대닷컴 입니다 ",
-          "timeStamp": 1709635200,
-          "types": "text",
-          "status": "sent"
-        },
-        {
-          "id": "msg_001",
-          "chatId": "1741668802089",
-          "senderId": "user_001",
-          "content": "현대닷컴 입니다 ",
-          "timeStamp": 1709635200,
-          "types": "text",
-          "status": "sent"
-        },
-        {
-          "id": "msg_001",
-          "chatId": "1741668802089",
-          "senderId": "user_001",
-          "content": "현대닷컴 입니다 ",
-          "timeStamp": 1709635200,
-          "types": "text",
-          "status": "sent"
-        },
-        {
-          "id": "msg_001",
-          "chatId": "1741668802089",
-          "senderId": "user_001",
-          "content": "현대닷컴 입니다 ",
-          "timeStamp": 1709635200,
-          "types": "text",
-          "status": "sent"
-        },
-        {
-          "id": "msg_001",
-          "chatId": "1741668802089",
-          "senderId": "user_001",
-          "content": "현대닷컴 입니다 ",
-          "timeStamp": 1709635200,
-          "types": "text",
-          "status": "sent"
-        }
-      ]
-    },
-    {
-      "id": "1741668821813",
-      "name": "제네시스",
-      "timeStamp": 1741668821813,
-      "memberList": ["1741570348500"],
-      "messageList": [
-        {
-          "id": "msg_001",
-          "chatId": "1741668821813",
-          "senderId": "user_001",
-          "content": "제네시스 입니다 ",
-          "timeStamp": 170935200,
-          "types": "text",
-          "status": "sent"
-        },
-        {
-          "id": "msg_001",
-          "chatId": "1741668821813",
-          "senderId": "user_001",
-          "content": "제네시스 입니다 ",
-          "timeStamp": 170963520,
-          "types": "text",
-          "status": "sent"
-        }
-      ]
-    },
-    {
-      "id": "1741668827351",
-      "name": "따따엔",
-      "timeStamp": 1741668827351,
-      "memberList": ["1741570348500"],
-      "messageList": []
-    },
-    {
-      "id": "1741669143189",
+      "id": "1742945103509",
       "name": "기아",
-      "timeStamp": 1741669143189,
-      "memberList": ["1741570348500"],
-      "messageList": []
+      "timeStamp": 1742945103509,
+      "memberList": [
+        "1742945033941"
+      ],
+      "messageList": [],
+      "taskList": []
     }
   ],
   "chat": []
