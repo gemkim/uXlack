@@ -70,19 +70,17 @@ export default function ChatContent() {
   }, [currentProjectChatList]) // messages가 변경될 때 실행
 
   return (
-    <div className="flex flex-col flex-1">
+    <div className="flex flex-col flex-1 p-4 relative">
       {/* 채팅 내용 */}
-      <div ref={chatContainerRef} className="flex-1 overflow-auto mb-4">
-        <div className="gap-6 flex flex-col max-w-[90%] size-full p-4">
+      <div ref={chatContainerRef} className="flex-1 overflow-auto">
+        {/* 메세지가 없을 경우 */}
+        {currentProjectChatList.length < 1 && (
+          <p className="absolute x-center y-center">새로운 메세지를 작성해보세요!</p>
+        )}
+        <div className="gap-6 flex flex-col max-w-[90%] size-full">
           {currentProjectChatList.map((chat) => (
             <ChatMessage chat={chat} key={`${selectedProjectId}-${chat.timeStamp}`} />
           ))}
-          {/* 메세지가 없을 경우 */}
-          {currentProjectChatList.length < 1 && (
-            <div className="size-full flex justify-center items-center text-white/70">
-              <p>새로운 메세지를 작성해보세요!</p>
-            </div>
-          )}
         </div>
       </div>
       {/* 입력창 */}

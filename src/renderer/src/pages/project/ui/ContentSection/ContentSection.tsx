@@ -14,5 +14,7 @@ export function ContentSection(props: ContentSectionProps) {
       return <ChatContent />
     case 'task':
       return <TaskContent />
+    case 'resource':
+      return <></>
   }
 }
