@@ -10,7 +10,13 @@ const FORM_FIELD_LIST: FormField[] = [
   { displayName: '이름', registerName: 'name' }
 ]
 
-export function RegisterForm() {
+interface RegisterFormProps {
+  setIsRegistering: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export function RegisterForm(props: RegisterFormProps) {
+  const { setIsRegistering } = props
+
   async function onSubmit(data: RegisterDto) {
     const newUser: UserDto = {
       id: new Date().getTime().toString(),
@@ -22,6 +28,7 @@ export function RegisterForm() {
 
     if (res.status === 201) {
       alert('회원가입이 완료 되었습니다.')
+      setIsRegistering(false)
     } else {
       alert('회원가입 실패')
     }

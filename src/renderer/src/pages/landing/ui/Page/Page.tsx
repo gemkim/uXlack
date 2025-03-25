@@ -27,7 +27,7 @@ export default function LandingPage() {
           <h1 className="font-bold">uXlack</h1>
         </div>
         <div className="flex-1 flex flex-col">
-          {isRegistering ? <RegisterForm /> : <LoginForm />}
+          {isRegistering ? <RegisterForm setIsRegistering={setIsRegistering} /> : <LoginForm />}
 
           <div className="mt-4 flex justify-center">
             <button
