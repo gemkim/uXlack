@@ -31,11 +31,10 @@ export default function ChatContent() {
 
     const newMessage: ChatMessageDto = {
       id: new Date().getTime().toString(),
-      chatId: selectedProjectId,
+      projectId: selectedProjectId,
       senderId: user.id,
       content: msg.message,
-      timeStamp: new Date().getTime(),
-      types: 'text',
+      type: 'text',
       status: 'sent'
     }
 
@@ -64,7 +63,9 @@ export default function ChatContent() {
     setIsEventMount(true)
   }, [socket])
 
-  const currentProjectChatList = currentChatList.filter((chat) => chat.chatId === selectedProjectId)
+  const currentProjectChatList = currentChatList.filter(
+    (chat) => chat.projectId === selectedProjectId
+  )
 
   useEffect(() => {
     if (chatContainerRef.current) {
@@ -82,7 +83,7 @@ export default function ChatContent() {
         )}
         <div className="gap-6 flex flex-col max-w-[90%] size-full">
           {currentProjectChatList.map((chat) => (
-            <ChatMessage chat={chat} key={`${selectedProjectId}-${chat.timeStamp}`} />
+            <ChatMessage chat={chat} key={`${selectedProjectId}-${chat.id}`} />
           ))}
         </div>
       </div>

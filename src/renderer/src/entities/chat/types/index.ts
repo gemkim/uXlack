@@ -3,10 +3,11 @@ export type ChatStatus = 'sent' | 'delivered' | 'read'
 
 export interface ChatMessageDto {
   id: string
-  chatId: string
+  projectId: string
   senderId: string
   content: string
-  timeStamp: number
-  types: ChatType
+  type: ChatType
   status: ChatStatus
+  createdAt?: string
+  updatedAt?: string
 }
