@@ -20,7 +20,7 @@
     "build:mac": "electron-vite build && electron-builder --mac",
     "build:linux": "electron-vite build && electron-builder --linux",
     "db": "npx json-server --watch db.json",
-    "server": "ts-node ./backend/server.js",
+    "server": "node ./backend/server.js",
     "all": "concurrently \"npm run dev\" \"npm run db\" \"npm run server\""
   },
   "dependencies": {
