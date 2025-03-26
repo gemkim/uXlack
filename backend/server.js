@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
+import 'dotenv/config'
 import express from 'express'
 import http from 'http'
+import mongoose from 'mongoose'
 import { Server } from 'socket.io'
 
 const app = express()
@@ -13,7 +15,27 @@ const io = new Server(server, {
 })
 
 const PORT = 4000
-const users = {}
+const MONGO_URI = process.env.MONGO_URI
+
+// Mongo DB
+mongoose
+  .connect(MONGO_URI)
+  .then(() => console.log('mongo connect'))
+  .catch((err) => console.log(err))
+
+const messageScheme = new mongoose.Schema(
+  {
+    id: String,
+    projectId: String,
+    senderId: String,
+    content: String,
+    type: String,
+    status: String
+  },
+  { timestamps: true }
+)
+
+const Message = mongoose.model('Message', messageScheme)
 
 // 로그인시 최초 소켓 세션 연결
 io.on('connection', (socket) => {
@@ -28,8 +50,23 @@ io.on('connection', (socket) => {
     })
   })
 
-  socket.on('send-message', (projectId, msgDto) => {
+  socket.on('send-message', async (projectId, msgDto) => {
+    const newMessage = new Message({
+      ...msgDto
+    })
+    await newMessage.save()
+
     io.to(projectId).emit('receive-message', msgDto)
+  })
+
+  socket.on('get-all-projects-message-list', async (projectId, callback) => {
+    const messages = await Message.find({ projectId }).sort({ createdAt: 1 })
+
+    // projectIdList.forEach(async (id) => {
+    //   const messages = await Message.find({ projectId: id }).sort({ createdAt: 1 })
+    //   messageOfProject.id = messages
+    // })
+    callback(messages)
   })
   // socket.on('user_join', (username) => {
   //   users[socket.id] = username

@@ -2,6 +2,7 @@ import { useUser } from '@renderer/entities/auth/model/slices'
 
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
 import { useSocket, useSocketActions } from '@renderer/entities/chat/model/slice'
+import { ChatMessageDto } from '@renderer/entities/chat/types'
 import { useProjectActions } from '@renderer/entities/project/model/slice'
 import { ProjectDto } from '@renderer/entities/project/model/types'
 
@@ -56,7 +57,22 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
     })
 
     newSocket.emit(SOCKET_EVENT.join, projectIdList)
+    newSocket.emit(
+      SOCKET_EVENT.getAllProjectsMessageList,
+      projectIdList,
+      (messageList: ChatMessageDto[]) => {
+        const projectDataClone = [...projectData]
 
+        const withMsgProject = projectDataClone.map((project) => {
+          return {
+            ...project,
+            messageList: messageList.filter((msg) => msg.projectId === project.id)
+          }
+        })
+
+        setProjectList(withMsgProject)
+      }
+    )
     setSocket(newSocket)
   }, [user, socket])
 
