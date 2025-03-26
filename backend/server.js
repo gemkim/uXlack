@@ -4,6 +4,7 @@ import express from 'express'
 import http from 'http'
 import mongoose from 'mongoose'
 import { Server } from 'socket.io'
+import Message from './models/message.js'
 
 const app = express()
 const server = http.createServer(app)
@@ -22,20 +23,6 @@ mongoose
   .connect(MONGO_URI)
   .then(() => console.log('mongo connect'))
   .catch((err) => console.log(err))
-
-const messageScheme = new mongoose.Schema(
-  {
-    id: String,
-    projectId: String,
-    senderId: String,
-    content: String,
-    type: String,
-    status: String
-  },
-  { timestamps: true }
-)
-
-const Message = mongoose.model('Message', messageScheme)
 
 // 로그인시 최초 소켓 세션 연결
 io.on('connection', (socket) => {
