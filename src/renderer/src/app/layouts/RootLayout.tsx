@@ -20,9 +20,12 @@ function RootLayout() {
     <div className="flex animate-fadeIn h-screen overflow-hidden">
       <MainNavigator />
       <div className="flex-1 flex flex-col max-h-screen h-screen overflow-hidden">
-        <Frame className="justify-end">
-          <WindowController />
-        </Frame>
+        <div className="border-b flex items-center">
+          <Frame className="justify-end border-b-0"></Frame>
+          <div className="pr-4">
+            <WindowController />
+          </div>
+        </div>
         <div className="flex-1 min-h-0 overflow-auto">
           <Outlet />
         </div>
