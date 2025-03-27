@@ -1,4 +1,5 @@
 import { useUser } from '@renderer/entities/auth/model/slices'
+import { Button } from '@renderer/shared/ui/Button/Button'
 import LoginForm from '@renderer/widget/LoginForm/ui/LoginForm'
 import { RegisterForm } from '@renderer/widget/RegisterForm/ui/RegisterForm'
 
@@ -30,12 +31,15 @@ export default function LandingPage() {
           {isRegistering ? <RegisterForm setIsRegistering={setIsRegistering} /> : <LoginForm />}
 
           <div className="mt-4 flex justify-center">
-            <button
-              onClick={() => setIsRegistering((prev) => !prev)}
+            <Button onClick={() => setIsRegistering((prev) => !prev)}>
+              {isRegistering ? '로그인으로' : '회원가입으로'}{' '}
+            </Button>
+            {/* <button
+              
               className="mt-auto mx-auto cursor-pointer text-sm transition-colors text-stone-850/65"
             >
-              {isRegistering ? '로그인' : '회원가입'}{' '}
-            </button>
+              {isRegistering ? '로그인으로' : '회원가입으로'}{' '}
+            </button> */}
           </div>
         </div>
       </div>

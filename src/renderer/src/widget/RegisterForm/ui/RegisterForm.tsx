@@ -39,7 +39,7 @@ export function RegisterForm(props: RegisterFormProps) {
   return (
     <div>
       <Form fieldList={FORM_FIELD_LIST} onSubmit={onSubmit}>
-        <Button type="submit" className="ml-auto ">
+        <Button colorScheme="blue" type="submit" className="ml-auto ">
           회원가입
         </Button>
         {errorMsg && <p className="text-red-400">{errorMsg ?? ''}</p>}

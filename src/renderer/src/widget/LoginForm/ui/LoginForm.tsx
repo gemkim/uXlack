@@ -1,4 +1,4 @@
-import { LoginDto, UserDto } from '@renderer/entities/auth/api/types'
+import { UserDto } from '@renderer/entities/auth/api/types'
 import { useAuthActions } from '@renderer/entities/auth/model/slices'
 import { fetchApi } from '@renderer/shared/lib/api'
 import { Button } from '@renderer/shared/ui/Button/Button'
@@ -14,7 +14,7 @@ export default function LoginForm() {
   const { setUser } = useAuthActions()
 
   // 아직 제대로된 db가 없기때문에 임시 코드임
-  async function onSubmit(data: LoginDto) {
+  async function onSubmit(data: UserDto) {
     console.log(data)
     const res = await fetchApi.get(`/user?account=${data.account}`)
     if (res.data.length < 1) {
@@ -33,7 +33,7 @@ export default function LoginForm() {
   return (
     <div className="h-full">
       <Form fieldList={FORM_FIELD_LIST} onSubmit={onSubmit}>
-        <Button type="submit" className="mt-auto ml-auto">
+        <Button colorScheme="blue" type="submit" className="mt-auto ml-auto">
           로그인
         </Button>
       </Form>
