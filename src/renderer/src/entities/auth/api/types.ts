@@ -1,15 +1,9 @@
 export type LoginStatus = 'initial' | 'unauthenticated' | 'authenticated'
 
-export interface LoginDto {
+export interface UserDto {
   account: string
   password: string
-}
-
-export interface RegisterDto extends LoginDto {
-  name: string
-}
-
-export interface UserDto extends RegisterDto {
-  id: string
-  registerAt: number
+  _id?: string
+  createdAt?: string
+  updatedAt: string
 }
