@@ -1,9 +1,10 @@
+import Profile from '../models/profile.model.js'
 import User from '../models/user.model.js'
 import bcrypt from 'bcryptjs'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const registerUser = async (req, res) => {
-  const { account, password } = req.body
+  const { account, password, name } = req.body
   try {
     const existingUser = await User.findOne({ account })
     if (existingUser) {
@@ -13,7 +14,9 @@ export const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10)
 
     const newUser = new User({ account, password: hashedPassword })
+    const newProfile = new Profile({ accountId: newUser._id, name, projectList: [] })
     await newUser.save()
+    await newProfile.save()
 
     res.json({ message: '회원가입 성공!' })
   } catch {

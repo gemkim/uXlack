@@ -7,7 +7,8 @@ import { useState } from 'react'
 
 const FORM_FIELD_LIST: FormField[] = [
   { displayName: '계정', registerName: 'account' },
-  { displayName: '비밀번호', registerName: 'password', type: 'password' }
+  { displayName: '비밀번호', registerName: 'password', type: 'password' },
+  { displayName: '이름', registerName: 'name' }
 ]
 
 interface RegisterFormProps {
