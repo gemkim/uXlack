@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import Message from '../models/message.js'
+import Message from '../models/message.model.js'
 
 const setupMessageSocket = (io) => {
   io.on('connection', (socket) => {
