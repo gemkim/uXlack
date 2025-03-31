@@ -19,6 +19,20 @@ const io = new Server(server, {
   }
 })
 const PORT = 4000
+// Mongo DB
+const MONGO_URI = process.env.MONGO_URI
+const SESSION_KEY = process.env.SESSION_KEY
+
+// 세션
+app.use(
+  session({
+    secret: SESSION_KEY, // 보안을 위해 .env에서 관리
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: MONGO_URI }),
+    cookie: { secure: false, httpOnly: true, maxAge: 1000 * 60 * 60 * 24 }
+  })
+)
 
 // 미들웨어
 app.use(express.json())
@@ -27,24 +41,10 @@ app.use(cors({ origin: 'http://localhost:5173', credentials: true }))
 // 라우터 연동
 app.use('/auth', authRouter)
 
-// Mongo DB
-const MONGO_URI = process.env.MONGO_URI
-
 mongoose
   .connect(MONGO_URI)
   .then(() => console.log('mongo connect'))
   .catch((err) => console.log(err))
-
-// 세션
-app.use(
-  session({
-    secret: 'key', // 보안을 위해 .env에서 관리
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: MONGO_URI }),
-    cookie: { secure: false, httpOnly: true, maxAge: 1000 * 60 * 60 * 24 }
-  })
-)
 
 // 소켓 연동
 setupMessageSocket(io)

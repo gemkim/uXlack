@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import Profile from '../models/profile.model.js'
 import User from '../models/user.model.js'
 import bcrypt from 'bcryptjs'
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const registerUser = async (req, res) => {
   const { account, password, name } = req.body
   try {
@@ -18,8 +18,34 @@ export const registerUser = async (req, res) => {
     await newUser.save()
     await newProfile.save()
 
-    res.json({ message: '회원가입 성공!' })
+    return res.json({ message: '회원가입 성공!' })
   } catch {
-    res.status(500).json({ message: '서버 오류 발생' })
+    return res.status(500).json({ message: '서버 오류 발생' })
+  }
+}
+
+export const login = async (req, res) => {
+  const { account, password } = req.body.data
+
+  try {
+    const user = await User.find({ account })
+
+    if (user.length < 1) {
+      return res.status(201).json({ message: '존재하지 않는 유저 입니다.' })
+    }
+
+    const isPasswordMatch = await bcrypt.compare(password, user[0].password)
+
+    if (!isPasswordMatch) {
+      return res.status(202).json({ message: '비밀번호가 일치하지 않습니다.' })
+    }
+
+    if (isPasswordMatch) {
+      const profile = await Profile.find({ accountId: user[0]._id.toString() })
+      req.session.user = { id: user[0]._id.toString(), profile: profile[0] }
+      return res.status(200).json({ message: '로그인 성공', user: req.session.user })
+    }
+  } catch {
+    return res.status(500).json({ message: '서버 오류 발생' })
   }
 }
