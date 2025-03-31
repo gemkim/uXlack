@@ -1,20 +1,20 @@
-import { useUser } from '@renderer/entities/auth/model/slices'
+import { useProfile } from '@renderer/entities/auth/model/slices'
 import Frame from '@renderer/shared/ui/Frame/Frame'
 import WindowController from '@renderer/shared/ui/WindowController/WindowController'
 import MainNavigator from '@renderer/widget/MainNavigator/ui/MainNavigator'
-
 import { useEffect } from 'react'
+
 import { Outlet, useNavigate } from 'react-router'
 
 function RootLayout() {
-  const user = useUser()
   const navigate = useNavigate()
+  const profile = useProfile()
 
   useEffect(() => {
-    if (!user) {
-      navigate('/')
-    }
-  }, [user])
+    if (profile) return
+
+    navigate('/')
+  }, [profile])
 
   return (
     <div className="flex animate-fadeIn h-screen overflow-hidden">

@@ -1,4 +1,4 @@
-import { useUser } from '@renderer/entities/auth/model/slices'
+import { useProfile } from '@renderer/entities/auth/model/slices'
 import { Button } from '@renderer/shared/ui/Button/Button'
 import LoginForm from '@renderer/widget/LoginForm/ui/LoginForm'
 import { RegisterForm } from '@renderer/widget/RegisterForm/ui/RegisterForm'
@@ -9,14 +9,15 @@ import { useNavigate } from 'react-router'
 export default function LandingPage() {
   const [isRegistering, setIsRegistering] = useState(false)
 
-  const user = useUser()
+  const profile = useProfile()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (user) {
+    if (profile) {
       navigate('/home')
     }
-  }, [user])
+  }, [profile])
+
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-zinc-50 flex-col relative">
       <div

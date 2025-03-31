@@ -1,4 +1,4 @@
-import { useUser } from '@renderer/entities/auth/model/slices'
+import { useProfile } from '@renderer/entities/auth/model/slices'
 
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
 import { useSocket, useSocketActions } from '@renderer/entities/chat/model/slice'
@@ -8,6 +8,7 @@ import { ProjectDto } from '@renderer/entities/project/model/types'
 
 import { useFetch } from '@renderer/shared/hooks/useFetch'
 import { ReactNode, useEffect } from 'react'
+
 import { io } from 'socket.io-client'
 
 interface AuthDataProviderProps {
@@ -17,10 +18,10 @@ interface AuthDataProviderProps {
 export default function AuthDataProvider(props: AuthDataProviderProps) {
   const { children } = props
 
-  // 유저
-  const user = useUser()
+  // 유저 프로필
+
   // 프로젝트
-  const { data: projectData } = useFetch<ProjectDto[]>('project', [user])
+  // const { data: projectData } = useFetch<ProjectDto[]>('project', [profile])
   const { setProjectList } = useProjectActions()
 
   // 소켓
@@ -28,53 +29,53 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
   const { setSocket } = useSocketActions()
 
   // 초기 프로젝트 로드
-  useEffect(() => {
-    if (!user) return
-    if (!projectData) return
-    let ignore = false
+  // useEffect(() => {
+  //   if (!profile) return
+  //   if (!projectData) return
+  //   let ignore = false
 
-    if (!ignore) {
-      setProjectList(projectData)
-    }
+  //   if (!ignore) {
+  //     setProjectList(projectData)
+  //   }
 
-    return () => {
-      ignore = true
-    }
-  }, [projectData])
+  //   return () => {
+  //     ignore = true
+  //   }
+  // }, [projectData])
 
   // 소켓 연결
-  useEffect(() => {
-    if (!user) return
-    if (socket) return
-    if (!projectData) return
+  // useEffect(() => {
+  //   if (!profile) return
+  //   if (socket) return
+  //   if (!projectData) return
 
-    const projectIdList = projectData.map((project) => project.id)
+  //   const projectIdList = projectData.map((project) => project.id)
 
-    const newSocket = io('http://localhost:4000', {
-      query: {
-        userId: user.id
-      }
-    })
+  //   const newSocket = io('http://localhost:4000', {
+  //     query: {
+  //       userId: profile.accountId
+  //     }
+  //   })
 
-    newSocket.emit(SOCKET_EVENT.join, projectIdList)
-    newSocket.emit(
-      SOCKET_EVENT.getAllProjectsMessageList,
-      projectIdList,
-      (messageList: ChatMessageDto[]) => {
-        const projectDataClone = [...projectData]
+  //   newSocket.emit(SOCKET_EVENT.join, projectIdList)
+  //   newSocket.emit(
+  //     SOCKET_EVENT.getAllProjectsMessageList,
+  //     projectIdList,
+  //     (messageList: ChatMessageDto[]) => {
+  //       const projectDataClone = [...projectData]
 
-        const withMsgProject = projectDataClone.map((project) => {
-          return {
-            ...project,
-            messageList: messageList.filter((msg) => msg.projectId === project.id)
-          }
-        })
+  //       const withMsgProject = projectDataClone.map((project) => {
+  //         return {
+  //           ...project,
+  //           messageList: messageList.filter((msg) => msg.projectId === project.id)
+  //         }
+  //       })
 
-        setProjectList(withMsgProject)
-      }
-    )
-    setSocket(newSocket)
-  }, [user, socket])
+  //       setProjectList(withMsgProject)
+  //     }
+  //   )
+  //   setSocket(newSocket)
+  // }, [profile, socket])
 
   return <>{children}</>
 }
