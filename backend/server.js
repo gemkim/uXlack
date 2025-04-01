@@ -9,6 +9,7 @@ import setupMessageSocket from './sockets/message.socket.js'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 import authRouter from './routes/auth.routes.js'
+import projectRouter from './routes/project.routes.js'
 
 export const app = express()
 const server = http.createServer(app)
@@ -40,7 +41,7 @@ app.use(cors({ origin: 'http://localhost:5173', credentials: true }))
 
 // 라우터 연동
 app.use('/auth', authRouter)
-
+app.use('/project', projectRouter)
 mongoose
   .connect(MONGO_URI)
   .then(() => console.log('mongo connect'))
