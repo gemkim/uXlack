@@ -1,6 +1,6 @@
+import { loginUser } from '@renderer/entities/auth/api/authApi'
 import { UserDto } from '@renderer/entities/auth/api/types'
 import { useAuthActions } from '@renderer/entities/auth/model/slices'
-import { fetchApi } from '@renderer/shared/lib/api'
 import { Button } from '@renderer/shared/ui/Button/Button'
 import Form from '@renderer/shared/ui/Form/Form'
 import { FormField } from '@renderer/shared/ui/Form/types'
@@ -17,15 +17,7 @@ export default function LoginForm() {
 
   // 아직 제대로된 db가 없기때문에 임시 코드임
   async function onSubmit(data: UserDto) {
-    const { account, password } = data
-
-    const res = await fetchApi.post(`/auth/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include', // 세션 쿠키 포함
-      data: { account, password }
-    })
-    console.log(res)
+    const res = await loginUser(data)
 
     if (res.status !== 200) {
       setErrorMsg(res.data.message)

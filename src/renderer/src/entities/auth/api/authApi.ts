@@ -13,3 +13,19 @@ export async function registerUser(userDto: UserDto) {
     throw new Error('예기치 못한 오류가 발생했습니다.')
   }
 }
+
+export async function loginUser(userDto: UserDto) {
+  const { account, password } = userDto
+
+  try {
+    const res = await fetchApi.post(`/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include', // 세션 쿠키 포함
+      data: { account, password }
+    })
+    return res
+  } catch (error: any) {
+    return error.response
+  }
+}
