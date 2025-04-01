@@ -81,9 +81,9 @@ export default function MainNavigator() {
           <div className="flex flex-col gap-2 mt-2">
             {projectList.map((project) => (
               <Button
-                key={project.id}
-                className={cn(isSelectedProject(project.id) && 'bg-neutral-200')}
-                onClick={() => handleProjectClick(project.id)}
+                key={project._id}
+                className={cn(isSelectedProject(project._id!) && 'bg-neutral-200')}
+                onClick={() => handleProjectClick(project._id!)}
               >
                 <IconFolder />
                 {project.name}

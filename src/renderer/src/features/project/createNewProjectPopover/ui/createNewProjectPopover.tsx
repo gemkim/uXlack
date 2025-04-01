@@ -1,4 +1,4 @@
-import { useUser } from '@renderer/entities/auth/model/slices'
+import { useProfile, useUser } from '@renderer/entities/auth/model/slices'
 
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
 import { useSocket } from '@renderer/entities/chat/model/slice'
@@ -15,28 +15,27 @@ const FORM_FIELD_LIST: FormField[] = [{ displayName: '프로젝트 이름', regi
 
 export default function CreateNewProjectPopover(props: PopoverProps) {
   const { close } = props
-  const user = useUser()
+  const profile = useProfile()
   const { addProject } = useProjectActions()
   const socket = useSocket()
 
   async function onSubmit(data: ProjectDto) {
-    if (!user) return
-    if (!socket) return
-
-    const idNumb = new Date().getTime()
+    if (!profile) return
+    // if (!socket) return
 
     const newProject: ProjectDto = {
       ...data,
-      id: idNumb.toString(),
-      timeStamp: idNumb,
-      memberList: [user.id],
+      memberList: [profile._id],
       messageList: [],
       taskList: []
     }
 
-    await createProject(newProject)
-    addProject(newProject)
-    socket.emit(SOCKET_EVENT.join, [idNumb.toString()])
+    console.log(newProject)
+    const res = await createProject(newProject)
+    const createdProject = res.data.project
+    console.log(createdProject)
+    addProject(createdProject)
+    // socket.emit(SOCKET_EVENT.join, [idNumb.toString()])
     close()
   }
   return (

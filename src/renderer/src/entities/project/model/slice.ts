@@ -21,13 +21,13 @@ const useProjectStore = create<ProjectStore>((set) => ({
     addProject: (project) => set((state) => ({ projectList: [...state.projectList, project] })),
     removeProject: (projectId) =>
       set((state) => ({
-        projectList: state.projectList.filter((project) => project.id !== projectId)
+        projectList: state.projectList.filter((project) => project._id !== projectId)
       })),
     setProjectList: (projectList) => set({ projectList }),
     setSelectedProjectId: (projectId) =>
       set((state) => ({
         selectedProjectId: projectId,
-        selectedProject: state.projectList.find((item) => item.id === projectId)
+        selectedProject: state.projectList.find((item) => item._id === projectId)
       }))
   }
 }))

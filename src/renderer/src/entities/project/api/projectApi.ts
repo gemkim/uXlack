@@ -1,18 +1,15 @@
 import { fetchApi } from '@renderer/shared/lib/api'
 
-import { AxiosError } from 'axios'
+import { AxiosError, AxiosResponse } from 'axios'
 import { ProjectDto } from '../model/types'
 
-export async function createProject(projectDto: ProjectDto) {
+export async function createProject(projectDto: ProjectDto): Promise<AxiosResponse<any>> {
   try {
-    const res = await fetchApi.post('/project', projectDto)
+    const res = await fetchApi.post('/project/create', projectDto)
     return res
   } catch (error) {
     if (error instanceof AxiosError) {
-      if (error.code === 'ERR_NETWORK') {
-        return { status: 400 }
-      }
+      return error.response!
     }
-    return { status: 500 }
   }
 }

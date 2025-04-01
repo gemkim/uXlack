@@ -1,12 +1,11 @@
-import { ChatMessageDto } from '@renderer/entities/chat/types'
-import { TaskDto } from '@renderer/entities/task/types'
-
 export interface ProjectDto {
-  id: string
   name: string
-  memberList: unknown[]
-  timeStamp: number
+  memberList: string[]
+  messageList: string[]
+  taskList: string[]
+  _id?: string
+  createdAt?: string
+  updatedAt?: string
   src?: string
-  messageList: ChatMessageDto[]
-  taskList: TaskDto[]
+  coverSrc?: string | null
 }
