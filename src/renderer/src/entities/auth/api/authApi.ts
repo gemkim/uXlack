@@ -29,3 +29,15 @@ export async function loginUser(userDto: UserDto) {
     return error.response
   }
 }
+
+export async function logoutUser() {
+  try {
+    const res = await fetchApi.post(`/auth/logout`, {
+      method: 'POST',
+      credentials: 'include' // 세션 쿠키 포함
+    })
+    return res
+  } catch (error) {
+    return error.response
+  }
+}

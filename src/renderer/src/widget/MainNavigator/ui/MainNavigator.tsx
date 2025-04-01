@@ -3,11 +3,13 @@ import {
   useProjectList,
   useSelectedProjectId
 } from '@renderer/entities/project/model/slice'
+import LogoutButton from '@renderer/features/auth/ui/LogoutButton'
 import CreateNewProjectPopover from '@renderer/features/project/createNewProjectPopover/ui/createNewProjectPopover'
 import {
   IconBell,
   IconFolder,
   IconHome,
+  IconLogout,
   IconPlus,
   IconQuestion,
   IconSearch,
@@ -99,6 +101,10 @@ export default function MainNavigator() {
             <IconSetting />
             설정
           </Button>
+          <LogoutButton>
+            <IconLogout />
+            로그아웃
+          </LogoutButton>
         </div>
       </div>
     </div>

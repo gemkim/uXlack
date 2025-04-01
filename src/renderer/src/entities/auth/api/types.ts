@@ -1,5 +1,3 @@
-import { ProjectDto } from '@renderer/entities/project/model/types'
-
 export type LoginStatus = 'initial' | 'unauthenticated' | 'authenticated'
 
 export interface UserDto {
