@@ -21,7 +21,7 @@
     "build:linux": "electron-vite build && electron-builder --linux",
     "db": "npx json-server --watch db.json",
     "server": "nodemon ./backend/server.js",
-    "all": "concurrently \"npm run dev\" \"npm run db\" \"npm run server\""
+    "all": "concurrently \"npm run dev\" \"npm run server\""
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
