@@ -27,7 +27,8 @@ export default tseslint.config(
       ...eslintPluginReactRefresh.configs.vite.rules,
       '@typescript-eslint/ban-ts-comment': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
-      '@typescript-eslint/no-empty-object-type': 'off'
+      '@typescript-eslint/no-empty-object-type': 'off',
+      '@typescript-eslint/no-explicit-any': 'warn'
     }
   },
   eslintConfigPrettier
