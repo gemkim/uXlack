@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { fetchApi } from '../lib/api'
+import { AxiosRequestConfig } from 'axios'
 
-type Endpoint = 'project'
-
-export function useFetch<T>(endpoint: Endpoint, deps: React.DependencyList = []) {
+export function useFetch<T>(
+  endpoint: string,
+  config: AxiosRequestConfig<any> = {},
+  deps: React.DependencyList = []
+) {
   const [data, setData] = useState<T | null>(null)
 
   useEffect(() => {
     let ignore = false
     if (ignore) return
 
-    fetchApi.get(`/${endpoint}`).then((res) => {
+    fetchApi.get(endpoint, config).then((res) => {
       if (!ignore) {
-        setData(res.data)
+        setData(res.data.data ?? null)
       }
     })
 
