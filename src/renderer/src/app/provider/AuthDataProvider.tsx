@@ -5,6 +5,7 @@ import { useSocket, useSocketActions } from '@renderer/entities/chat/model/slice
 import { ChatMessageDto } from '@renderer/entities/chat/types'
 import { useProjectActions } from '@renderer/entities/project/model/slice'
 import { ProjectDto } from '@renderer/entities/project/model/types'
+import { API_ENDPOINT } from '@renderer/shared/constants/api-endpoint'
 
 import { useFetch } from '@renderer/shared/hooks/useFetch'
 import { ReactNode, useEffect } from 'react'
@@ -18,10 +19,13 @@ interface AuthDataProviderProps {
 export default function AuthDataProvider(props: AuthDataProviderProps) {
   const { children } = props
 
-  // 유저 프로필
+  const profile = useProfile()
+  const { data: projectListData } = useFetch<ProjectDto[]>(
+    API_ENDPOINT.project.getProjectList,
+    { params: { profileId: profile?._id } },
+    [profile]
+  )
 
-  // 프로젝트
-  // const { data: projectData } = useFetch<ProjectDto[]>('project', [profile])
   const { setProjectList } = useProjectActions()
 
   // 소켓
@@ -29,31 +33,31 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
   const { setSocket } = useSocketActions()
 
   // 초기 프로젝트 로드
-  // useEffect(() => {
-  //   if (!profile) return
-  //   if (!projectData) return
-  //   let ignore = false
+  useEffect(() => {
+    if (!profile) return
+    if (!projectListData) return
+    let ignore = false
 
-  //   if (!ignore) {
-  //     setProjectList(projectData)
-  //   }
+    if (!ignore) {
+      setProjectList(projectListData)
+    }
 
-  //   return () => {
-  //     ignore = true
-  //   }
-  // }, [projectData])
+    return () => {
+      ignore = true
+    }
+  }, [projectListData])
 
   // 소켓 연결
   // useEffect(() => {
   //   if (!profile) return
   //   if (socket) return
-  //   if (!projectData) return
+  //   if (!projectListData) return
 
-  //   const projectIdList = projectData.map((project) => project.id)
+  //   const projectIdList = projectListData.map((project) => project._id)
 
   //   const newSocket = io('http://localhost:4000', {
   //     query: {
-  //       userId: profile.accountId
+  //       userId: profile._id
   //     }
   //   })
 
@@ -62,9 +66,9 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
   //     SOCKET_EVENT.getAllProjectsMessageList,
   //     projectIdList,
   //     (messageList: ChatMessageDto[]) => {
-  //       const projectDataClone = [...projectData]
+  //       const projectListDataClone = [...projectListData]
 
-  //       const withMsgProject = projectDataClone.map((project) => {
+  //       const withMsgProject = projectListDataClone.map((project) => {
   //         return {
   //           ...project,
   //           messageList: messageList.filter((msg) => msg.projectId === project.id)
