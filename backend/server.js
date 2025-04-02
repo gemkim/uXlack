@@ -10,6 +10,8 @@ import session from 'express-session'
 import MongoStore from 'connect-mongo'
 import authRouter from './routes/auth.routes.js'
 import projectRouter from './routes/project.routes.js'
+import swaggerUi from 'swagger-ui-express'
+import swaggerSpec from './config/swagger.js'
 
 export const app = express()
 const server = http.createServer(app)
@@ -42,6 +44,8 @@ app.use(cors({ origin: 'http://localhost:5173', credentials: true }))
 // 라우터 연동
 app.use('/auth', authRouter)
 app.use('/project', projectRouter)
+// 스웨거 라우터
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 mongoose
   .connect(MONGO_URI)
   .then(() => console.log('mongo connect'))
