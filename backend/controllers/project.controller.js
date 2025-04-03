@@ -2,8 +2,17 @@
 import Project from '../models/project.model.js'
 
 export const registerProject = async (req, res) => {
+  const { name, memberList } = req.body
+  console.log(req.body)
   try {
-    const newProject = new Project({ ...req.body })
+    const newProject = new Project({
+      name,
+      memberList,
+      messageList: [],
+      taskList: [],
+      coverSrc: null,
+      createdBy: memberList[0]
+    })
 
     await newProject.save()
 

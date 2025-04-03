@@ -4,7 +4,8 @@ import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
 import { useSocket } from '@renderer/entities/chat/model/slice'
 import { createProject } from '@renderer/entities/project/api/projectApi'
 import { useProjectActions } from '@renderer/entities/project/model/slice'
-import { ProjectDto } from '@renderer/entities/project/model/types'
+
+import { CreateProjectDto } from '@renderer/entities/project/types/types'
 
 import { PopoverProps } from '@renderer/shared/types/overlayProps'
 import Form from '@renderer/shared/ui/Form/Form'
@@ -19,21 +20,18 @@ export default function CreateNewProjectPopover(props: PopoverProps) {
   const { addProject } = useProjectActions()
   const socket = useSocket()
 
-  async function onSubmit(data: ProjectDto) {
+  async function onSubmit(data: CreateProjectDto) {
     if (!profile) return
     // if (!socket) return
 
-    const newProject: ProjectDto = {
-      ...data,
-      memberList: [profile._id],
-      messageList: [],
-      taskList: []
+    const newProject: CreateProjectDto = {
+      name: data.name,
+      memberList: [profile._id]
     }
 
-    console.log(newProject)
     const res = await createProject(newProject)
     const createdProject = res.data.project
-    console.log(createdProject)
+
     addProject(createdProject)
     // socket.emit(SOCKET_EVENT.join, [idNumb.toString()])
     close()

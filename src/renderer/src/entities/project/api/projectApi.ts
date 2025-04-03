@@ -1,15 +1,25 @@
 import { fetchApi } from '@renderer/shared/lib/api'
 
+import { API_ENDPOINT } from '@renderer/shared/constants/api-endpoint'
 import { AxiosError, AxiosResponse } from 'axios'
-import { ProjectDto } from '../model/types'
+import { CreateProjectDto } from '../types/types'
 
-export async function createProject(projectDto: ProjectDto): Promise<AxiosResponse<any>> {
+export async function createProject(
+  createProjectDto: CreateProjectDto
+): Promise<AxiosResponse<any>> {
   try {
-    const res = await fetchApi.post('/project/create', projectDto)
+    const res = await fetchApi.post(API_ENDPOINT.project.create, createProjectDto)
     return res
   } catch (error) {
-    if (error instanceof AxiosError) {
-      return error.response!
+    if (error instanceof AxiosError && error.response) {
+      return error.response
+    }
+    return {
+      data: { message: '서버 오류 발생' },
+      status: 500,
+      statusText: 'Internal Server Error',
+      headers: {},
+      config: {} as any
     }
   }
 }
