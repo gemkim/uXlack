@@ -1,4 +1,4 @@
-import { useUser } from '@renderer/entities/auth/model/slices'
+import { useProfile } from '@renderer/entities/auth/model/slices'
 
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
 import { useSocket } from '@renderer/entities/chat/model/slice'
@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 export default function ChatContent() {
-  const user = useUser()
+  const profile = useProfile()
 
   const selectedProjectId = useSelectedProjectId()
   const selectedProject = useSelectedProject()
@@ -25,30 +25,24 @@ export default function ChatContent() {
   const chatContainerRef = useRef<HTMLDivElement>(null)
 
   function onSubmit(msg: { message: string }) {
-    if (!user) return
+    if (!profile) return
     if (!selectedProjectId) return
     if (!socket) return
 
+    console.log(selectedProjectId)
+
     const newMessage: ChatMessageDto = {
-      id: new Date().getTime().toString(),
       projectId: selectedProjectId,
-      senderId: user.id,
+      senderId: profile._id!,
       content: msg.message,
       type: 'text',
       status: 'sent'
     }
 
+    console.log('submit')
     socket.emit(SOCKET_EVENT.sendMessage, selectedProjectId, newMessage)
     reset()
   }
-
-  // 프로젝트 변경 처리
-  // 해당 컴포넌트가 아니라 Provider 레벨에서 zustandfh 관리해야할듯함
-  useEffect(() => {
-    if (!selectedProject) return
-
-    setCurrentChatList(selectedProject.messageList)
-  }, [selectedProject])
 
   // 메세지 수신 이벤트 등록
   useEffect(() => {
@@ -83,7 +77,7 @@ export default function ChatContent() {
         )}
         <div className="gap-6 flex flex-col max-w-[90%] size-full">
           {currentProjectChatList.map((chat) => (
-            <ChatMessage chat={chat} key={`${selectedProjectId}-${chat.id}`} />
+            <ChatMessage chat={chat} key={`${selectedProjectId}-${chat._id}`} />
           ))}
         </div>
       </div>

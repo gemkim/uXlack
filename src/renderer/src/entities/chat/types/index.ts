@@ -2,7 +2,7 @@ export type ChatType = 'text' | 'images' | 'file'
 export type ChatStatus = 'sent' | 'delivered' | 'read'
 
 export interface ChatMessageDto {
-  id: string
+  _id?: string
   projectId: string
   senderId: string
   content: string

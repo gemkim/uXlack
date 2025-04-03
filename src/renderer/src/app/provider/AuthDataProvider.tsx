@@ -2,13 +2,12 @@ import { useProfile } from '@renderer/entities/auth/model/slices'
 
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
 import { useSocket, useSocketActions } from '@renderer/entities/chat/model/slice'
-import { ChatMessageDto } from '@renderer/entities/chat/types'
-import { useProjectActions } from '@renderer/entities/project/model/slice'
+import { useProjectActions, useProjectList } from '@renderer/entities/project/model/slice'
 import { ProjectDto } from '@renderer/entities/project/model/types'
 import { API_ENDPOINT } from '@renderer/shared/constants/api-endpoint'
 
 import { useFetch } from '@renderer/shared/hooks/useFetch'
-import { ReactNode, useEffect } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 
 import { io } from 'socket.io-client'
 
@@ -20,12 +19,15 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
   const { children } = props
 
   const profile = useProfile()
+
+  const [isProjectLoadingDone, setIsProjectLoadingDone] = useState(false)
+
   const { data: projectListData } = useFetch<ProjectDto[]>(
     API_ENDPOINT.project.getProjectList,
     { params: { profileId: profile?._id } },
     [profile]
   )
-
+  const projectList = useProjectList()
   const { setProjectList } = useProjectActions()
 
   // 소켓
@@ -40,20 +42,21 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
 
     if (!ignore) {
       setProjectList(projectListData)
+      setIsProjectLoadingDone(true)
     }
 
     return () => {
       ignore = true
     }
-  }, [projectListData])
+  }, [profile, projectListData])
 
   // 소켓 연결
   useEffect(() => {
     if (!profile) return
     if (socket) return
-    if (!projectListData) return
+    if (!isProjectLoadingDone) return
 
-    const projectIdList = projectListData.map((project) => project._id)
+    const projectIdList = projectList.map((project) => project._id)
 
     const newSocket = io('http://localhost:4000', {
       query: {
@@ -79,7 +82,7 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
     //   }
     // )
     setSocket(newSocket)
-  }, [profile, socket])
+  }, [projectList.length, profile, socket])
 
   return <>{children}</>
 }
