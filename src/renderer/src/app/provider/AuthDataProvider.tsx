@@ -48,38 +48,38 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
   }, [projectListData])
 
   // 소켓 연결
-  // useEffect(() => {
-  //   if (!profile) return
-  //   if (socket) return
-  //   if (!projectListData) return
+  useEffect(() => {
+    if (!profile) return
+    if (socket) return
+    if (!projectListData) return
 
-  //   const projectIdList = projectListData.map((project) => project._id)
+    const projectIdList = projectListData.map((project) => project._id)
 
-  //   const newSocket = io('http://localhost:4000', {
-  //     query: {
-  //       userId: profile._id
-  //     }
-  //   })
+    const newSocket = io('http://localhost:4000', {
+      query: {
+        profileId: profile._id
+      }
+    })
 
-  //   newSocket.emit(SOCKET_EVENT.join, projectIdList)
-  //   newSocket.emit(
-  //     SOCKET_EVENT.getAllProjectsMessageList,
-  //     projectIdList,
-  //     (messageList: ChatMessageDto[]) => {
-  //       const projectListDataClone = [...projectListData]
+    newSocket.emit(SOCKET_EVENT.join, projectIdList)
+    // newSocket.emit(
+    //   SOCKET_EVENT.getAllProjectsMessageList,
+    //   projectIdList,
+    //   (messageList: ChatMessageDto[]) => {
+    //     const projectListDataClone = [...projectListData]
 
-  //       const withMsgProject = projectListDataClone.map((project) => {
-  //         return {
-  //           ...project,
-  //           messageList: messageList.filter((msg) => msg.projectId === project.id)
-  //         }
-  //       })
+    //     const withMsgProject = projectListDataClone.map((project) => {
+    //       return {
+    //         ...project,
+    //         messageList: messageList.filter((msg) => msg.projectId === project.id)
+    //       }
+    //     })
 
-  //       setProjectList(withMsgProject)
-  //     }
-  //   )
-  //   setSocket(newSocket)
-  // }, [profile, socket])
+    //     setProjectList(withMsgProject)
+    //   }
+    // )
+    setSocket(newSocket)
+  }, [profile, socket])
 
   return <>{children}</>
 }

@@ -26,7 +26,6 @@ export const getProjectListByProfileId = async (req, res) => {
   const { profileId } = req.query
   try {
     const projectList = await Project.find({ memberList: profileId })
-    console.log(projectList)
 
     return res.status(200).json({ message: '프로젝트 조회 성공!', data: projectList })
   } catch {

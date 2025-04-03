@@ -22,7 +22,7 @@ export default function CreateNewProjectPopover(props: PopoverProps) {
 
   async function onSubmit(data: CreateProjectDto) {
     if (!profile) return
-    // if (!socket) return
+    if (!socket) return
 
     const newProject: CreateProjectDto = {
       name: data.name,
@@ -31,9 +31,9 @@ export default function CreateNewProjectPopover(props: PopoverProps) {
 
     const res = await createProject(newProject)
     const createdProject = res.data.project
-
+    const createdProjectId = createdProject._id
     addProject(createdProject)
-    // socket.emit(SOCKET_EVENT.join, [idNumb.toString()])
+    socket.emit(SOCKET_EVENT.join, [createdProjectId])
     close()
   }
   return (
