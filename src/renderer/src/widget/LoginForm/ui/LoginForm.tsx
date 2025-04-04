@@ -1,6 +1,7 @@
 import { loginUser } from '@renderer/entities/auth/api/authApi'
-import { UserDto } from '@renderer/entities/auth/api/types'
+
 import { useAuthActions } from '@renderer/entities/auth/model/slices'
+import { UserDto } from '@renderer/entities/auth/types'
 import { Button } from '@renderer/shared/ui/Button/Button'
 import Form from '@renderer/shared/ui/Form/Form'
 import { FormField } from '@renderer/shared/ui/Form/types'

@@ -1,6 +1,7 @@
 import { fetchApi } from '@renderer/shared/lib/api'
-import { UserDto } from './types'
+
 import { AxiosError } from 'axios'
+import { UserDto } from '../types'
 
 export async function registerUser(userDto: UserDto) {
   try {

@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { ProfileDto, UserDto } from '../api/types'
+import { ProfileDto, UserDto } from '../types'
 
 interface AuthStore {
   user: UserDto | null
