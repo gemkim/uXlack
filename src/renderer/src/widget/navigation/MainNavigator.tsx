@@ -22,6 +22,7 @@ import Frame from '@renderer/shared/ui/Frame/Frame'
 
 import { overlay } from 'overlay-kit'
 import { useNavigate } from 'react-router'
+import SettingModal from '../setting/SettingModal'
 
 export default function MainNavigator() {
   const projectList = useProjectList()
@@ -45,6 +46,10 @@ export default function MainNavigator() {
   function handleProjectClick(id: string) {
     setSelectedProjectId(id)
     navigate(`/project/${id}`)
+  }
+
+  function handleSettingClick() {
+    overlay.open((controller) => <SettingModal {...controller} />)
   }
 
   const isSelectedProject = (id: string) => id === selectedProjectId
@@ -97,7 +102,7 @@ export default function MainNavigator() {
             <IconQuestion />
             도움말
           </Button>
-          <Button className="w-full">
+          <Button className="w-full" onClick={handleSettingClick}>
             <IconSetting />
             설정
           </Button>
