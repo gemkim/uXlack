@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import type { ProjectDto } from './types'
+import { ProjectDto } from '../types/types'
 
 interface ProjectStore {
   projectList: ProjectDto[]

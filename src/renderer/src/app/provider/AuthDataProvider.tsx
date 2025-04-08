@@ -3,7 +3,8 @@ import { useProfile } from '@renderer/entities/auth/model/slices'
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
 import { useSocket, useSocketActions } from '@renderer/entities/chat/model/slice'
 import { useProjectActions, useProjectList } from '@renderer/entities/project/model/slice'
-import { ProjectDto } from '@renderer/entities/project/model/types'
+import { ProjectDto } from '@renderer/entities/project/types/types'
+
 import { API_ENDPOINT } from '@renderer/shared/constants/api-endpoint'
 
 import { useFetch } from '@renderer/shared/hooks/useFetch'
