@@ -1,4 +1,4 @@
-import SubNavigator from '@renderer/widget/SubNavigator/ui/SubNavigator'
+import SubNavigator from '@renderer/widget/navigation/SubNavigator'
 import { useState } from 'react'
 import { ProjectContent } from '../../types'
 import ContentSection from '../ContentSection/ContentSection'

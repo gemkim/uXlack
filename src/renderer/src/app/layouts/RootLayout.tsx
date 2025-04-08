@@ -1,7 +1,7 @@
 import { useProfile } from '@renderer/entities/auth/model/slices'
 import Frame from '@renderer/shared/ui/Frame/Frame'
 import WindowController from '@renderer/shared/ui/WindowController/WindowController'
-import MainNavigator from '@renderer/widget/MainNavigator/ui/MainNavigator'
+import MainNavigator from '@renderer/widget/navigation/MainNavigator'
 import { useEffect } from 'react'
 
 import { Outlet, useNavigate } from 'react-router'

@@ -1,7 +1,7 @@
 import { useProfile } from '@renderer/entities/auth/model/slices'
 import { Button } from '@renderer/shared/ui/Button/Button'
-import LoginForm from '@renderer/widget/LoginForm/ui/LoginForm'
-import { RegisterForm } from '@renderer/widget/RegisterForm/ui/RegisterForm'
+import LoginForm from '@renderer/widget/auth/LoginForm'
+import { RegisterForm } from '@renderer/widget/auth/RegisterForm'
 
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
