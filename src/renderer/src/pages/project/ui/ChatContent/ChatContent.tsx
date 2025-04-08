@@ -4,7 +4,7 @@ import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
 import { useSocket } from '@renderer/entities/chat/model/slice'
 import { ChatMessageDto } from '@renderer/entities/chat/types'
 import { useSelectedProject, useSelectedProjectId } from '@renderer/entities/project/model/slice'
-import ChatMessage from '@renderer/features/chat/chatMessage/ui/ChatMessage'
+import ChatMessage from '@renderer/features/chat/ui/ChatMessage'
 
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'

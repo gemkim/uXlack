@@ -4,7 +4,7 @@ import {
   useSelectedProjectId
 } from '@renderer/entities/project/model/slice'
 import LogoutButton from '@renderer/features/auth/ui/LogoutButton'
-import CreateNewProjectPopover from '@renderer/features/project/createNewProjectPopover/ui/createNewProjectPopover'
+import CreateNewProjectPopover from '@renderer/features/project/ui/createNewProjectPopover'
 import {
   IconBell,
   IconFolder,
