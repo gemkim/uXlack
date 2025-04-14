@@ -1,3 +1,4 @@
+import { useProfile } from '@renderer/entities/auth/model/slices'
 import {
   useProjectActions,
   useProjectList,
@@ -25,6 +26,7 @@ import { useNavigate } from 'react-router'
 import SettingModal from '../setting/SettingModal'
 
 export default function MainNavigator() {
+  const profile = useProfile()
   const projectList = useProjectList()
   const navigate = useNavigate()
   const selectedProjectId = useSelectedProjectId()
@@ -48,7 +50,7 @@ export default function MainNavigator() {
     navigate(`/project/${id}`)
   }
 
-  function handleSettingClick() {
+  function handleMyProfileClick() {
     overlay.open((controller) => <SettingModal {...controller} />)
   }
 
@@ -98,18 +100,34 @@ export default function MainNavigator() {
         </div>
         {/* 하단매뉴 */}
         <div className="mt-auto px-4 flex flex-col gap-0.5">
-          <Button className="w-full">
+          {/* <Button className="w-full">
             <IconQuestion />
             도움말
           </Button>
-          <Button className="w-full" onClick={handleSettingClick}>
+          <Button className="w-full" onClick={handleMyProfileClick}>
             <IconSetting />
             설정
-          </Button>
-          <LogoutButton>
+          </Button> */}
+          {/* <LogoutButton>
             <IconLogout />
             로그아웃
-          </LogoutButton>
+          </LogoutButton> */}
+        </div>
+        <div className="border-t px-4 pt-4">
+          <Button className="size-full" onClick={handleMyProfileClick}>
+            {profile && (
+              <div className="flex gap-2 items-center">
+                <div className="size-[32px] rounded-full bg-black flex justify-center items-center">
+                  <span className="text-white">{profile.name[0]}</span>
+                </div>
+                <div className="flex flex-col">
+                  <span>{profile.name}</span>
+                  {/* 컴포넌트 분리 필요 - 상태에따라 색상과 텍스트를 반환하는 */}
+                  <span className="text-xs">온라인</span>
+                </div>
+              </div>
+            )}
+          </Button>
         </div>
       </div>
     </div>

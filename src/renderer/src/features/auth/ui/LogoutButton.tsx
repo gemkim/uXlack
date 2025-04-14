@@ -1,6 +1,7 @@
 import { logoutUser } from '@renderer/entities/auth/api/authApi'
 import { useAuthActions } from '@renderer/entities/auth/model/slices'
 import { Button } from '@renderer/shared/ui/Button/Button'
+import { overlay } from 'overlay-kit'
 import { ReactNode } from 'react'
 
 interface LogoutButtionProps {
@@ -22,6 +23,15 @@ export default function LogoutButton(props: LogoutButtionProps) {
       setProfile(null)
       console.log('log out')
     }
+
+    overlay.closeAll()
+    setTimeout(() => {
+      overlay.unmountAll()
+    }, 700)
   }
-  return <Button onClick={handleOnClick}>{children ? children : '로그아웃'}</Button>
+  return (
+    <Button onClick={handleOnClick} className="text-red-300 font-semibold">
+      {children ? children : '로그아웃'}
+    </Button>
+  )
 }
