@@ -55,9 +55,6 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
   useEffect(() => {
     if (!profile) return
     if (socket) return
-    if (!isProjectLoadingDone) return
-
-    const projectIdList = projectList.map((project) => project._id)
 
     const newSocket = io('http://localhost:4000', {
       query: {
@@ -65,7 +62,6 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
       }
     })
 
-    newSocket.emit(SOCKET_EVENT.join, projectIdList)
     // newSocket.emit(
     //   SOCKET_EVENT.getAllProjectsMessageList,
     //   projectIdList,
@@ -83,7 +79,18 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
     //   }
     // )
     setSocket(newSocket)
+    console.log('set socket')
+    console.log(socket)
   }, [projectList.length, profile, socket])
 
+  // 소켓에 정상 연결 되었을때 채팅방 연결
+  useEffect(() => {
+    if (!isProjectLoadingDone) return
+    if (!socket) return
+
+    const projectIdList = projectList.map((project) => project._id)
+
+    socket.emit(SOCKET_EVENT.join, projectIdList)
+  }, [isProjectLoadingDone, socket])
   return <>{children}</>
 }
