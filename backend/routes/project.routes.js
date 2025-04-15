@@ -4,6 +4,32 @@ import { getProjectListByProfileId, registerProject } from '../controllers/proje
 const projectRouter = Router()
 
 // 메세지 가져오기
+/**
+ * @swagger
+ * /project/create:
+ *   post:
+ *     summary: 새 프로젝트 생성 api
+ *     tags: [Project]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               memberList:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 example: ["profileId"]
+ *     responses:
+ *       200:
+ *         description: 프로젝트 생성 완료
+ *       500:
+ *         description: 그 외 서버 에러
+ */
 projectRouter.post('/create', registerProject)
 projectRouter.get('/getProjectList', getProjectListByProfileId)
 // projectRouter.post('/delete', () => {})
