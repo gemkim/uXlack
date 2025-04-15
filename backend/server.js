@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
 import 'dotenv/config'
 import express from 'express'
 import http from 'http'
@@ -12,6 +11,7 @@ import authRouter from './routes/auth.routes.js'
 import projectRouter from './routes/project.routes.js'
 import swaggerUi from 'swagger-ui-express'
 import swaggerSpec from './config/swagger.js'
+import profileRouter from './routes/profile.routes.js'
 
 export const app = express()
 const server = http.createServer(app)
@@ -26,6 +26,9 @@ const PORT = 4000
 const MONGO_URI = process.env.MONGO_URI
 const SESSION_KEY = process.env.SESSION_KEY
 
+// cors
+app.use(cors({ origin: 'http://localhost:5173', credentials: true }))
+
 // 세션
 app.use(
   session({
@@ -39,11 +42,11 @@ app.use(
 
 // 미들웨어
 app.use(express.json())
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }))
 
 // 라우터 연동
 app.use('/auth', authRouter)
 app.use('/project', projectRouter)
+app.use('/profile', profileRouter)
 // 스웨거 라우터
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 mongoose

@@ -15,7 +15,12 @@ export const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10)
 
     const newUser = new User({ account, password: hashedPassword })
-    const newProfile = new Profile({ accountId: newUser._id, name, projectList: [] })
+    const newProfile = new Profile({
+      accountId: newUser._id,
+      name,
+      projectList: [],
+      iconSeed: name
+    })
     await newUser.save()
     await newProfile.save()
 
@@ -26,7 +31,7 @@ export const registerUser = async (req, res) => {
 }
 
 export const login = async (req, res) => {
-  const { account, password } = req.body.data
+  const { account, password } = req.body
 
   try {
     const user = await User.find({ account })
@@ -44,6 +49,7 @@ export const login = async (req, res) => {
     if (isPasswordMatch) {
       const profile = await Profile.find({ accountId: user[0]._id.toString() })
       req.session.user = { id: user[0]._id.toString(), profile: profile[0] }
+      console.log('Session after login:', req.session)
       return res.status(200).json({ message: '로그인 성공', user: req.session.user })
     }
   } catch {
