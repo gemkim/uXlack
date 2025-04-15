@@ -1,4 +1,4 @@
-import { useProfile, useUser } from '@renderer/entities/auth/model/slices'
+import { useProfile } from '@renderer/entities/auth/model/slices'
 import { ProfileDto } from '@renderer/entities/auth/types'
 import LogoutButton from '@renderer/features/auth/ui/LogoutButton'
 import { IconQuestion } from '@renderer/shared/assets/svgs'
@@ -22,7 +22,6 @@ export default function SettingModal(props: OverlayProps) {
     (p) => p.name
   )
 
-  const user = useUser()
   const profile = useProfile()
 
   function handleOptionClick(name: (typeof optionNames)[number]) {

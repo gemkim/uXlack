@@ -1,4 +1,4 @@
-import { useProfile, useUser } from '@renderer/entities/auth/model/slices'
+import { useProfile } from '@renderer/entities/auth/model/slices'
 
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
 import { useSocket } from '@renderer/entities/chat/model/slice'
