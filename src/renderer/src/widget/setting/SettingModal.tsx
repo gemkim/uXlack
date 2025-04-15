@@ -1,16 +1,23 @@
-import { useProfile, useUser } from '@renderer/entities/auth/model/slices'
+import { updateProfileIconSeed } from '@renderer/entities/auth/api/authApi'
+import { useAuthActions, useProfile, useUser } from '@renderer/entities/auth/model/slices'
 import { ProfileDto } from '@renderer/entities/auth/types'
 import LogoutButton from '@renderer/features/auth/ui/LogoutButton'
-import { IconQuestion } from '@renderer/shared/assets/svgs'
+import ProfileIcon from '@renderer/features/auth/ui/ProfileIcon'
+import {
+  IconCaretRight,
+  IconCheck,
+  IconDice,
+  IconQuestion,
+  IconReturn
+} from '@renderer/shared/assets/svgs'
 import { useHandleOption } from '@renderer/shared/hooks/useHandleOption'
-import { cn } from '@renderer/shared/lib/utils/utils'
+import { cn, generateString } from '@renderer/shared/lib/utils/utils'
 
 import { OverlayProps } from '@renderer/shared/types/overlayProps'
 import { Button } from '@renderer/shared/ui/Button/Button'
 import Input from '@renderer/shared/ui/Input/Input'
 import Modal from '@renderer/shared/ui/Modal/Modal'
 import { useState } from 'react'
-
 const SETTING_CONTENTS = [
   { name: 'profile', label: '내 프로필' },
   { name: 'setting', label: '설정 ' }
@@ -57,7 +64,7 @@ export default function SettingModal(props: OverlayProps) {
         </div>
         {/* 컨텐츠 패널 */}
         <div className="flex-1">
-          {selectedOption.name === 'profile' && <Profile profile={profile} />}
+          {selectedOption.name === 'profile' && profile && <Profile profile={profile} />}
           {selectedOption.name === 'setting' && <Setting />}
         </div>
       </div>
@@ -65,14 +72,41 @@ export default function SettingModal(props: OverlayProps) {
   )
 }
 
-function Profile({ profile }: { profile: ProfileDto | null }) {
+function Profile({ profile }: { profile: ProfileDto }) {
   const [isProfileEditing, setIsProfileEditing] = useState(false)
 
-  if (!profile) return
-  const { name } = profile
+  const { name, iconSeed } = profile
+  const defaultSeed = iconSeed ?? name
+  const [seed, setSeed] = useState(defaultSeed)
+
+  const { setProfile } = useAuthActions()
 
   function handleProfileImageClick() {
     setIsProfileEditing((prev) => !prev)
+    setSeed(defaultSeed)
+  }
+
+  function hnadleProfileRandomClick() {
+    setSeed(generateString(4))
+  }
+
+  function handleReturnClick() {
+    setSeed(defaultSeed)
+    setIsProfileEditing(false)
+  }
+
+  async function handleProfileSubmitClick() {
+    console.log('적용')
+    const res = await updateProfileIconSeed(seed)
+
+    const newProfile = res.data.profile as ProfileDto
+
+    if (!newProfile) return
+
+    setProfile(newProfile)
+    setIsProfileEditing(false)
+
+    // 백엔드 개발 후 추가 예정
   }
 
   return (
@@ -80,43 +114,32 @@ function Profile({ profile }: { profile: ProfileDto | null }) {
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           <label className="font-bold">프로필 이미지</label>
-          <div className="flex flex-col">
+          <div className="flex gap-4">
             <div
               onClick={handleProfileImageClick}
               className="size-[112px] overflow-hidden rounded-full border flex items-center justify-center cursor-pointer hover:brightness-75 transition-all"
             >
-              <span>프로필 이미지 영역</span>
+              <ProfileIcon seed={seed} />
             </div>
             <div
               className={cn(
-                'mt-2 transition-all overflow-hidden',
-                isProfileEditing ? 'max-h-[500px]' : 'max-h-0'
+                'flex-1 flex items-end transition-opacity',
+                isProfileEditing ? 'opacity-100' : 'opacity-0 pointer-events-none'
               )}
             >
-              {/* <div className="flex justify-center gap-2">
-                <button>전</button>
-                <button>무작위</button>
-                <button>후</button>
-              </div> */}
-              {/* <div className="flex flex-col">
-                <div className="flex">
-                  <div className="flex-1">eye</div>
-                  <div className="flex-1">mouth</div>
-                  <div className="flex-1">shape color</div>
-                  <div className="flex-1">translateY (character)</div>
+              <div className="flex gap-4">
+                <Button onClick={hnadleProfileRandomClick}>
+                  <IconDice />
+                </Button>
+                <div className="flex gap-2">
+                  <Button onClick={handleReturnClick}>
+                    <IconReturn />
+                  </Button>
+                  <Button onClick={handleProfileSubmitClick}>
+                    <IconCheck />
+                  </Button>
                 </div>
-                <div className="flex">
-                  <div className="flex-1">filp</div>
-                  <div className="flex-1">rotate</div>
-                  <div className="flex-1">scale</div>
-                </div>
-                <div className="flex">
-                  <div className="flex-1">bg type</div>
-                  <div className="flex-1">bg color</div>
-                  <div className="flex-1">translateX (character)</div>
-                  <div className="flex-1">translateY (character)</div>
-                </div>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
