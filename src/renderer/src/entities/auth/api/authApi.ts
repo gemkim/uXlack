@@ -19,12 +19,7 @@ export async function loginUser(userDto: UserDto) {
   const { account, password } = userDto
 
   try {
-    const res = await fetchApi.post(`/auth/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include', // 세션 쿠키 포함
-      data: { account, password }
-    })
+    const res = await fetchApi.post(`/auth/login`, { account, password })
     return res
   } catch (error: any) {
     return error.response
@@ -33,12 +28,27 @@ export async function loginUser(userDto: UserDto) {
 
 export async function logoutUser() {
   try {
-    const res = await fetchApi.post(`/auth/logout`, {
-      method: 'POST',
-      credentials: 'include' // 세션 쿠키 포함
-    })
+    const res = await fetchApi.post(`/auth/logout`)
     return res
-  } catch (error) {
+  } catch (error: any) {
+    return error.response
+  }
+}
+
+export async function updateProfileName(newName: string) {
+  try {
+    const res = await fetchApi.put(`/profile/update-name`, { name: newName })
+    return res
+  } catch (error: any) {
+    return error.response
+  }
+}
+
+export async function updateProfileIconSeed(newIconSeed: string) {
+  try {
+    const res = await fetchApi.put(`/profile/update-icon`, { iconSeed: newIconSeed })
+    return res
+  } catch (error: any) {
     return error.response
   }
 }
