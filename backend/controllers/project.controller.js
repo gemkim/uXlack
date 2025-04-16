@@ -23,7 +23,8 @@ export const registerProject = async (req, res) => {
 }
 
 export const getProjectListByProfileId = async (req, res) => {
-  const { profileId } = req.query
+  const { profileId } = req.body
+
   try {
     const projectList = await Project.find({ memberList: profileId })
 
