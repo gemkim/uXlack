@@ -1,7 +1,9 @@
 import { useSelectedProject } from '@renderer/entities/project/model/slice'
+import ProjectMemberPopover from '@renderer/features/project/ui/ProjectMemberPopover'
 import { ProjectContent } from '@renderer/pages/project/types'
 import { IconCalendar, IconFile, IconMessage, IconUser } from '@renderer/shared/assets/svgs'
 import { Button } from '@renderer/shared/ui/Button/Button'
+import { overlay } from 'overlay-kit'
 
 interface SubNavigatorProps {
   content: ProjectContent
@@ -14,6 +16,13 @@ export default function SubNavigator(props: SubNavigatorProps) {
   const selectedProject = useSelectedProject()
 
   const isSelectedContent = (c: ProjectContent) => c === content
+
+  function handleProjectMemberClick(event: React.MouseEvent<HTMLButtonElement>) {
+    const rect = event.currentTarget.getBoundingClientRect()
+
+    overlay.open((controller) => <ProjectMemberPopover {...controller} triggerRect={rect} />)
+  }
+
   return (
     <div className="flex flex-col min-w-[220px] h-full">
       {selectedProject && (
@@ -23,10 +32,10 @@ export default function SubNavigator(props: SubNavigatorProps) {
               <div>
                 <span className="font-bold">{selectedProject.name}</span>
               </div>
-              <div className="flex items-center gap-2">
+              <Button className="flex items-center gap-2" onClick={handleProjectMemberClick}>
                 <IconUser />
                 <span className="text-sm">{selectedProject.memberList.length}</span>
-              </div>
+              </Button>
             </div>
             <div className="flex flex-col mt-4 gap-2">
               <Button isActive={isSelectedContent('chat')} onClick={() => setContent('chat')}>
