@@ -31,7 +31,7 @@ const projectRouter = Router()
  *         description: 그 외 서버 에러
  */
 projectRouter.post('/create', registerProject)
-projectRouter.get('/getProjectList', getProjectListByProfileId)
+projectRouter.post('/getProjectList', getProjectListByProfileId)
 // projectRouter.post('/delete', () => {})
 // projectRouter.post('/edit', () => {})
 
