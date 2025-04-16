@@ -1,28 +1,46 @@
-import React, { useEffect, useState } from 'react'
-import { fetchApi } from '../lib/api'
 import { AxiosRequestConfig } from 'axios'
+import { useEffect, useState } from 'react'
+import { fetchApi } from '../lib/api'
+
+type Method = 'get' | 'post' | 'put' | 'delete'
 
 export function useFetch<T>(
+  method: Method,
   endpoint: string,
-  config: AxiosRequestConfig<any> = {},
-  deps: React.DependencyList = []
+  payload: any = {},
+  deps: React.DependencyList = [],
+  skip = false // 추가
 ) {
   const [data, setData] = useState<T | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<any>(null)
 
   useEffect(() => {
-    let ignore = false
-    if (ignore) return
+    if (skip) return
+    let cancelled = false
 
-    fetchApi.get(endpoint, config).then((res) => {
-      if (!ignore) {
-        setData(res.data.data ?? null)
+    const fetchData = async () => {
+      setLoading(true)
+      setError(null)
+      try {
+        const res = await fetchApi[method](endpoint, method === 'post' ? payload : { ...payload })
+        console.log(res, payload)
+        if (!cancelled) {
+          setData(res.data.data ?? null)
+        }
+      } catch (err) {
+        if (!cancelled) setError(err)
+      } finally {
+        if (!cancelled) setLoading(false)
       }
-    })
+    }
+
+    fetchData()
 
     return () => {
-      ignore = true
+      cancelled = true
     }
-  }, [endpoint, ...deps])
+  }, deps)
 
-  return { data }
+  return { data, loading, error }
 }
