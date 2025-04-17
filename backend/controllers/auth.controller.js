@@ -2,6 +2,7 @@
 import Profile from '../models/profile.model.js'
 import User from '../models/user.model.js'
 import bcrypt from 'bcryptjs'
+import { generateUniqueTag } from '../utils/generateTag.js'
 
 // 회원가입
 export const registerUser = async (req, res) => {
@@ -15,9 +16,11 @@ export const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10)
 
     const newUser = new User({ account, password: hashedPassword })
+    const tag = await generateUniqueTag(name)
     const newProfile = new Profile({
       accountId: newUser._id,
       name,
+      tag,
       projectList: [],
       iconSeed: name
     })
