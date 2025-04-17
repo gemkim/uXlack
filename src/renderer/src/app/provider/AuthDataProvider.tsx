@@ -2,8 +2,8 @@ import { useProfile } from '@renderer/entities/auth/model/slices'
 import { ProfileDto } from '@renderer/entities/auth/types'
 
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
-import { useSocket, useSocketActions } from '@renderer/entities/chat/model/slice'
-import { useProjectActions, useProjectList } from '@renderer/entities/project/model/slice'
+import { useSocket, useSocketActions } from '@renderer/entities/chat/model/socketSlice'
+import { useProjectActions } from '@renderer/entities/project/model/slice'
 import { ProjectDto } from '@renderer/entities/project/types/types'
 
 import { useFetch } from '@renderer/shared/hooks/useFetch'
