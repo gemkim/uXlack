@@ -27,7 +27,7 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
     'post',
     '/project/getProjectList',
     { profileId: profile?._id },
-    [profile],
+    [profile?._id],
     !profile?._id
   )
 
