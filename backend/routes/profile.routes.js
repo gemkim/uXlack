@@ -93,5 +93,31 @@ profileRouter.put('/update-icon', updateProfileIconSeed)
  *         description: 그 외 서버 에러
  */
 profileRouter.post('/get-profile-list', getProfileList)
+/**
+ * @swagger
+ * /profile/get-profile-by-name-tag:
+ *   post:
+ *     summary: 사용자가 'name', 'tag'를 통해 profile을 조회하는 api
+ *     description: 프로젝트에 멤벌르 초대하는 기능 등에 사용합니다.
+ *     tags: [Profile]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               tag:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: 프로필 조회 성공
+ *       400:
+ *         description: 존재하지 않는 유저 입니다.
+ *       500:
+ *         description: 그 외 서버 에러
+ */
 profileRouter.post('/get-profile-by-name-tag', getProfileByNameTag)
 export default profileRouter
