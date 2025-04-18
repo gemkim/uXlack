@@ -21,7 +21,7 @@ const setupMessageSocket = (io) => {
       })
       await newMessage.save()
 
-      io.to(projectId).emit(event.receiveMessage, msgDto)
+      io.to(projectId).emit(event.receiveMessage, newMessage)
     })
 
     socket.on(event.getAllProjectsMessageList, async (projectId, callback) => {
