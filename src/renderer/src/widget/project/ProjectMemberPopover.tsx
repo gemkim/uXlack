@@ -5,6 +5,7 @@ import { ProjectDto } from '@renderer/entities/project/types/types'
 
 import ProfileIcon from '@renderer/features/auth/ui/ProfileIcon'
 import { IconCheck, IconClose, IconNewUser } from '@renderer/shared/assets/svgs'
+import { API_ENDPOINT } from '@renderer/shared/constants/api-endpoint'
 import { fetchApi } from '@renderer/shared/lib/api'
 
 import { PopoverProps } from '@renderer/shared/types/overlayProps'
@@ -118,7 +119,7 @@ function Invite(props: InviteProps) {
   async function handleInviteClick() {
     if (!searchedProfile) return
     if (!selectedProject) return
-    const res = await fetchApi.post('/invite/send', {
+    const res = await fetchApi.post(API_ENDPOINT.invite.send, {
       inviteeId: searchedProfile?._id,
       projectId: selectedProject._id
     })
@@ -186,7 +187,7 @@ function Invite(props: InviteProps) {
       setIsLoading(true)
 
       const res = fetchApi
-        .post('/profile/get-profile-by-name-tag', { name, tag })
+        .post(API_ENDPOINT.profile.getProfileByNameTag, { name, tag })
         .then((r) => {
           const profile = r.data.profile[0] as ProfileDto
           setIsInviteSuccess(false)
