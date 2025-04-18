@@ -121,8 +121,11 @@ export default function MainNavigator() {
                 <div className="size-[32px] rounded-full bg-black overflow-hidden flex justify-center items-center">
                   <ProfileIcon />
                 </div>
-                <div className="flex flex-col">
-                  <span>{profile.name}</span>
+                <div className="flex flex-col items-start">
+                  <div className="flex items-center gap-1">
+                    <span>{profile.name}</span>
+                    <span className="text-gray-400 text-xs">#{profile.tag}</span>
+                  </div>
                   {/* 컴포넌트 분리 필요 - 상태에따라 색상과 텍스트를 반환하는 */}
                   <span className="text-xs">온라인</span>
                 </div>
