@@ -1,3 +1,5 @@
+import { ProfileDto } from '@renderer/entities/auth/types'
+
 export interface ProjectDto {
   name: string
   memberList: string[]
@@ -10,3 +12,14 @@ export interface ProjectDto {
 }
 
 export type CreateProjectDto = Pick<ProjectDto, 'name' | 'memberList'>
+
+export type InviteStatus = 'pending' | 'accepted' | 'declined'
+
+export interface InviteDto {
+  _id: string
+  inviter: Pick<ProfileDto, 'name' | 'iconSeed' | 'tag'>
+  inviteeId: string
+  project: Pick<ProjectDto, 'name'>
+  status: InviteStatus
+  createAt: string
+}

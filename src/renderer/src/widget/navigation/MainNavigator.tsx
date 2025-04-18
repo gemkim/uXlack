@@ -25,6 +25,7 @@ import { overlay } from 'overlay-kit'
 import { useNavigate } from 'react-router'
 import SettingModal from '../setting/SettingModal'
 import ProfileIcon from '@renderer/features/auth/ui/ProfileIcon'
+import AlarmPopover from '@renderer/widget/alarm/AlarmPopover'
 
 export default function MainNavigator() {
   const profile = useProfile()
@@ -55,6 +56,12 @@ export default function MainNavigator() {
     overlay.open((controller) => <SettingModal {...controller} />)
   }
 
+  function handleAlarmClick(event: React.MouseEvent<HTMLButtonElement>) {
+    const rect = event.currentTarget.getBoundingClientRect()
+
+    overlay.open((controller) => <AlarmPopover {...controller} triggerRect={rect}></AlarmPopover>)
+  }
+
   const isSelectedProject = (id: string) => id === selectedProjectId
 
   return (
@@ -73,7 +80,7 @@ export default function MainNavigator() {
           <Button>
             <IconSearch /> 검색
           </Button>
-          <Button>
+          <Button onClick={handleAlarmClick}>
             <IconBell />
             알림
           </Button>

@@ -3,8 +3,9 @@ import { ProfileDto } from '@renderer/entities/auth/types'
 
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
 import { useSocket, useSocketActions } from '@renderer/entities/chat/model/socketSlice'
+import { useInviteActions } from '@renderer/entities/project/model/inviteSlice'
 import { useProjectActions } from '@renderer/entities/project/model/slice'
-import { ProjectDto } from '@renderer/entities/project/types/types'
+import { InviteDto, ProjectDto } from '@renderer/entities/project/types/types'
 
 import { useFetch } from '@renderer/shared/hooks/useFetch'
 import { ReactNode, useEffect, useState } from 'react'
@@ -20,9 +21,24 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
 
   const profile = useProfile()
 
-  const { setProjectList, setProfileList } = useProjectActions()
+  const { setInviteList } = useInviteActions()
+
+  // 초대 로드
+  const { data: inviteDataList } = useFetch<InviteDto[]>(
+    'post',
+    '/invite/get-received',
+    {},
+    [profile?._id],
+    !profile?._id
+  )
+
+  useEffect(() => {
+    if (!inviteDataList) return
+    setInviteList(inviteDataList)
+  }, [inviteDataList])
 
   // 프로젝트 로드
+  const { setProjectList, setProfileList } = useProjectActions()
   const { data: ProjectDataList } = useFetch<ProjectDto[]>(
     'post',
     '/project/getProjectList',
