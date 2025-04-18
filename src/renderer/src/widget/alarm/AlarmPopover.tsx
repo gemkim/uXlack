@@ -37,7 +37,8 @@ function InviteAlarm({ inviteList }: { inviteList: InviteDto[] }) {
                 <span className="font-semibold text-xs">
                   {invite.inviter.name}#{invite.inviter.tag}
                 </span>
-                님이 {invite.project.name} 프로젝트에 초대했습니다.
+                님이 <span className="text-xs font-semibold">{invite.project.name}</span> 프로젝트에
+                초대했습니다.
               </p>
             </div>
             <div className="flex justify-end text-xs gap-4">

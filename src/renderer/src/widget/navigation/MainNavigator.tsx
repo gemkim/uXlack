@@ -26,6 +26,7 @@ import { useNavigate } from 'react-router'
 import SettingModal from '../setting/SettingModal'
 import ProfileIcon from '@renderer/features/auth/ui/ProfileIcon'
 import AlarmPopover from '@renderer/widget/alarm/AlarmPopover'
+import { useInviteList } from '@renderer/entities/project/model/inviteSlice'
 
 export default function MainNavigator() {
   const profile = useProfile()
@@ -33,6 +34,8 @@ export default function MainNavigator() {
   const navigate = useNavigate()
   const selectedProjectId = useSelectedProjectId()
   const { setSelectedProjectId } = useProjectActions()
+
+  const inviteList = useInviteList()
 
   function handleNewProjectClick(event: React.MouseEvent<HTMLButtonElement>) {
     const rect = event.currentTarget.getBoundingClientRect()
@@ -80,9 +83,17 @@ export default function MainNavigator() {
           <Button>
             <IconSearch /> 검색
           </Button>
-          <Button onClick={handleAlarmClick}>
-            <IconBell />
-            알림
+          <Button onClick={handleAlarmClick} className="justify-between">
+            <span className="flex items-center gap-2">
+              {' '}
+              <IconBell />
+              알림
+            </span>
+            {inviteList.length > 0 && (
+              <span className="size-[14px] rounded-full bg-red-500 flex items-center justify-center">
+                <span className="text-[9px] text-white">{inviteList.length}</span>
+              </span>
+            )}
           </Button>
         </div>
         {/* 프로젝트 */}
