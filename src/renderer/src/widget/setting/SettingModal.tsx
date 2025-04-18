@@ -74,7 +74,7 @@ export default function SettingModal(props: OverlayProps) {
 function Profile({ profile }: { profile: ProfileDto }) {
   const [isProfileEditing, setIsProfileEditing] = useState(false)
 
-  const { name, iconSeed } = profile
+  const { name, iconSeed, tag } = profile
   const defaultSeed = iconSeed ?? name
   const [seed, setSeed] = useState(defaultSeed)
 
@@ -142,9 +142,15 @@ function Profile({ profile }: { profile: ProfileDto }) {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-2">
-          <label className="font-bold">이름</label>
-          <Input value={name} disabled />
+        <div className="flex gap-4">
+          <div className="flex flex-col gap-2 basis-1/3">
+            <label className="font-bold">이름</label>
+            <Input value={name} disabled />
+          </div>
+          <div className="flex flex-col gap-2 basis-1/3">
+            <label className="font-bold">태그</label>
+            <Input value={`#${tag}`} disabled />
+          </div>
         </div>
       </div>
       <div className="mt-auto flex justify-end">
