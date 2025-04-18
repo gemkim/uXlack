@@ -1,5 +1,5 @@
 import { useSelectedProject } from '@renderer/entities/project/model/slice'
-import ProjectMemberPopover from '@renderer/features/project/ui/ProjectMemberPopover'
+import ProjectMemberPopover from '@renderer/widget/project/ProjectMemberPopover'
 import { ProjectContent } from '@renderer/pages/project/types'
 import { IconCalendar, IconFile, IconMessage, IconUser } from '@renderer/shared/assets/svgs'
 import { Button } from '@renderer/shared/ui/Button/Button'
