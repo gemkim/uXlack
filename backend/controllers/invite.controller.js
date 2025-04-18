@@ -44,3 +44,32 @@ export const sendInvite = async (req, res) => {
     return res.status(500).json({ message: '서버 오류 발생' })
   }
 }
+
+export const getReceivedInvites = async (req, res) => {
+  const { _id } = req.session.user.profile
+
+  try {
+    const inviteList = await Invite.find({ inviteeId: _id })
+      .populate('inviterId', 'name iconSeed tag')
+      .populate('projectId', 'name')
+
+    const inviteDtoList = inviteList.map((invite) => ({
+      _id: invite._id.toString(),
+      inviter: {
+        name: invite.inviterId.name,
+        iconSeed: invite.inviterId.iconSeed,
+        tag: invite.inviterId.tag
+      },
+      inviteeId: invite.inviteeId.toString(),
+      project: {
+        name: invite.projectId.name
+      },
+      status: invite.status,
+      createAt: invite.createdAt.toISOString()
+    }))
+
+    return res.status(200).json({ message: '초대 조회 성공!', data: inviteDtoList })
+  } catch {
+    return res.status(500).json({ message: '서버 오류 발생' })
+  }
+}
