@@ -84,7 +84,7 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
       return
     }
 
-    socket.emit(SOCKET_EVENT.join, projectIdList)
+    socket.emit(SOCKET_EVENT.joinRooms, projectIdList)
 
     console.log(projectIdList, '채팅방 연결')
     //

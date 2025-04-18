@@ -1,4 +1,4 @@
-export const SOCKET_EVENT = {
+export const SOCKET_EVENT_BACKEND = {
   /**
    * 최초 소켓 연결
    */

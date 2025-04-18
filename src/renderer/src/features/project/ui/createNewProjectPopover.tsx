@@ -33,7 +33,7 @@ export default function CreateNewProjectPopover(props: PopoverProps) {
     const createdProject = res.data.project
     const createdProjectId = createdProject._id
     addProject(createdProject)
-    socket.emit(SOCKET_EVENT.join, [createdProjectId])
+    socket.emit(SOCKET_EVENT.joinRooms, [createdProjectId])
     close()
   }
   return (
