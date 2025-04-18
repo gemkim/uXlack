@@ -13,7 +13,7 @@ export default function Input(props: InputProps) {
     <input
       className={cn(
         className,
-        'bg-gray-100 p-1 outline-none text-black mt-2 border border-gray-200 rounded-sm'
+        'bg-gray-100 p-1 outline-none text-black border border-gray-200 rounded-sm'
       )}
       {...register}
       {...attrs}
