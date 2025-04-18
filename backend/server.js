@@ -12,6 +12,7 @@ import projectRouter from './routes/project.routes.js'
 import swaggerUi from 'swagger-ui-express'
 import swaggerSpec from './config/swagger.js'
 import profileRouter from './routes/profile.routes.js'
+import inviteRouter from './routes/invite.routes.js'
 
 export const app = express()
 const server = http.createServer(app)
@@ -47,6 +48,7 @@ app.use(express.json())
 app.use('/auth', authRouter)
 app.use('/project', projectRouter)
 app.use('/profile', profileRouter)
+app.use('/invite', inviteRouter)
 // 스웨거 라우터
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 mongoose

@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import {
+  getProfileByNameTag,
   getProfileList,
   updateProfileIconSeed,
   updateProfileName
@@ -92,4 +93,5 @@ profileRouter.put('/update-icon', updateProfileIconSeed)
  *         description: 그 외 서버 에러
  */
 profileRouter.post('/get-profile-list', getProfileList)
+profileRouter.post('/get-profile-by-name-tag', getProfileByNameTag)
 export default profileRouter
