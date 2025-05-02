@@ -1,7 +1,7 @@
 import { useProfile } from '@renderer/entities/auth/model/slices'
 import { ProfileDto } from '@renderer/entities/auth/types'
 import LogoutButton from '@renderer/features/auth/ui/LogoutButton'
-import { IconQuestion } from '@renderer/shared/assets/svgs'
+import { IconCheck, IconQuestion, IconNext, IconReturn } from '@renderer/shared/assets/svgs'
 import { useHandleOption } from '@renderer/shared/hooks/useHandleOption'
 import { cn } from '@renderer/shared/lib/utils/utils'
 
@@ -79,7 +79,8 @@ function Profile({ profile }: { profile: ProfileDto | null }) {
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           <label className="font-bold">프로필 이미지</label>
-          <div className="flex flex-col">
+          <div className="flex">
+            {/* 프로필 아바타 */}
             <div
               onClick={handleProfileImageClick}
               className="size-[112px] overflow-hidden rounded-full border flex items-center justify-center cursor-pointer hover:brightness-75 transition-all"
@@ -88,10 +89,22 @@ function Profile({ profile }: { profile: ProfileDto | null }) {
             </div>
             <div
               className={cn(
-                'mt-2 transition-all overflow-hidden',
+                'mt-2 self-end transition-all overflow-hidden',
                 isProfileEditing ? 'max-h-[500px]' : 'max-h-0'
               )}
             >
+              {/* 프로필 옵션선택 버튼 */}
+              <div className="flex">
+                <Button>
+                  <IconNext />
+                </Button>
+                <Button>
+                  <IconReturn />
+                </Button>
+                <Button>
+                  <IconCheck />
+                </Button>
+              </div>
               {/* <div className="flex justify-center gap-2">
                 <button>전</button>
                 <button>무작위</button>
