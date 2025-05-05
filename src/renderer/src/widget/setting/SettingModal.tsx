@@ -9,6 +9,7 @@ import { OverlayProps } from '@renderer/shared/types/overlayProps'
 import { Button } from '@renderer/shared/ui/Button/Button'
 import Input from '@renderer/shared/ui/Input/Input'
 import Modal from '@renderer/shared/ui/Modal/Modal'
+import UserAvatar from '@renderer/shared/ui/UserIcon/userAvatar'
 import { useState } from 'react'
 
 const SETTING_CONTENTS = [
@@ -85,7 +86,8 @@ function Profile({ profile }: { profile: ProfileDto | null }) {
               onClick={handleProfileImageClick}
               className="size-[112px] overflow-hidden rounded-full border flex items-center justify-center cursor-pointer hover:brightness-75 transition-all"
             >
-              <span>프로필 이미지 영역</span>
+              {/* testmj */}
+              <UserAvatar />
             </div>
             <div
               className={cn(
