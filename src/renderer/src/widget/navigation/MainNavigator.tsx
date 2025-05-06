@@ -24,6 +24,7 @@ import Frame from '@renderer/shared/ui/Frame/Frame'
 import { overlay } from 'overlay-kit'
 import { useNavigate } from 'react-router'
 import SettingModal from '../setting/SettingModal'
+import UserAvatar from '@renderer/shared/ui/UserIcon/userAvatar'
 
 export default function MainNavigator() {
   const profile = useProfile()
@@ -118,7 +119,10 @@ export default function MainNavigator() {
             {profile && (
               <div className="flex gap-2 items-center">
                 <div className="size-[32px] rounded-full bg-black flex justify-center items-center">
-                  <span className="text-white">{profile.name[0]}</span>
+                  { profile.iconSeed ?
+                    <UserAvatar seed={profile.iconSeed} /> 
+                    : <span className="text-white">{profile.name[0]}</span>
+                  }
                 </div>
                 <div className="flex flex-col">
                   <span>{profile.name}</span>
