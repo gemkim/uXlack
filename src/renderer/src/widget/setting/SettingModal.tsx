@@ -3,8 +3,7 @@ import { ProfileDto } from '@renderer/entities/auth/types'
 import LogoutButton from '@renderer/features/auth/ui/LogoutButton'
 import { IconCheck, IconQuestion, IconNext, IconReturn } from '@renderer/shared/assets/svgs'
 import { useHandleOption } from '@renderer/shared/hooks/useHandleOption'
-import { cn } from '@renderer/shared/lib/utils/utils'
-
+import { cn, createRandomString } from '@renderer/shared/lib/utils/utils'
 import { OverlayProps } from '@renderer/shared/types/overlayProps'
 import { Button } from '@renderer/shared/ui/Button/Button'
 import Input from '@renderer/shared/ui/Input/Input'
@@ -66,13 +65,28 @@ export default function SettingModal(props: OverlayProps) {
 }
 
 function Profile({ profile }: { profile: ProfileDto | null }) {
-  const [isProfileEditing, setIsProfileEditing] = useState(false)
-
   if (!profile) return
-  const { name } = profile
+  const { accountId, iconSeed, name, tag } = profile
+  const [isProfileEditing, setIsProfileEditing] = useState(false)
+  const [avatarSeed, setAvatarSeed] = useState(iconSeed)
+console.log('test', iconSeed);
 
+  // profile 정보
   function handleProfileImageClick() {
     setIsProfileEditing((prev) => !prev)
+  }
+  // 프로필 랜덤
+  function changeRandomAvatar() {
+    setAvatarSeed(createRandomString(4)) // Q: length가 4 아니어도 되는건가,,,
+  }
+  // 프로필 리셋
+  function handleReturnAvatar() {
+    setAvatarSeed(iconSeed)
+    setIsProfileEditing(false)
+  }
+  // 프로필 확인하기
+  function handleAvatarConfirm() {
+    alert('아바타 확인하기')
   }
 
   return (
@@ -87,7 +101,7 @@ function Profile({ profile }: { profile: ProfileDto | null }) {
               className="size-[112px] overflow-hidden rounded-full border flex items-center justify-center cursor-pointer hover:brightness-75 transition-all"
             >
               {/* testmj */}
-              <UserAvatar />
+              <UserAvatar seed={avatarSeed} />
             </div>
             <div
               className={cn(
@@ -97,40 +111,16 @@ function Profile({ profile }: { profile: ProfileDto | null }) {
             >
               {/* 프로필 옵션선택 버튼 */}
               <div className="flex">
-                <Button>
+                <Button onClick={changeRandomAvatar}>
                   <IconNext />
                 </Button>
-                <Button>
+                <Button onClick={handleReturnAvatar}>
                   <IconReturn />
                 </Button>
-                <Button>
+                <Button onClick={handleAvatarConfirm}>
                   <IconCheck />
                 </Button>
               </div>
-              {/* <div className="flex justify-center gap-2">
-                <button>전</button>
-                <button>무작위</button>
-                <button>후</button>
-              </div> */}
-              {/* <div className="flex flex-col">
-                <div className="flex">
-                  <div className="flex-1">eye</div>
-                  <div className="flex-1">mouth</div>
-                  <div className="flex-1">shape color</div>
-                  <div className="flex-1">translateY (character)</div>
-                </div>
-                <div className="flex">
-                  <div className="flex-1">filp</div>
-                  <div className="flex-1">rotate</div>
-                  <div className="flex-1">scale</div>
-                </div>
-                <div className="flex">
-                  <div className="flex-1">bg type</div>
-                  <div className="flex-1">bg color</div>
-                  <div className="flex-1">translateX (character)</div>
-                  <div className="flex-1">translateY (character)</div>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>
