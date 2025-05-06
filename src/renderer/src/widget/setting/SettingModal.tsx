@@ -1,4 +1,5 @@
-import { useProfile } from '@renderer/entities/auth/model/slices'
+import { updateProfileIconSeed } from '@renderer/entities/auth/api/authApi'
+import { useAuthActions, useProfile } from '@renderer/entities/auth/model/slices'
 import { ProfileDto } from '@renderer/entities/auth/types'
 import LogoutButton from '@renderer/features/auth/ui/LogoutButton'
 import { IconCheck, IconQuestion, IconNext, IconReturn } from '@renderer/shared/assets/svgs'
@@ -69,7 +70,7 @@ function Profile({ profile }: { profile: ProfileDto | null }) {
   const { accountId, iconSeed, name, tag } = profile
   const [isProfileEditing, setIsProfileEditing] = useState(false)
   const [avatarSeed, setAvatarSeed] = useState(iconSeed)
-console.log('test', iconSeed);
+  const { setProfile } = useAuthActions() // zustand
 
   // profile 정보
   function handleProfileImageClick() {
@@ -84,9 +85,15 @@ console.log('test', iconSeed);
     setAvatarSeed(iconSeed)
     setIsProfileEditing(false)
   }
-  // 프로필 확인하기
-  function handleAvatarConfirm() {
-    alert('아바타 확인하기')
+  const handleAvatarSave = async () => {
+    try {
+      await updateProfileIconSeed(avatarSeed) // api에 변경된 seed update
+      const updatedProfile = { ...profile, iconSeed: avatarSeed } // 새로운 변수에 업데이트 된 데이터 적용
+      setProfile(updatedProfile) // zustand의 store에 업데이트 하기
+      setIsProfileEditing(false)
+    } catch (error) {
+      console.error('업데이트 실패', error)
+    }
   }
 
   return (
@@ -100,7 +107,6 @@ console.log('test', iconSeed);
               onClick={handleProfileImageClick}
               className="size-[112px] overflow-hidden rounded-full border flex items-center justify-center cursor-pointer hover:brightness-75 transition-all"
             >
-              {/* testmj */}
               <UserAvatar seed={avatarSeed} />
             </div>
             <div
@@ -117,7 +123,7 @@ console.log('test', iconSeed);
                 <Button onClick={handleReturnAvatar}>
                   <IconReturn />
                 </Button>
-                <Button onClick={handleAvatarConfirm}>
+                <Button onClick={handleAvatarSave}>
                   <IconCheck />
                 </Button>
               </div>
