@@ -13,5 +13,6 @@ export interface ProfileDto {
   accountId: string
   name: string
   projectList: string[]
+  tag: string
   iconSeed?: string
 }

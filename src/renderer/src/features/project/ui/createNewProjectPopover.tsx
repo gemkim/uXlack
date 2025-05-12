@@ -1,7 +1,7 @@
 import { useProfile } from '@renderer/entities/auth/model/slices'
 
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
-import { useSocket } from '@renderer/entities/chat/model/slice'
+import { useSocket } from '@renderer/entities/chat/model/socketSlice'
 import { createProject } from '@renderer/entities/project/api/projectApi'
 import { useProjectActions } from '@renderer/entities/project/model/slice'
 
@@ -33,7 +33,7 @@ export default function CreateNewProjectPopover(props: PopoverProps) {
     const createdProject = res.data.project
     const createdProjectId = createdProject._id
     addProject(createdProject)
-    socket.emit(SOCKET_EVENT.join, [createdProjectId])
+    socket.emit(SOCKET_EVENT.joinRooms, [createdProjectId])
     close()
   }
   return (

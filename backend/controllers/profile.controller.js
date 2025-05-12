@@ -60,3 +60,48 @@ export const updateProfileIconSeed = async (req, res) => {
     res.status(500).json({ message: '서버 오류 발생' })
   }
 }
+
+export const getProfileList = async (req, res) => {
+  const { profileIdList } = req.body
+
+  try {
+    const profileList = await Profile.find({
+      _id: { $in: profileIdList }
+    })
+
+    return res.status(200).json({
+      message: '프로필 조회 성공!',
+      data: profileList
+    })
+  } catch (error) {
+    console.error(error)
+    return res.status(500).json({ message: '서버 오류 발생' })
+  }
+}
+
+export const getProfileByNameTag = async (req, res) => {
+  const { name, tag } = req.body
+
+  try {
+    const profile = await Profile.find({
+      name,
+      tag
+    })
+
+    console.log(profile)
+
+    if (profile.length < 1) {
+      return res.status(400).json({
+        message: '존재하지 않는 유저 입니다.'
+      })
+    }
+
+    return res.status(200).json({
+      message: '프로필 조회 성공!',
+      profile
+    })
+  } catch (error) {
+    console.error(error)
+    return res.status(500).json({ message: '서버 오류 발생' })
+  }
+}

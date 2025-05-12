@@ -26,7 +26,7 @@ const popoverVariants: Variants = {
 
 export default function Popover(props: PopoverProps) {
   const { isOpen, close, unmount, triggerRect, children } = props
-  const { x, y } = triggerRect
+  const { x, y, width } = triggerRect
 
   const ref = useOnOutsideClick(() => {
     close()
@@ -40,12 +40,13 @@ export default function Popover(props: PopoverProps) {
   const isToLeft = x > window.innerWidth / 2
   const isToTop = y > window.innerHeight / 2
   const gap = 20
+  const halfOfTriggerWidth = width / 2
 
   const margins = {
     marginTop: `${y}px`,
     marginBottom: `${window.innerHeight - y}px`,
-    marginLeft: isToLeft ? 'auto' : `${x + gap}px`,
-    marginRight: isToLeft ? `${window.innerWidth - x + gap}px` : 'auto'
+    marginLeft: isToLeft ? 'auto' : `${x + gap + halfOfTriggerWidth}px`,
+    marginRight: isToLeft ? `${window.innerWidth - x + gap + halfOfTriggerWidth}px` : 'auto'
   }
 
   console.log(isToTop)

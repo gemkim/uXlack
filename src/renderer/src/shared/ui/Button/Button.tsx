@@ -32,7 +32,8 @@ export function Button(props: ButtonProps) {
         className,
         'flex items-center transition-colors gap-2 py-1 px-1.5 rounded-sm',
         buttonColorStyles[colorScheme],
-        isActive && highlightColorClassName
+        isActive && highlightColorClassName,
+        attrs.disabled && 'pointer-events-none'
       )}
       {...attrs}
     >

@@ -24,6 +24,9 @@ import Frame from '@renderer/shared/ui/Frame/Frame'
 import { overlay } from 'overlay-kit'
 import { useNavigate } from 'react-router'
 import SettingModal from '../setting/SettingModal'
+import ProfileIcon from '@renderer/features/auth/ui/ProfileIcon'
+import AlarmPopover from '@renderer/widget/alarm/AlarmPopover'
+import { useInviteList } from '@renderer/entities/project/model/inviteSlice'
 
 export default function MainNavigator() {
   const profile = useProfile()
@@ -31,6 +34,8 @@ export default function MainNavigator() {
   const navigate = useNavigate()
   const selectedProjectId = useSelectedProjectId()
   const { setSelectedProjectId } = useProjectActions()
+
+  const inviteList = useInviteList()
 
   function handleNewProjectClick(event: React.MouseEvent<HTMLButtonElement>) {
     const rect = event.currentTarget.getBoundingClientRect()
@@ -54,6 +59,12 @@ export default function MainNavigator() {
     overlay.open((controller) => <SettingModal {...controller} />)
   }
 
+  function handleAlarmClick(event: React.MouseEvent<HTMLButtonElement>) {
+    const rect = event.currentTarget.getBoundingClientRect()
+
+    overlay.open((controller) => <AlarmPopover {...controller} triggerRect={rect}></AlarmPopover>)
+  }
+
   const isSelectedProject = (id: string) => id === selectedProjectId
 
   return (
@@ -72,9 +83,17 @@ export default function MainNavigator() {
           <Button>
             <IconSearch /> 검색
           </Button>
-          <Button>
-            <IconBell />
-            알림
+          <Button onClick={handleAlarmClick} className="justify-between">
+            <span className="flex items-center gap-2">
+              {' '}
+              <IconBell />
+              알림
+            </span>
+            {inviteList.length > 0 && (
+              <span className="size-[14px] rounded-full bg-red-500 flex items-center justify-center">
+                <span className="text-[9px] text-white">{inviteList.length}</span>
+              </span>
+            )}
           </Button>
         </div>
         {/* 프로젝트 */}
@@ -117,11 +136,14 @@ export default function MainNavigator() {
           <Button className="size-full" onClick={handleMyProfileClick}>
             {profile && (
               <div className="flex gap-2 items-center">
-                <div className="size-[32px] rounded-full bg-black flex justify-center items-center">
-                  <span className="text-white">{profile.name[0]}</span>
+                <div className="size-[32px] rounded-full bg-black overflow-hidden flex justify-center items-center">
+                  <ProfileIcon />
                 </div>
-                <div className="flex flex-col">
-                  <span>{profile.name}</span>
+                <div className="flex flex-col items-start">
+                  <div className="flex items-center gap-1">
+                    <span>{profile.name}</span>
+                    <span className="text-gray-400 text-xs">#{profile.tag}</span>
+                  </div>
                   {/* 컴포넌트 분리 필요 - 상태에따라 색상과 텍스트를 반환하는 */}
                   <span className="text-xs">온라인</span>
                 </div>

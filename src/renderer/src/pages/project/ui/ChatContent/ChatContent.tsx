@@ -1,7 +1,7 @@
 import { useProfile } from '@renderer/entities/auth/model/slices'
 
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
-import { useSocket } from '@renderer/entities/chat/model/slice'
+import { useSocket } from '@renderer/entities/chat/model/socketSlice'
 import { ChatMessageDto } from '@renderer/entities/chat/types'
 import { useSelectedProject, useSelectedProjectId } from '@renderer/entities/project/model/slice'
 import ChatMessage from '@renderer/features/chat/ui/ChatMessage'
