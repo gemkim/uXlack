@@ -1,5 +1,6 @@
 import { IconCalendar, IconUnorderedList } from '@renderer/shared/assets/svgs'
 import { Button } from '@renderer/shared/ui/Button/Button'
+import Calendar from '@renderer/shared/ui/Calendar/Calendar'
 
 import { useState } from 'react'
 
@@ -26,9 +27,7 @@ export default function TaskContent() {
           새 일정
         </Button>
       </div>
-      {taskList.length < 1 && (
-        <p className="absolute x-center y-center">새로운 일정을 등록해보세요!</p>
-      )}
+      <div className="flex-1 flex mt-4">{view === 'calendar' && <Calendar />}</div>
     </div>
   )
 }
