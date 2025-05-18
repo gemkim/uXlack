@@ -8,6 +8,7 @@ import { useProjectActions } from '@renderer/entities/project/model/slice'
 import { InviteDto, ProjectDto } from '@renderer/entities/project/types/types'
 
 import { useFetch } from '@renderer/shared/hooks/useFetch'
+import { BASE_URL } from '@renderer/shared/lib/api'
 import { ReactNode, useEffect, useState } from 'react'
 
 import { io } from 'socket.io-client'
@@ -62,7 +63,9 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
     if (!profile) return
     if (socket) return
 
-    const newSocket = io('http://localhost:4000', {
+    const newSocket = io(BASE_URL, {
+      transports: ['websocket'],
+      withCredentials: true,
       query: {
         profileId: profile._id
       }
