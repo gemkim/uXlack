@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-export const BASE_URL = 'https://uxlack-backend.onrender.com'
+const isDev = import.meta.env.VITE_ELECTRON_ENV === 'dev'
+export const BASE_URL = isDev ? 'http://localhost:4000' : 'https://uxlack-backend.onrender.com'
 
 export const fetchApi = axios.create({
   baseURL: BASE_URL,
