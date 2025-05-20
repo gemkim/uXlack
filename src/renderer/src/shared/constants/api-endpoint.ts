@@ -24,6 +24,7 @@ export const API_ENDPOINT = {
   }),
   invite: withPrefix('/invite', {
     send: '/send',
-    getReceived: '/get-received'
+    getReceived: '/get-received',
+    respond: '/respond'
   })
 }

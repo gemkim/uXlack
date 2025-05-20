@@ -1,4 +1,6 @@
-import { useInviteList } from '@renderer/entities/project/model/inviteSlice'
+import { respondInvite } from '@renderer/entities/project/api/projectApi'
+import { useInviteActions, useInviteList } from '@renderer/entities/project/model/inviteSlice'
+import { useProjectActions } from '@renderer/entities/project/model/slice'
 import { InviteDto } from '@renderer/entities/project/types/types'
 import ProfileIcon from '@renderer/features/auth/ui/ProfileIcon'
 import { IconCheck, IconClose } from '@renderer/shared/assets/svgs'
@@ -23,11 +25,27 @@ export default function AlarmPopover(props: PopoverProps) {
 }
 
 function InviteAlarm({ inviteList }: { inviteList: InviteDto[] }) {
+  const { setInviteList } = useInviteActions()
+  const { addProject } = useProjectActions()
+  async function handleInviteRespondClick(inviteId: string, isAccept: boolean) {
+    try {
+      const res = await respondInvite(inviteId, isAccept)
+      if (isAccept) {
+        const project = res?.data.project
+        addProject(project)
+      }
+      const filteredInviteList = inviteList.filter(invite => invite._id !== inviteId)
+      setInviteList(filteredInviteList)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <div>
       <span className="text-xs text-gray-400">초대</span>
       <div className="flex flex-col mt-2 gap-4">
-        {inviteList.map((invite) => (
+        {inviteList.map(invite => (
           <div className="flex flex-col" key={invite._id}>
             <div className="flex items-center">
               <div className="size-[32px] rounded-full overflow-hidden shrink-0">
@@ -42,10 +60,10 @@ function InviteAlarm({ inviteList }: { inviteList: InviteDto[] }) {
               </p>
             </div>
             <div className="flex justify-end text-xs gap-4">
-              <Button>
+              <Button onClick={() => handleInviteRespondClick(invite._id, false)}>
                 <IconClose className="size-[12px] fill-red-400" />
               </Button>
-              <Button>
+              <Button onClick={() => handleInviteRespondClick(invite._id, true)}>
                 <IconCheck className="size-[12px] fill-blue-400" />
               </Button>
             </div>

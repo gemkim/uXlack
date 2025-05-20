@@ -23,3 +23,13 @@ export async function createProject(
     }
   }
 }
+
+export async function respondInvite(inviteId: string, isAccept: boolean) {
+  try {
+    const res = await fetchApi.post(API_ENDPOINT.invite.respond, { inviteId, isAccept })
+    console.log(res)
+    return res
+  } catch (err) {
+    console.log(err)
+  }
+}
