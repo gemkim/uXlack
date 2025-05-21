@@ -35,14 +35,12 @@ export default function ProjectMemberPopover(props: PopoverProps) {
   if (!profileList) return
   if (!selectedProject) return
 
-  const memberList = profileList.filter((profile) =>
-    selectedProject.memberList.includes(profile._id)
-  )
+  const memberList = profileList.filter(profile => selectedProject.memberList.includes(profile._id))
 
   const projectMemberList = [myProfile, ...memberList]
 
   function handleToggleClick() {
-    setIsInvite((prev) => !prev)
+    setIsInvite(prev => !prev)
   }
 
   return (
@@ -56,7 +54,11 @@ export default function ProjectMemberPopover(props: PopoverProps) {
               projectMemberList={projectMemberList}
             />
           ) : (
-            <MemberList memberList={projectMemberList} handleToggleClick={handleToggleClick} />
+            <MemberList
+              selectedProject={selectedProject}
+              memberList={projectMemberList}
+              handleToggleClick={handleToggleClick}
+            />
           )}
         </div>
       </div>
@@ -66,11 +68,12 @@ export default function ProjectMemberPopover(props: PopoverProps) {
 
 interface MemberListProps {
   memberList: ProfileDto[]
+  selectedProject: ProjectDto
   handleToggleClick: () => void
 }
 
 function MemberList(props: MemberListProps) {
-  const { memberList, handleToggleClick } = props
+  const { memberList, handleToggleClick, selectedProject } = props
   return (
     <>
       <Button onClick={handleToggleClick} className="flex gap-2 items-center w-full">
@@ -78,8 +81,11 @@ function MemberList(props: MemberListProps) {
         <span>새 멤버</span>{' '}
       </Button>
       <div className="flex flex-col mt-4">
-        {memberList.map((profile) => (
-          <div className="flex items-center p-2" key={`member-${profile._id}`}>
+        {memberList.map(profile => (
+          <div
+            className="flex items-center p-2"
+            key={`${selectedProject._id}-member-${profile._id}`}
+          >
             <div className="size-[32px] rounded-full overflow-hidden">
               <ProfileIcon seed={profile.iconSeed ?? profile.name} />
             </div>
@@ -167,11 +173,11 @@ function Invite(props: InviteProps) {
         return
       }
 
-      const projectMemberIdList = projectMemberList.map((i) => i._id)
+      const projectMemberIdList = projectMemberList.map(i => i._id)
 
       // 현재 프로젝트에 있는 인원인지 체크
       const targetProfile = projectMemberList.filter(
-        (profile) => profile.name === name && profile.tag === tag
+        profile => profile.name === name && profile.tag === tag
       )
 
       if (targetProfile[0]) {
@@ -188,13 +194,13 @@ function Invite(props: InviteProps) {
 
       const res = fetchApi
         .post(API_ENDPOINT.profile.getProfileByNameTag, { name, tag })
-        .then((r) => {
+        .then(r => {
           const profile = r.data.profile[0] as ProfileDto
           setIsInviteSuccess(false)
           setSearchedProfile(profile)
           setIsLoading(false)
         })
-        .catch((err) => {
+        .catch(err => {
           setSearchMsg(SEARCH_MSG.noProfile)
           setIsLoading(false)
         })

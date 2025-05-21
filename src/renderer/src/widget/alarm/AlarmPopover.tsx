@@ -1,7 +1,9 @@
+import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
+import { useSocket } from '@renderer/entities/chat/model/socketSlice'
 import { respondInvite } from '@renderer/entities/project/api/projectApi'
 import { useInviteActions, useInviteList } from '@renderer/entities/project/model/inviteSlice'
-import { useProjectActions } from '@renderer/entities/project/model/slice'
-import { InviteDto } from '@renderer/entities/project/types/types'
+import { useProfileList, useProjectActions } from '@renderer/entities/project/model/slice'
+import { InviteDto, ProjectDto } from '@renderer/entities/project/types/types'
 import ProfileIcon from '@renderer/features/auth/ui/ProfileIcon'
 import { IconCheck, IconClose } from '@renderer/shared/assets/svgs'
 import { PopoverProps } from '@renderer/shared/types/overlayProps'
@@ -26,13 +28,28 @@ export default function AlarmPopover(props: PopoverProps) {
 
 function InviteAlarm({ inviteList }: { inviteList: InviteDto[] }) {
   const { setInviteList } = useInviteActions()
-  const { addProject } = useProjectActions()
+  const { addProject, setProfileList } = useProjectActions()
+
+  const profileList = useProfileList()
+  const socket = useSocket()
+
   async function handleInviteRespondClick(inviteId: string, isAccept: boolean) {
+    if (!socket) return
+
     try {
       const res = await respondInvite(inviteId, isAccept)
       if (isAccept) {
-        const project = res?.data.project
+        const project = res?.data.project as ProjectDto
         addProject(project)
+        const profileIdList = profileList.map(profile => profile._id)
+        const uniqueProfileIdList = project.memberList.filter(
+          memberId => !profileIdList.includes(memberId)
+        )
+
+        socket.emit(SOCKET_EVENT.joinRooms, [project._id], uniqueProfileIdList)
+        socket.on('profile:get-multiple', newProfileList =>
+          setProfileList([...profileList, ...newProfileList])
+        )
       }
       const filteredInviteList = inviteList.filter(invite => invite._id !== inviteId)
       setInviteList(filteredInviteList)

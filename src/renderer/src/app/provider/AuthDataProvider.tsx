@@ -4,7 +4,7 @@ import { ProfileDto } from '@renderer/entities/auth/types'
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
 import { useSocket, useSocketActions } from '@renderer/entities/chat/model/socketSlice'
 import { useInviteActions } from '@renderer/entities/project/model/inviteSlice'
-import { useProjectActions } from '@renderer/entities/project/model/slice'
+import { useProfileList, useProjectActions } from '@renderer/entities/project/model/slice'
 import { InviteDto, ProjectDto } from '@renderer/entities/project/types/types'
 
 import { useFetch } from '@renderer/shared/hooks/useFetch'
@@ -21,6 +21,7 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
   const { children } = props
 
   const profile = useProfile()
+  const profileList = useProfileList()
 
   const { setInviteList } = useInviteActions()
 
@@ -80,48 +81,25 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
     if (!ProjectDataList) return
     if (!socket) return
 
-    const projectIdList = ProjectDataList.map((project) => project._id)
+    const projectIdList = ProjectDataList.map(project => project._id)
 
     if (projectIdList.length < 1) {
       console.log('참여 프로젝트가 없어서 채팅 연결 안함')
       return
     }
 
-    socket.emit(SOCKET_EVENT.joinRooms, projectIdList)
+    const flatProfileIdList = ProjectDataList.map(project => project.memberList).flat()
+    const uniqueProfileIdList = [...new Set(flatProfileIdList)].filter(id => id !== profile?._id)
+
+    socket.emit(SOCKET_EVENT.joinRooms, projectIdList, uniqueProfileIdList)
+
+    socket.on('profile:get-multiple', newProfileList =>
+      setProfileList([...profileList, ...newProfileList])
+    )
 
     console.log(projectIdList, '채팅방 연결')
     //
-    // 프로젝트에 속한 모든 사람 프로필 데이터 요청
   }, [socket, ProjectDataList])
-
-  const [profileIdList, setProfileIdList] = useState<string[]>([])
-
-  const { data: ProfileDataList } = useFetch<ProfileDto[]>(
-    'post',
-    '/profile/get-profile-list',
-    { profileIdList },
-    [profileIdList.length],
-    profileIdList.length < 1
-  )
-
-  useEffect(() => {
-    if (!profile) return
-    if (!ProjectDataList) return
-    if (ProjectDataList.length < 1) return
-
-    const needProfileList = ProjectDataList.map((project) => project.memberList).flat()
-    const removeDuple = [...new Set(needProfileList)]
-    const removeMe = removeDuple.filter((id) => id !== profile._id)
-
-    setProfileIdList(removeMe)
-  }, [ProjectDataList])
-
-  useEffect(() => {
-    if (!ProfileDataList) return
-    if (ProfileDataList.length < 1) return
-
-    setProfileList(ProfileDataList)
-  }, [ProfileDataList])
 
   return <>{children}</>
 }
