@@ -1,40 +1,54 @@
 import { create } from 'zustand'
 import { ProjectDto } from '../types/types'
+import { useMemo } from 'react'
 
 interface ProjectStore {
-  projectList: ProjectDto[]
+  projectMap: Record<string, ProjectDto>
   selectedProjectId: string | null
-  selectedProject: ProjectDto | null
 
   actions: {
-    addProject: (project: ProjectDto) => void
+    addProjectList: (projectList: ProjectDto[]) => void
     removeProject: (projectId: string) => void
-    setProjectList: (projectList: ProjectDto[]) => void
     setSelectedProjectId: (projectId: string | null) => void
   }
 }
 
 const useProjectStore = create<ProjectStore>((set) => ({
-  projectList: [],
+  projectMap: {},
   selectedProjectId: null,
-  selectedProject: null,
-  profileList: [],
+
   actions: {
-    addProject: (project) => set((state) => ({ projectList: [...state.projectList, project] })),
-    removeProject: (projectId) =>
-      set((state) => ({
-        projectList: state.projectList.filter((project) => project._id !== projectId)
-      })),
-    setProjectList: (projectList) => set({ projectList }),
-    setSelectedProjectId: (projectId) =>
-      set((state) => ({
-        selectedProjectId: projectId,
-        selectedProject: state.projectList.find((item) => item._id === projectId)
-      }))
+    addProjectList: (projectList: ProjectDto[]) =>
+      set((state) => {
+        const updated = { ...state.projectMap }
+        projectList.forEach((p) => {
+          updated[p._id] = p
+        })
+        return { projectMap: updated }
+      }),
+    removeProject: (projectId: string) =>
+      set((state) => {
+        const updated = { ...state.projectMap }
+        delete updated[projectId]
+
+        const selectedProjectId =
+          state.selectedProjectId === projectId ? null : state.selectedProjectId
+
+        return { projectMap: updated, selectedProjectId }
+      }),
+    setSelectedProjectId: (selectedProjectId) => set({ selectedProjectId })
   }
 }))
 
-export const useProjectList = () => useProjectStore((state) => state.projectList)
-export const useSelectedProjectId = () => useProjectStore((state) => state.selectedProjectId)
-export const useSelectedProject = () => useProjectStore((state) => state.selectedProject)
+export const useProjectList = () => {
+  const projectMap = useProjectStore((state) => state.projectMap)
+  return useMemo(() => Object.values(projectMap), [projectMap])
+}
+
+export const useSelectedProject = () => {
+  return useProjectStore((state) =>
+    state.selectedProjectId ? state.projectMap[state.selectedProjectId] : null
+  )
+}
+
 export const useProjectActions = () => useProjectStore((state) => state.actions)

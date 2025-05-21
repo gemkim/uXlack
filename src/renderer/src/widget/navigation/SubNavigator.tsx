@@ -1,12 +1,8 @@
-import {
-  useProjectList,
-  useSelectedProject,
-  useSelectedProjectId
-} from '@renderer/entities/project/model/slice'
-import ProjectMemberPopover from '@renderer/widget/project/ProjectMemberPopover'
+import { useSelectedProject } from '@renderer/entities/project/model/slice'
 import { ProjectContent } from '@renderer/pages/project/types'
 import { IconCalendar, IconFile, IconMessage, IconUser } from '@renderer/shared/assets/svgs'
 import { Button } from '@renderer/shared/ui/Button/Button'
+import ProjectMemberPopover from '@renderer/widget/project/ProjectMemberPopover'
 import { overlay } from 'overlay-kit'
 
 interface SubNavigatorProps {
@@ -17,11 +13,7 @@ interface SubNavigatorProps {
 export default function SubNavigator(props: SubNavigatorProps) {
   const { content, setContent } = props
 
-  const projectList = useProjectList()
-  const selectedProjectId = useSelectedProjectId()
-
-  const selectedProject = projectList.find((project) => project._id === selectedProjectId)
-  // const selectedProject = useSelectedProject()
+  const selectedProject = useSelectedProject()
 
   const isSelectedContent = (c: ProjectContent) => c === content
 

@@ -3,16 +3,16 @@ import { useMyProfile } from '@renderer/entities/profile/model/slice'
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
 import { useSocket } from '@renderer/entities/chat/model/slice'
 import { ChatMessageDto } from '@renderer/entities/chat/types'
-import { useSelectedProject, useSelectedProjectId } from '@renderer/entities/project/model/slice'
+
 import ChatMessage from '@renderer/features/chat/ui/ChatMessage'
 
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useSelectedProject } from '@renderer/entities/project/model/slice'
 
 export default function ChatContent() {
   const myProfile = useMyProfile()
 
-  const selectedProjectId = useSelectedProjectId()
   const selectedProject = useSelectedProject()
 
   const socket = useSocket()
@@ -26,13 +26,11 @@ export default function ChatContent() {
 
   function onSubmit(msg: { message: string }) {
     if (!myProfile) return
-    if (!selectedProjectId) return
+    if (!selectedProject) return
     if (!socket) return
 
-    console.log(selectedProjectId)
-
     const newMessage: ChatMessageDto = {
-      projectId: selectedProjectId,
+      projectId: selectedProject._id,
       senderId: myProfile._id!,
       content: msg.message,
       type: 'text',
@@ -40,7 +38,7 @@ export default function ChatContent() {
     }
 
     console.log('submit')
-    socket.emit(SOCKET_EVENT.sendMessage, selectedProjectId, newMessage)
+    socket.emit(SOCKET_EVENT.sendMessage, selectedProject._id, newMessage)
     reset()
   }
 
@@ -58,7 +56,7 @@ export default function ChatContent() {
   }, [socket])
 
   const currentProjectChatList = currentChatList.filter(
-    (chat) => chat.projectId === selectedProjectId
+    (chat) => chat.projectId === selectedProject!._id
   )
 
   useEffect(() => {
@@ -77,7 +75,7 @@ export default function ChatContent() {
         )}
         <div className="gap-6 flex flex-col max-w-[90%] size-full">
           {currentProjectChatList.map((chat) => (
-            <ChatMessage chat={chat} key={`${selectedProjectId}-${chat._id}`} />
+            <ChatMessage chat={chat} key={`${selectedProject!._id}-${chat._id}`} />
           ))}
         </div>
       </div>

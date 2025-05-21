@@ -46,7 +46,7 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
   }, [inviteDataList])
 
   // 프로젝트 로드
-  const { setProjectList } = useProjectActions()
+  const { addProjectList } = useProjectActions()
 
   const { data: ProjectDataList } = useFetch<ProjectDto[]>(
     'post',
@@ -59,7 +59,7 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
   useEffect(() => {
     if (!ProjectDataList) return
 
-    setProjectList(ProjectDataList)
+    addProjectList(ProjectDataList)
     console.log('프로젝트 로딩 완료')
   }, [ProjectDataList])
 

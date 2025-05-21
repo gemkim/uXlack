@@ -2,7 +2,7 @@ import { useMyProfile } from '@renderer/entities/profile/model/slice'
 import {
   useProjectActions,
   useProjectList,
-  useSelectedProjectId
+  useSelectedProject
 } from '@renderer/entities/project/model/slice'
 import CreateNewProjectPopover from '@renderer/features/project/ui/createNewProjectPopover'
 import { IconBell, IconFolder, IconHome, IconPlus, IconSearch } from '@renderer/shared/assets/svgs'
@@ -22,7 +22,9 @@ export default function MainNavigator() {
   const myProfile = useMyProfile()
   const projectList = useProjectList()
   const navigate = useNavigate()
-  const selectedProjectId = useSelectedProjectId()
+
+  const selectedProject = useSelectedProject()
+
   const { setSelectedProjectId } = useProjectActions()
 
   const inviteList = useInviteList()
@@ -55,7 +57,7 @@ export default function MainNavigator() {
     overlay.open((controller) => <AlarmPopover {...controller} triggerRect={rect}></AlarmPopover>)
   }
 
-  const isSelectedProject = (id: string) => id === selectedProjectId
+  const isSelectedProject = (id: string) => id === selectedProject?._id
 
   return (
     <div className="h-screen flex flex-col min-w-[180px] border-r z-10">
