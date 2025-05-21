@@ -9,7 +9,7 @@ export function useFetch<T>(
   endpoint: string,
   payload: any = {},
   deps: React.DependencyList = [],
-  skip = false // 추가
+  skip = false
 ) {
   const [data, setData] = useState<T | null>(null)
   const [loading, setLoading] = useState(true)
@@ -17,14 +17,27 @@ export function useFetch<T>(
 
   useEffect(() => {
     if (skip) return
+
     let cancelled = false
 
     const fetchData = async () => {
       setLoading(true)
       setError(null)
+
       try {
-        const res = await fetchApi[method](endpoint, method === 'post' ? payload : { ...payload })
-        console.log(res, payload)
+        const config: AxiosRequestConfig = {
+          method,
+          url: endpoint
+        }
+
+        if (method === 'get' || method === 'delete') {
+          config.params = payload
+        } else {
+          config.data = payload
+        }
+
+        const res = await fetchApi.request(config)
+
         if (!cancelled) {
           setData(res.data.data ?? null)
         }
@@ -36,11 +49,10 @@ export function useFetch<T>(
     }
 
     fetchData()
-
     return () => {
       cancelled = true
     }
-  }, deps)
+  }, [skip, ...deps])
 
   return { data, loading, error }
 }
