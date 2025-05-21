@@ -7,7 +7,7 @@ interface ProfileStore {
   profileMap: Record<string, ProfileDto>
   actions: {
     setMyProfile: (profile: ProfileDto | null) => void
-    addProfileList: (profiles: ProfileDto[]) => void
+    addProfileList: (profileList: ProfileDto[]) => void
   }
 }
 
@@ -16,10 +16,10 @@ const useProfileStore = create<ProfileStore>((set) => ({
   profileMap: {},
   actions: {
     setMyProfile: (myProfile) => set({ myProfile }),
-    addProfileList: (profiles: ProfileDto[]) =>
+    addProfileList: (profileList: ProfileDto[]) =>
       set((state) => {
         const updated = { ...state.profileMap }
-        profiles.forEach((p) => {
+        profileList.forEach((p) => {
           updated[p._id] = p
         })
         return { profileMap: updated }
