@@ -1,6 +1,7 @@
-import { useProfile } from '@renderer/entities/auth/model/slices'
-import { ProfileDto } from '@renderer/entities/auth/types'
-import { useProfileList, useSelectedProject } from '@renderer/entities/project/model/slice'
+import { useMyProfile, useProfileList } from '@renderer/entities/profile/model/slice'
+import { ProfileDto } from '@renderer/entities/profile/types'
+
+import { useSelectedProject } from '@renderer/entities/project/model/slice'
 import { ProjectDto } from '@renderer/entities/project/types/types'
 
 import ProfileIcon from '@renderer/features/auth/ui/ProfileIcon'
@@ -25,7 +26,7 @@ const SEARCH_MSG = {
 }
 
 export default function ProjectMemberPopover(props: PopoverProps) {
-  const myProfile = useProfile()
+  const myProfile = useMyProfile()
   const profileList = useProfileList()
   const selectedProject = useSelectedProject()
 
@@ -35,12 +36,14 @@ export default function ProjectMemberPopover(props: PopoverProps) {
   if (!profileList) return
   if (!selectedProject) return
 
-  const memberList = profileList.filter(profile => selectedProject.memberList.includes(profile._id))
+  const memberList = profileList.filter((profile) =>
+    selectedProject.memberList.includes(profile._id)
+  )
 
   const projectMemberList = [myProfile, ...memberList]
 
   function handleToggleClick() {
-    setIsInvite(prev => !prev)
+    setIsInvite((prev) => !prev)
   }
 
   return (
@@ -81,7 +84,7 @@ function MemberList(props: MemberListProps) {
         <span>새 멤버</span>{' '}
       </Button>
       <div className="flex flex-col mt-4">
-        {memberList.map(profile => (
+        {memberList.map((profile) => (
           <div
             className="flex items-center p-2"
             key={`${selectedProject._id}-member-${profile._id}`}
@@ -173,11 +176,11 @@ function Invite(props: InviteProps) {
         return
       }
 
-      const projectMemberIdList = projectMemberList.map(i => i._id)
+      const projectMemberIdList = projectMemberList.map((i) => i._id)
 
       // 현재 프로젝트에 있는 인원인지 체크
       const targetProfile = projectMemberList.filter(
-        profile => profile.name === name && profile.tag === tag
+        (profile) => profile.name === name && profile.tag === tag
       )
 
       if (targetProfile[0]) {
@@ -194,13 +197,13 @@ function Invite(props: InviteProps) {
 
       const res = fetchApi
         .post(API_ENDPOINT.profile.getProfileByNameTag, { name, tag })
-        .then(r => {
+        .then((r) => {
           const profile = r.data.profile[0] as ProfileDto
           setIsInviteSuccess(false)
           setSearchedProfile(profile)
           setIsLoading(false)
         })
-        .catch(err => {
+        .catch((err) => {
           setSearchMsg(SEARCH_MSG.noProfile)
           setIsLoading(false)
         })

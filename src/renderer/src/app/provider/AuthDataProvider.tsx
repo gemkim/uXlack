@@ -1,17 +1,22 @@
-import { useProfile } from '@renderer/entities/auth/model/slices'
-import { ProfileDto } from '@renderer/entities/auth/types'
+import {
+  useMyProfile,
+  useProfileActions,
+  useProfileList
+} from '@renderer/entities/profile/model/slice'
 
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
-import { useSocket, useSocketActions } from '@renderer/entities/chat/model/socketSlice'
-import { useInviteActions } from '@renderer/entities/project/model/inviteSlice'
-import { useProfileList, useProjectActions } from '@renderer/entities/project/model/slice'
-import { InviteDto, ProjectDto } from '@renderer/entities/project/types/types'
+import { useSocket, useSocketActions } from '@renderer/entities/chat/model/slice'
+
+import { useProjectActions } from '@renderer/entities/project/model/slice'
+import { ProjectDto } from '@renderer/entities/project/types/types'
 
 import { useFetch } from '@renderer/shared/hooks/useFetch'
 import { BASE_URL } from '@renderer/shared/lib/api'
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useEffect } from 'react'
 
 import { io } from 'socket.io-client'
+import { useInviteActions } from '@renderer/entities/invite/model/slice'
+import { InviteDto } from '@renderer/entities/invite/types'
 
 interface AuthDataProviderProps {
   children: ReactNode
@@ -20,9 +25,10 @@ interface AuthDataProviderProps {
 export default function AuthDataProvider(props: AuthDataProviderProps) {
   const { children } = props
 
-  const profile = useProfile()
+  const myProfile = useMyProfile()
   const profileList = useProfileList()
 
+  const { addProfileList } = useProfileActions()
   const { setInviteList } = useInviteActions()
 
   // 초대 로드
@@ -30,8 +36,8 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
     'post',
     '/invite/get-received',
     {},
-    [profile?._id],
-    !profile?._id
+    [myProfile?._id],
+    !myProfile?._id
   )
 
   useEffect(() => {
@@ -40,13 +46,14 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
   }, [inviteDataList])
 
   // 프로젝트 로드
-  const { setProjectList, setProfileList } = useProjectActions()
+  const { setProjectList } = useProjectActions()
+
   const { data: ProjectDataList } = useFetch<ProjectDto[]>(
     'post',
     '/project/getProjectList',
-    { profileId: profile?._id },
-    [profile?._id],
-    !profile?._id
+    { profileId: myProfile?._id },
+    [myProfile?._id],
+    !myProfile?._id
   )
 
   useEffect(() => {
@@ -61,40 +68,42 @@ export default function AuthDataProvider(props: AuthDataProviderProps) {
   const { setSocket } = useSocketActions()
 
   useEffect(() => {
-    if (!profile) return
+    if (!myProfile) return
     if (socket) return
 
     const newSocket = io(BASE_URL, {
       transports: ['websocket'],
       withCredentials: true,
       query: {
-        profileId: profile._id
+        profileId: myProfile._id
       }
     })
 
     setSocket(newSocket)
     console.log('소켓 연결 완료')
-  }, [profile])
+  }, [myProfile])
 
   // 소켓에 정상 연결 되었을때 채팅방 연결
   useEffect(() => {
     if (!ProjectDataList) return
     if (!socket) return
 
-    const projectIdList = ProjectDataList.map(project => project._id)
+    const projectIdList = ProjectDataList.map((project) => project._id)
 
     if (projectIdList.length < 1) {
       console.log('참여 프로젝트가 없어서 채팅 연결 안함')
       return
     }
 
-    const flatProfileIdList = ProjectDataList.map(project => project.memberList).flat()
-    const uniqueProfileIdList = [...new Set(flatProfileIdList)].filter(id => id !== profile?._id)
+    const flatProfileIdList = ProjectDataList.map((project) => project.memberList).flat()
+    const uniqueProfileIdList = [...new Set(flatProfileIdList)].filter(
+      (id) => id !== myProfile?._id
+    )
 
     socket.emit(SOCKET_EVENT.joinRooms, projectIdList, uniqueProfileIdList)
 
-    socket.on('profile:get-multiple', newProfileList =>
-      setProfileList([...profileList, ...newProfileList])
+    socket.on('profile:get-multiple', (newProfileList) =>
+      addProfileList([...profileList, ...newProfileList])
     )
 
     console.log(projectIdList, '채팅방 연결')

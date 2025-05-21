@@ -1,35 +1,25 @@
-import { useProfile } from '@renderer/entities/auth/model/slices'
+import { useMyProfile } from '@renderer/entities/profile/model/slice'
 import {
   useProjectActions,
   useProjectList,
   useSelectedProjectId
 } from '@renderer/entities/project/model/slice'
-import LogoutButton from '@renderer/features/auth/ui/LogoutButton'
 import CreateNewProjectPopover from '@renderer/features/project/ui/createNewProjectPopover'
-import {
-  IconBell,
-  IconFolder,
-  IconHome,
-  IconLogout,
-  IconPlus,
-  IconQuestion,
-  IconSearch,
-  IconSetting
-} from '@renderer/shared/assets/svgs'
+import { IconBell, IconFolder, IconHome, IconPlus, IconSearch } from '@renderer/shared/assets/svgs'
 import { cn } from '@renderer/shared/lib/utils/utils'
 
 import { Button } from '@renderer/shared/ui/Button/Button'
 import Frame from '@renderer/shared/ui/Frame/Frame'
 
+import ProfileIcon from '@renderer/features/auth/ui/ProfileIcon'
+import AlarmPopover from '@renderer/widget/alarm/AlarmPopover'
 import { overlay } from 'overlay-kit'
 import { useNavigate } from 'react-router'
 import SettingModal from '../setting/SettingModal'
-import ProfileIcon from '@renderer/features/auth/ui/ProfileIcon'
-import AlarmPopover from '@renderer/widget/alarm/AlarmPopover'
-import { useInviteList } from '@renderer/entities/project/model/inviteSlice'
+import { useInviteList } from '@renderer/entities/invite/model/slice'
 
 export default function MainNavigator() {
-  const profile = useProfile()
+  const myProfile = useMyProfile()
   const projectList = useProjectList()
   const navigate = useNavigate()
   const selectedProjectId = useSelectedProjectId()
@@ -134,15 +124,15 @@ export default function MainNavigator() {
         </div>
         <div className="border-t px-4 pt-4">
           <Button className="size-full" onClick={handleMyProfileClick}>
-            {profile && (
+            {myProfile && (
               <div className="flex gap-2 items-center">
                 <div className="size-[32px] rounded-full bg-black overflow-hidden flex justify-center items-center">
                   <ProfileIcon />
                 </div>
                 <div className="flex flex-col items-start">
                   <div className="flex items-center gap-1">
-                    <span>{profile.name}</span>
-                    <span className="text-gray-400 text-xs">#{profile.tag}</span>
+                    <span>{myProfile.name}</span>
+                    <span className="text-gray-400 text-xs">#{myProfile.tag}</span>
                   </div>
                   {/* 컴포넌트 분리 필요 - 상태에따라 색상과 텍스트를 반환하는 */}
                   <span className="text-xs">온라인</span>

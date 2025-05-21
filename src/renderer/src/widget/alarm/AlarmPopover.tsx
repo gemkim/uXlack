@@ -1,9 +1,12 @@
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
-import { useSocket } from '@renderer/entities/chat/model/socketSlice'
+import { useSocket } from '@renderer/entities/chat/model/slice'
+import { useInviteActions, useInviteList } from '@renderer/entities/invite/model/slice'
+import { InviteDto } from '@renderer/entities/invite/types'
+import { useProfileActions, useProfileList } from '@renderer/entities/profile/model/slice'
 import { respondInvite } from '@renderer/entities/project/api/projectApi'
-import { useInviteActions, useInviteList } from '@renderer/entities/project/model/inviteSlice'
-import { useProfileList, useProjectActions } from '@renderer/entities/project/model/slice'
-import { InviteDto, ProjectDto } from '@renderer/entities/project/types/types'
+
+import { useProjectActions } from '@renderer/entities/project/model/slice'
+import { ProjectDto } from '@renderer/entities/project/types/types'
 import ProfileIcon from '@renderer/features/auth/ui/ProfileIcon'
 import { IconCheck, IconClose } from '@renderer/shared/assets/svgs'
 import { PopoverProps } from '@renderer/shared/types/overlayProps'
@@ -28,7 +31,8 @@ export default function AlarmPopover(props: PopoverProps) {
 
 function InviteAlarm({ inviteList }: { inviteList: InviteDto[] }) {
   const { setInviteList } = useInviteActions()
-  const { addProject, setProfileList } = useProjectActions()
+  const { addProject } = useProjectActions()
+  const { addProfileList } = useProfileActions()
 
   const profileList = useProfileList()
   const socket = useSocket()
@@ -41,17 +45,17 @@ function InviteAlarm({ inviteList }: { inviteList: InviteDto[] }) {
       if (isAccept) {
         const project = res?.data.project as ProjectDto
         addProject(project)
-        const profileIdList = profileList.map(profile => profile._id)
+        const profileIdList = profileList.map((profile) => profile._id)
         const uniqueProfileIdList = project.memberList.filter(
-          memberId => !profileIdList.includes(memberId)
+          (memberId) => !profileIdList.includes(memberId)
         )
 
         socket.emit(SOCKET_EVENT.joinRooms, [project._id], uniqueProfileIdList)
-        socket.on('profile:get-multiple', newProfileList =>
-          setProfileList([...profileList, ...newProfileList])
+        socket.on('profile:get-multiple', (newProfileList) =>
+          addProfileList([...profileList, ...newProfileList])
         )
       }
-      const filteredInviteList = inviteList.filter(invite => invite._id !== inviteId)
+      const filteredInviteList = inviteList.filter((invite) => invite._id !== inviteId)
       setInviteList(filteredInviteList)
     } catch (err) {
       console.log(err)
@@ -62,7 +66,7 @@ function InviteAlarm({ inviteList }: { inviteList: InviteDto[] }) {
     <div>
       <span className="text-xs text-gray-400">초대</span>
       <div className="flex flex-col mt-2 gap-4">
-        {inviteList.map(invite => (
+        {inviteList.map((invite) => (
           <div className="flex flex-col" key={invite._id}>
             <div className="flex items-center">
               <div className="size-[32px] rounded-full overflow-hidden shrink-0">

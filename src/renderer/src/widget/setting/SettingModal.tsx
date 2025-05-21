@@ -1,15 +1,10 @@
 import { updateProfileIconSeed } from '@renderer/entities/auth/api/authApi'
-import { useAuthActions, useProfile } from '@renderer/entities/auth/model/slices'
-import { ProfileDto } from '@renderer/entities/auth/types'
+import { useMyProfile, useProfileActions } from '@renderer/entities/profile/model/slice'
+import { ProfileDto } from '@renderer/entities/profile/types'
+
 import LogoutButton from '@renderer/features/auth/ui/LogoutButton'
 import ProfileIcon from '@renderer/features/auth/ui/ProfileIcon'
-import {
-  IconCaretRight,
-  IconCheck,
-  IconDice,
-  IconQuestion,
-  IconReturn
-} from '@renderer/shared/assets/svgs'
+import { IconCheck, IconDice, IconQuestion, IconReturn } from '@renderer/shared/assets/svgs'
 import { useHandleOption } from '@renderer/shared/hooks/useHandleOption'
 import { cn, generateString } from '@renderer/shared/lib/utils/utils'
 
@@ -29,7 +24,7 @@ export default function SettingModal(props: OverlayProps) {
     (p) => p.name
   )
 
-  const profile = useProfile()
+  const myProfile = useMyProfile()
 
   function handleOptionClick(name: (typeof optionNames)[number]) {
     switch (name) {
@@ -63,7 +58,7 @@ export default function SettingModal(props: OverlayProps) {
         </div>
         {/* 컨텐츠 패널 */}
         <div className="flex-1">
-          {selectedOption.name === 'profile' && profile && <Profile profile={profile} />}
+          {selectedOption.name === 'profile' && myProfile && <Profile profile={myProfile} />}
           {selectedOption.name === 'setting' && <Setting />}
         </div>
       </div>
@@ -78,7 +73,7 @@ function Profile({ profile }: { profile: ProfileDto }) {
   const defaultSeed = iconSeed ?? name
   const [seed, setSeed] = useState(defaultSeed)
 
-  const { setProfile } = useAuthActions()
+  const { setMyProfile } = useProfileActions()
 
   function handleProfileImageClick() {
     setIsProfileEditing((prev) => !prev)
@@ -102,7 +97,7 @@ function Profile({ profile }: { profile: ProfileDto }) {
 
     if (!newProfile) return
 
-    setProfile(newProfile)
+    setMyProfile(newProfile)
     setIsProfileEditing(false)
 
     // 백엔드 개발 후 추가 예정

@@ -1,5 +1,6 @@
 import { logoutUser } from '@renderer/entities/auth/api/authApi'
-import { useAuthActions } from '@renderer/entities/auth/model/slices'
+import { useProfileActions } from '@renderer/entities/profile/model/slice'
+
 import { Button } from '@renderer/shared/ui/Button/Button'
 import { overlay } from 'overlay-kit'
 import { ReactNode } from 'react'
@@ -10,7 +11,7 @@ interface LogoutButtionProps {
 
 export default function LogoutButton(props: LogoutButtionProps) {
   const { children } = props
-  const { setProfile } = useAuthActions()
+  const { setMyProfile } = useProfileActions()
 
   async function handleOnClick() {
     const res = await logoutUser()
@@ -20,7 +21,7 @@ export default function LogoutButton(props: LogoutButtionProps) {
     }
 
     if (res.status === 200) {
-      setProfile(null)
+      setMyProfile(null)
       console.log('log out')
     }
 

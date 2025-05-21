@@ -1,7 +1,7 @@
-import { useProfile } from '@renderer/entities/auth/model/slices'
+import { useMyProfile } from '@renderer/entities/profile/model/slice'
 
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
-import { useSocket } from '@renderer/entities/chat/model/socketSlice'
+import { useSocket } from '@renderer/entities/chat/model/slice'
 import { createProject } from '@renderer/entities/project/api/projectApi'
 import { useProjectActions } from '@renderer/entities/project/model/slice'
 
@@ -16,7 +16,7 @@ const FORM_FIELD_LIST: FormField[] = [{ displayName: '프로젝트 이름', regi
 
 export default function CreateNewProjectPopover(props: PopoverProps) {
   const { close } = props
-  const profile = useProfile()
+  const myProfile = useMyProfile()
   const { addProject } = useProjectActions()
   const socket = useSocket()
 

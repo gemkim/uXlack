@@ -1,6 +1,6 @@
-import { useProfile } from '@renderer/entities/auth/model/slices'
+import { useMyProfile, useProfileList } from '@renderer/entities/profile/model/slice'
 import { ChatMessageDto } from '@renderer/entities/chat/types'
-import { useProfileList } from '@renderer/entities/project/model/slice'
+
 import ProfileIcon from '@renderer/features/auth/ui/ProfileIcon'
 
 interface ChatMessageProps {
@@ -11,12 +11,12 @@ export default function ChatMessage(props: ChatMessageProps) {
   const { chat } = props
   const { senderId, content, createdAt } = chat
 
-  const profile = useProfile()
+  const myProfile = useMyProfile()
   const profileList = useProfileList()
 
-  if (!profile) return
+  if (!myProfile) return
 
-  const senderProfile = [profile, ...profileList].find((i) => i._id === senderId)
+  const senderProfile = [myProfile, ...profileList].find((i) => i._id === senderId)
 
   if (!senderProfile) return
   if (!createdAt) return

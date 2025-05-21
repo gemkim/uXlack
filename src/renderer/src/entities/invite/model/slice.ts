@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { InviteDto } from '../types/types'
+import { InviteDto } from '../types'
 
 interface InviteStore {
   inviteList: InviteDto[]

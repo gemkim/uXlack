@@ -1,7 +1,7 @@
-import { useProfile } from '@renderer/entities/auth/model/slices'
+import { useMyProfile } from '@renderer/entities/profile/model/slice'
 
 import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
-import { useSocket } from '@renderer/entities/chat/model/socketSlice'
+import { useSocket } from '@renderer/entities/chat/model/slice'
 import { ChatMessageDto } from '@renderer/entities/chat/types'
 import { useSelectedProject, useSelectedProjectId } from '@renderer/entities/project/model/slice'
 import ChatMessage from '@renderer/features/chat/ui/ChatMessage'
@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 export default function ChatContent() {
-  const profile = useProfile()
+  const myProfile = useMyProfile()
 
   const selectedProjectId = useSelectedProjectId()
   const selectedProject = useSelectedProject()
@@ -25,7 +25,7 @@ export default function ChatContent() {
   const chatContainerRef = useRef<HTMLDivElement>(null)
 
   function onSubmit(msg: { message: string }) {
-    if (!profile) return
+    if (!myProfile) return
     if (!selectedProjectId) return
     if (!socket) return
 
@@ -33,7 +33,7 @@ export default function ChatContent() {
 
     const newMessage: ChatMessageDto = {
       projectId: selectedProjectId,
-      senderId: profile._id!,
+      senderId: myProfile._id!,
       content: msg.message,
       type: 'text',
       status: 'sent'

@@ -1,7 +1,7 @@
 import { loginUser } from '@renderer/entities/auth/api/authApi'
 
-import { useAuthActions } from '@renderer/entities/auth/model/slices'
 import { UserDto } from '@renderer/entities/auth/types'
+import { useProfileActions } from '@renderer/entities/profile/model/slice'
 import { Button } from '@renderer/shared/ui/Button/Button'
 import Form from '@renderer/shared/ui/Form/Form'
 import { FormField } from '@renderer/shared/ui/Form/types'
@@ -13,7 +13,8 @@ const FORM_FIELD_LIST: FormField[] = [
 ]
 
 export default function LoginForm() {
-  const { setProfile } = useAuthActions()
+  const { setMyProfile } = useProfileActions()
+
   const [errorMsg, setErrorMsg] = useState('')
 
   // 아직 제대로된 db가 없기때문에 임시 코드임
@@ -27,7 +28,7 @@ export default function LoginForm() {
 
     if (res.status === 200) {
       setErrorMsg('')
-      setProfile(res.data.user.profile)
+      setMyProfile(res.data.user.profile)
     }
     // const existUser = res.data[0] as UserDto
 

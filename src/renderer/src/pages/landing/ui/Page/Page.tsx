@@ -1,22 +1,22 @@
-import { useProfile } from '@renderer/entities/auth/model/slices'
 import { Button } from '@renderer/shared/ui/Button/Button'
 import LoginForm from '@renderer/widget/auth/LoginForm'
 import { RegisterForm } from '@renderer/widget/auth/RegisterForm'
 
+import { useMyProfile } from '@renderer/entities/profile/model/slice'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 
 export default function LandingPage() {
   const [isRegistering, setIsRegistering] = useState(false)
 
-  const profile = useProfile()
+  const myProfile = useMyProfile()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (profile) {
+    if (myProfile) {
       navigate('/home')
     }
-  }, [profile])
+  }, [myProfile])
 
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-zinc-50 flex-col relative">
