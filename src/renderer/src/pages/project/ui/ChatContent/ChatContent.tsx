@@ -2,27 +2,36 @@ import { useMyProfile } from '@renderer/entities/profile/model/slice'
 
 import { SOCKET_EVENT } from '@renderer/shared/lib/socket/conetants/socket-event'
 import { useSocket } from '@renderer/shared/lib/socket/model/slice'
-import { MessageDto } from '@renderer/shared/lib/socket'
 
 import ChatMessage from '@renderer/features/chat/ui/ChatMessage'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelectedProject } from '@renderer/entities/project/model/slice'
+import { MessageDto } from '@renderer/entities/message/types'
+import {
+  useMessageActions,
+  useMessageListByProjectId
+} from '@renderer/entities/message/model/slice'
 
 export default function ChatContent() {
   const myProfile = useMyProfile()
 
   const selectedProject = useSelectedProject()
-
   const socket = useSocket()
 
-  const [currentChatList, setCurrentChatList] = useState<MessageDto[]>([])
+  const { addMessage } = useMessageActions()
   const [isEventMount, setIsEventMount] = useState(false)
-
   const { register, handleSubmit, reset } = useForm<{ message: string }>()
-
   const chatContainerRef = useRef<HTMLDivElement>(null)
+
+  const messageListByProjectId = useMessageListByProjectId()
+
+  const currentProjectMessageList = useMemo(() => {
+    return messageListByProjectId[selectedProject?._id ?? ''] ?? []
+  }, [messageListByProjectId, selectedProject?._id])
+
+  console.log('currentProjectMessageList', currentProjectMessageList)
 
   function onSubmit(msg: { message: string }) {
     if (!myProfile) return
@@ -37,7 +46,6 @@ export default function ChatContent() {
       status: 'sent'
     }
 
-    console.log('submit')
     socket.emit(SOCKET_EVENT.sendMessage, selectedProject._id, newMessage)
     reset()
   }
@@ -45,36 +53,33 @@ export default function ChatContent() {
   // 메세지 수신 이벤트 등록
   useEffect(() => {
     if (!socket) return
+    if (!selectedProject) return
     console.log(socket)
     if (isEventMount) return
 
     socket.on(SOCKET_EVENT.receiveMessage, (msg) => {
       console.log('서버로 받은 메세지', msg)
-      setCurrentChatList((prev) => [...prev, msg])
+      addMessage(selectedProject._id, msg)
     })
     setIsEventMount(true)
   }, [socket])
-
-  const currentProjectChatList = currentChatList.filter(
-    (chat) => chat.projectId === selectedProject!._id
-  )
 
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight
     }
-  }, [currentProjectChatList]) // messages가 변경될 때 실행
+  }, [currentProjectMessageList]) // messages가 변경될 때 실행
 
   return (
     <div className="flex flex-col relative max-h-full h-full">
       {/* 채팅 내용 */}
       <div ref={chatContainerRef} className="flex-1 overflow-auto p-4">
         {/* 메세지가 없을 경우 */}
-        {currentProjectChatList.length < 1 && (
+        {currentProjectMessageList.length < 1 && (
           <p className="absolute x-center y-center">새로운 메세지를 작성해보세요!</p>
         )}
         <div className="gap-6 flex flex-col max-w-[90%] size-full">
-          {currentProjectChatList.map((chat) => (
+          {currentProjectMessageList.map((chat) => (
             <ChatMessage chat={chat} key={`${selectedProject!._id}-${chat._id}`} />
           ))}
         </div>
