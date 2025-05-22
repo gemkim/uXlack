@@ -31,7 +31,7 @@ export default function AlarmPopover(props: PopoverProps) {
 
 function InviteAlarm({ inviteList }: { inviteList: InviteDto[] }) {
   const { setInviteList } = useInviteActions()
-  const { addProject } = useProjectActions()
+  const { addProjectList } = useProjectActions()
   const { addProfileList } = useProfileActions()
 
   const profileList = useProfileList()
@@ -44,7 +44,7 @@ function InviteAlarm({ inviteList }: { inviteList: InviteDto[] }) {
       const res = await respondInvite(inviteId, isAccept)
       if (isAccept) {
         const project = res?.data.project as ProjectDto
-        addProject(project)
+        addProjectList([project])
         const profileIdList = profileList.map((profile) => profile._id)
         const uniqueProfileIdList = project.memberList.filter(
           (memberId) => !profileIdList.includes(memberId)
