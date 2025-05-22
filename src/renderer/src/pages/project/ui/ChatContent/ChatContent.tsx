@@ -1,8 +1,8 @@
 import { useMyProfile } from '@renderer/entities/profile/model/slice'
 
-import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
-import { useSocket } from '@renderer/entities/chat/model/slice'
-import { ChatMessageDto } from '@renderer/entities/chat/types'
+import { SOCKET_EVENT } from '@renderer/shared/lib/socket/conetants/socket-event'
+import { useSocket } from '@renderer/shared/lib/socket/model/slice'
+import { MessageDto } from '@renderer/shared/lib/socket'
 
 import ChatMessage from '@renderer/features/chat/ui/ChatMessage'
 
@@ -17,7 +17,7 @@ export default function ChatContent() {
 
   const socket = useSocket()
 
-  const [currentChatList, setCurrentChatList] = useState<ChatMessageDto[]>([])
+  const [currentChatList, setCurrentChatList] = useState<MessageDto[]>([])
   const [isEventMount, setIsEventMount] = useState(false)
 
   const { register, handleSubmit, reset } = useForm<{ message: string }>()
@@ -29,7 +29,7 @@ export default function ChatContent() {
     if (!selectedProject) return
     if (!socket) return
 
-    const newMessage: ChatMessageDto = {
+    const newMessage: MessageDto = {
       projectId: selectedProject._id,
       senderId: myProfile._id!,
       content: msg.message,

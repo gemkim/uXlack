@@ -1,7 +1,7 @@
 import { useMyProfile } from '@renderer/entities/profile/model/slice'
 
-import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
-import { useSocket } from '@renderer/entities/chat/model/slice'
+import { SOCKET_EVENT } from '@renderer/shared/lib/socket/conetants/socket-event'
+import { useSocket } from '@renderer/shared/lib/socket/model/slice'
 import { createProject } from '@renderer/entities/project/api/projectApi'
 
 import { CreateProjectDto } from '@renderer/entities/project/types/types'

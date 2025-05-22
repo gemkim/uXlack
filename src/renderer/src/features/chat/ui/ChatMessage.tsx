@@ -1,10 +1,10 @@
 import { useMyProfile, useProfileList } from '@renderer/entities/profile/model/slice'
-import { ChatMessageDto } from '@renderer/entities/chat/types'
+import { MessageDto } from '@renderer/shared/lib/socket'
 
 import ProfileIcon from '@renderer/features/auth/ui/ProfileIcon'
 
 interface ChatMessageProps {
-  chat: ChatMessageDto
+  chat: MessageDto
 }
 
 export default function ChatMessage(props: ChatMessageProps) {

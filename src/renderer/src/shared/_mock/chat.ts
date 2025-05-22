@@ -1,6 +1,6 @@
-import { ChatMessageDto } from '@renderer/entities/chat/types'
+import { MessageDto } from '@renderer/shared/lib/socket'
 
-export const TEMP_CHAT_LIST: ChatMessageDto[] = [
+export const TEMP_CHAT_LIST: MessageDto[] = [
   {
     id: 'msg_001',
     chatId: 'room_123',

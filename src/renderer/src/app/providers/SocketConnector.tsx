@@ -1,5 +1,5 @@
-import { SOCKET_EVENT } from '@renderer/entities/chat/constants/socket-event'
-import { useSocket, useSocketActions } from '@renderer/entities/chat/model/slice'
+import { SOCKET_EVENT } from '@renderer/shared/lib/socket/conetants/socket-event'
+import { useSocket, useSocketActions } from '@renderer/shared/lib/socket/model/slice'
 import { useProfileActions } from '@renderer/entities/profile/model/slice'
 import { ProfileDto } from '@renderer/entities/profile/types'
 import { useProjectList } from '@renderer/entities/project/model/slice'
