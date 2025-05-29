@@ -1,7 +1,8 @@
 import { IconCalendar, IconUnorderedList } from '@renderer/shared/assets/svgs'
 import { Button } from '@renderer/shared/ui/Button/Button'
 import Calendar from '@renderer/shared/ui/Calendar/Calendar'
-
+import { CreateSchedulePopover } from '@renderer/features/calendar/ui/CreateSchedulePopover'
+import { overlay } from 'overlay-kit'
 import { useState } from 'react'
 
 type TaskView = 'task' | 'calendar'
@@ -11,6 +12,12 @@ export default function TaskContent() {
   const taskList = []
 
   const isSelectedView = (v: TaskView) => v === view
+
+  function handleNewScheduleClick(event: React.MouseEvent<HTMLButtonElement>) {
+    const rect = event.currentTarget.getBoundingClientRect()
+    overlay.open((controller) => <CreateSchedulePopover {...controller} triggerRect={rect} />)
+    console.log('응응')
+  }
 
   return (
     <div className="flex flex-col flex-1 p-4 relative">
@@ -23,7 +30,7 @@ export default function TaskContent() {
             <IconUnorderedList />
           </Button>
         </div>
-        <Button colorScheme="blue" className="shadow-md">
+        <Button colorScheme="blue" className="shadow-md" onClick={handleNewScheduleClick}>
           새 일정
         </Button>
       </div>
