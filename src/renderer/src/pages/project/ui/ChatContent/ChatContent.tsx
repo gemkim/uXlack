@@ -5,14 +5,11 @@ import { useSocket } from '@renderer/shared/lib/socket/model/slice'
 
 import ChatMessage from '@renderer/features/chat/ui/ChatMessage'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { useSelectedProject } from '@renderer/entities/project/model/slice'
+import { useMessageListByProjectId } from '@renderer/entities/message/model/slice'
 import { MessageDto } from '@renderer/entities/message/types'
-import {
-  useMessageActions,
-  useMessageListByProjectId
-} from '@renderer/entities/message/model/slice'
+import { useSelectedProject } from '@renderer/entities/project/model/slice'
+import { useEffect, useMemo, useRef } from 'react'
+import { useForm } from 'react-hook-form'
 
 export default function ChatContent() {
   const myProfile = useMyProfile()
@@ -20,8 +17,6 @@ export default function ChatContent() {
   const selectedProject = useSelectedProject()
   const socket = useSocket()
 
-  const { addMessage } = useMessageActions()
-  const [isEventMount, setIsEventMount] = useState(false)
   const { register, handleSubmit, reset } = useForm<{ message: string }>()
   const chatContainerRef = useRef<HTMLDivElement>(null)
 
@@ -49,20 +44,6 @@ export default function ChatContent() {
     socket.emit(SOCKET_EVENT.sendMessage, selectedProject._id, newMessage)
     reset()
   }
-
-  // 메세지 수신 이벤트 등록
-  useEffect(() => {
-    if (!socket) return
-    if (!selectedProject) return
-    console.log(socket)
-    if (isEventMount) return
-
-    socket.on(SOCKET_EVENT.receiveMessage, (msg) => {
-      console.log('서버로 받은 메세지', msg)
-      addMessage(selectedProject._id, msg)
-    })
-    setIsEventMount(true)
-  }, [socket])
 
   useEffect(() => {
     if (chatContainerRef.current) {
