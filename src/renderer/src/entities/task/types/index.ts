@@ -8,7 +8,8 @@ export interface TaskDto {
   tagId: string
   // 일정 관련자들의 profileId 배열
   assignee?: string[]
-
+  // 일정 생성자 profile _id
+  createBy: string
   // mongoose 자동 생성 필드
   _id?: string
   createAt?: string
