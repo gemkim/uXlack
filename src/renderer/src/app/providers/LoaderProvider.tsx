@@ -2,8 +2,7 @@ import { useMyProfile } from '@renderer/entities/profile/model/slice'
 
 import { ReactNode } from 'react'
 
-import InviteLoader from '@renderer/widget/loader/InviteLoader'
-import ProjectLoader from '@renderer/widget/loader/ProjectLoader'
+import BootstrapLoader from '@renderer/widget/loader/BootstrapLoader'
 import SocketConnector from './SocketConnector'
 
 interface LoaderProviderProps {
@@ -19,8 +18,7 @@ export default function LoaderProvider(props: LoaderProviderProps) {
     <>
       {myProfile && (
         <>
-          <InviteLoader myProfile={myProfile} />
-          <ProjectLoader myProfile={myProfile} />
+          <BootstrapLoader myProfile={myProfile} />
           <SocketConnector myProfile={myProfile} />
         </>
       )}

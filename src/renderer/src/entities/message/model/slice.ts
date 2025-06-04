@@ -4,6 +4,7 @@ import { MessageDto } from '../types'
 interface MessageStore {
   messageListByProjectId: Record<string, MessageDto[]>
   actions: {
+    setMessageListByProjectId: (messageRecord: Record<string, MessageDto[]>) => void
     setMessageList: (projectId: string, messageList: MessageDto[]) => void
     addMessage: (projectId: string, message: MessageDto) => void
     clearMessageList: (projectId: string) => void
@@ -14,6 +15,7 @@ const useMessageStore = create<MessageStore>((set) => ({
   messageListByProjectId: {},
 
   actions: {
+    setMessageListByProjectId: (messageRecord) => set({ messageListByProjectId: messageRecord }),
     setMessageList: (projectId, messageList) =>
       set((state) => ({
         messageListByProjectId: {
