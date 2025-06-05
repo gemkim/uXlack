@@ -1,3 +1,4 @@
+import { useInviteSocket } from '@renderer/entities/invite/model/useInviteSocket'
 import { useMessageSocket } from '@renderer/entities/message/model/useMessageSocket'
 import { ProfileDto } from '@renderer/entities/profile/types'
 import { BASE_URL } from '@renderer/shared/lib/api'
@@ -15,6 +16,7 @@ export default function SocketConnector({ myProfile }: { myProfile: ProfileDto }
   const { setSocket } = useSocketActions()
 
   useMessageSocket()
+  useInviteSocket()
 
   useEffect(() => {
     if (!myProfile) return

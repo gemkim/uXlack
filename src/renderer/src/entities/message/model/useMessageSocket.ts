@@ -29,7 +29,7 @@ export function useMessageSocket() {
     )
 
     socket.emit(SOCKET_EVENT.joinRooms, projectIdList, uniqueProfileIdList)
-    socket.on('profile:get-multiple', (newProfileList) => addProfileList([...newProfileList]))
+    socket.once('profile:get-multiple', (newProfileList) => addProfileList([...newProfileList]))
   }
 
   /*
@@ -48,6 +48,8 @@ export function useMessageSocket() {
     if (!socket) return
 
     if (isReCeiveEventMount) return
+
+    console.log('메세지 수신 이벤트 등록')
 
     socket.on(SOCKET_EVENT.receiveMessage, (msg) => {
       console.log('서버로 받은 메세지', msg)

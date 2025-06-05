@@ -18,5 +18,9 @@ export const SOCKET_EVENT = {
   /**
    * 속한 프로젝트 모두 메세지 받아오기
    */
-  getAllProjectsMessageList: 'get-all-projects-message-list'
+  getAllProjectsMessageList: 'get-all-projects-message-list',
+  /**
+   * 실시간 초대 수신
+   */
+  receiveInvite: 'receive-invite'
 }
