@@ -4,6 +4,7 @@ import { InviteDto } from '../types'
 interface InviteStore {
   inviteList: InviteDto[]
   actions: {
+    addInviteList: (inviteList: InviteDto[]) => void
     setInviteList: (inviteList: InviteDto[]) => void
   }
 }
@@ -11,6 +12,8 @@ interface InviteStore {
 const useInviteStore = create<InviteStore>((set) => ({
   inviteList: [],
   actions: {
+    addInviteList: (inviteList) =>
+      set((state) => ({ inviteList: [...state.inviteList, ...inviteList] })),
     setInviteList: (inviteList) => set({ inviteList })
   }
 }))
