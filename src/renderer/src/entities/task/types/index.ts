@@ -15,3 +15,15 @@ export interface TaskDto {
   createAt?: string
   updatedAt?: string
 }
+
+// 일정 생성 API 요청 타입
+export interface CreateTaskDto {
+  projectId: string
+  name: string
+  desc: string
+  startDate: string
+  endDate?: string
+  tagId: string
+  createBy: string
+  assignee?: string[]
+}

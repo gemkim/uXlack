@@ -26,5 +26,8 @@ export const API_ENDPOINT = {
     send: '/send',
     getReceived: '/get-received',
     respond: '/respond'
+  }),
+  task: withPrefix('/task', {
+    create: '/create'
   })
 }
