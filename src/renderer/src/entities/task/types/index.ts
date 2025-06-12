@@ -2,8 +2,8 @@ export interface TaskDto {
   projectId: string
   name: string
   desc: string
-  startDate: Date
-  endDate?: Date
+  startDate: string
+  endDate?: string
   // tag도 있어야할듯한데
   tagId: string
   // 일정 관련자들의 profileId 배열
