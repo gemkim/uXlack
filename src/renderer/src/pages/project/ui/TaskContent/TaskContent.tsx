@@ -9,34 +9,6 @@ type TaskView = 'task' | 'calendar'
 
 export default function TaskContent() {
   const [view, setView] = useState<TaskView>('calendar')
-  const taskList = [
-    {
-      id:'SJ-1',
-      title:'스터디 진짜 하는 날',
-      date: '2025-06-20'
-    },
-    {
-      id:'SJ-2',
-      title:'스터디 진짜 진짜 하는 날',
-      date: '2025-06-23'
-    },
-    {
-      id:'SJ-3',
-      title:'스터디 찐 해야하는 날',
-      date: '2025-06-24'
-    },{
-      id:'SJ-3',
-      title: '포기하면 편한 날',
-      date: '2025-06-25'
-    },
-    {
-      id:'SJ-3',
-      title: '다음 스터디 뿌신다 🔥',
-      date: '2025-06-26'
-    }
-  ]
-  // └ 👏 화잍이 📨 ✍️ 브랜치 퍼가요~ 🙇‍♂️
-
   const isSelectedView = (v: TaskView) => v === view
 
   function handleNewTaskClick(event: React.MouseEvent<HTMLButtonElement>) {
