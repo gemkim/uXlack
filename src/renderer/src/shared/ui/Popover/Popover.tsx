@@ -49,9 +49,8 @@ export default function Popover(props: PopoverProps) {
     marginRight: isToLeft ? `${window.innerWidth - x + gap + halfOfTriggerWidth}px` : 'auto'
   }
 
-  console.log(isToTop)
   return (
-    <div className="fixed left-0 top-0 w-screen h-screen z-[90] pointer-events-none ">
+    <div className="fixed left-0 top-0 w-screen h-screen z-[90] pointer-events-none">
       {/* popover */}
       <AnimatePresence>
         {isOpen && (

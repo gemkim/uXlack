@@ -1,4 +1,5 @@
 import { cn } from '@renderer/shared/lib/utils/utils'
+import { forwardRef } from 'react'
 
 interface ButtonProps
   extends React.DetailedHTMLProps<
@@ -19,7 +20,10 @@ const buttonColorStyles = {
   blue: 'bg-blue-550 hover:bg-blue-650 text-white'
 }
 
-export function Button(props: ButtonProps) {
+function ButtonRef(
+  props: ButtonProps,
+  ref: React.Ref<HTMLButtonElement>
+) {
   const { className, children, isActive, colorScheme = 'gray', ...attrs } = props
 
   const highlightColorClassName = buttonColorStyles[colorScheme]
@@ -28,6 +32,7 @@ export function Button(props: ButtonProps) {
 
   return (
     <button
+      ref={ref}
       className={cn(
         className,
         'flex items-center transition-colors gap-2 py-1 px-1.5 rounded-sm',
@@ -41,3 +46,5 @@ export function Button(props: ButtonProps) {
     </button>
   )
 }
+
+export const Button = forwardRef(ButtonRef);
