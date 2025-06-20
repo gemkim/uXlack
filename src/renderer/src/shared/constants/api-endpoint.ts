@@ -27,7 +27,10 @@ export const API_ENDPOINT = {
     getReceived: '/get-received',
     respond: '/respond'
   }),
-  task: withPrefix('/task', {
-    create: '/create'
-  })
+  task: {
+    ...withPrefix('/task', {
+      create: '/create',
+    }),
+    delete: (taskId: string) => `/task/delete/${taskId}`,
+  }
 }
