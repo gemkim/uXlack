@@ -1,5 +1,6 @@
 import { useMyProfile } from '@renderer/entities/profile/model/slice'
 import Frame from '@renderer/shared/ui/Frame/Frame'
+import { Toast } from '@renderer/shared/ui/Toast/Toast'
 import WindowController from '@renderer/shared/ui/WindowController/WindowController'
 import MainNavigator from '@renderer/widget/navigation/MainNavigator'
 import { useEffect } from 'react'
@@ -29,6 +30,7 @@ function RootLayout() {
         <div className="flex-1 min-h-0 overflow-auto">
           <Outlet />
         </div>
+        <Toast />
       </div>
     </div>
   )

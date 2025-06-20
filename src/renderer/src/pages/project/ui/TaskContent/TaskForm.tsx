@@ -3,10 +3,12 @@ import { useSelectedProject } from "@renderer/entities/project/model/slice";
 import { taskApi } from "@renderer/entities/task/api/taskApi";
 import { TaskDto } from "@renderer/entities/task/types";
 import ProfileIcon from "@renderer/features/auth/ui/ProfileIcon";
+import { useToast } from "@renderer/shared/hooks/useToast";
 import InputText, { InputTextRefType } from "@renderer/shared/ui/Input/InputText";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export default function TaskForm({confirm}:{confirm: () => void}) {
+  const { addToast } = useToast();
   const selectedProject = useSelectedProject() // project
   const myProfile = useMyProfile() // 
   const profileList = useProfileList() // 
@@ -68,7 +70,6 @@ export default function TaskForm({confirm}:{confirm: () => void}) {
       .filter(([_, checkbox]) => checkbox?.checked)
       .map(([ID]) => ID);
 
-    console.log(Array.isArray(assignee)); 
     const requestBody : TaskDto = {
       projectId:selectedProject._id,
       name:title,
@@ -79,13 +80,14 @@ export default function TaskForm({confirm}:{confirm: () => void}) {
       tagId, // 업무 - 디자인, 기획, 퍼블, 등
       assignee // 참조 - 일정 관련자
     }
-
     try {
       await taskApi.create(requestBody);
+      addToast("정상적으로 등록!!.😀", "success");
       resetForm();
       confirm();
     } catch (error: any) {
       console.error('❌ 일정 등록 실패:', error);
+      addToast("일정 등록 실패했어요.😫", "error");
     }
   },[selectedProject, myProfile, showError]);
 

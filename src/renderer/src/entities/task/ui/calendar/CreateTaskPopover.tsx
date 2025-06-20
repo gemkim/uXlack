@@ -1,9 +1,8 @@
-import Popover from '@renderer/shared/ui/Popover/Popover'
+import { TaskDto } from '@renderer/entities/task/types'
 import { PopoverProps } from '@renderer/shared/types/overlayProps'
 import Form from '@renderer/shared/ui/Form/Form'
 import { FormField } from '@renderer/shared/ui/Form/types'
-import { createTask } from '@renderer/entities/task/model/slice'
-import { CreateTaskDto } from '@renderer/entities/task/types'
+import Popover from '@renderer/shared/ui/Popover/Popover'
 
 const FORM_FIELD_LIST: FormField[] = [
   {
@@ -42,7 +41,7 @@ export const CreateTaskPopover = (props: PopoverProps) => {
       // console.log(date.toString())
       // console.log(date.toISOString())
 
-      const taskData: CreateTaskDto = {
+      const taskData: TaskDto = {
         name: data.name,
         startDate: date.toISOString(),
         desc: data.desc,
@@ -50,7 +49,7 @@ export const CreateTaskPopover = (props: PopoverProps) => {
         projectId: '683904fd93608ebc7a645777', // 뭘로 해야할까
         createBy: '6838fa2721a4447f0c0c65fc' // 작성자 이름
       }
-      await createTask(taskData)
+      // await createTask(taskData)
       close()
     } catch (error) {
       console.error('일정 등록 실패:', error)
