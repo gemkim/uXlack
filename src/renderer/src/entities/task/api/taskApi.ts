@@ -20,9 +20,3 @@ export const taskApi = {
     }
   },
 }
-
-// const url = `${BASE_URL}${API_ENDPOINT.task.create}`
-//     console.log('요청 URL:', url)
-//     console.log('요청 데이터:', data)
-//     const response = await axios.post(url, data)
-//     return response.data
