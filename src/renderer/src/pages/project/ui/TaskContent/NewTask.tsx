@@ -26,7 +26,6 @@ export function NewTask (){
         colorScheme="blue" 
         className="shadow-md" 
         onClick={handleNewTaskClick}
-
       >
         <span className="text-white">새 일정</span>
       </Button>
@@ -37,7 +36,7 @@ export function NewTask (){
         onClose={onClose}
       >
         <div className="relative text-white/70 text-sm w-[300px]">
-          <TaskForm />
+          <TaskForm confirm={aniClose} />
           <CloseButton onClose={aniClose}/>
         </div>
       </PopoverWrapper>

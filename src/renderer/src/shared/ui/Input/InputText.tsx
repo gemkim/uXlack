@@ -135,40 +135,39 @@ export default forwardRef<InputTextRefType, InputPropsType>(function InputText({
       className={cn('relative w-full font-[16px] leading-none', className, isFocus && 'isFocus', isError && 'error')}
       style={style}
     >
-      <input
-        ref={inputRef}
-        type="text"
-        id={id}
-        name={name}
-        className={cn('block w-full h-10 p-2.5 rounded-md bg-transparent text-black outline-none transition-colors',lineClass, errorClass, focusClass, disabled && 'cursor-not-allowed bg-gray-100 text-gray-400')}
-        value={val}
-        onFocus={handleFocusIn}
-        onBlur={handleFocusOut}
-        onKeyUp={handleKeyUp}
-        onChange={handleOnChange}
-        autoComplete="off"
-        title={placeholder ?? title ?? '입력 해주세요'}
-        placeholder={undefined} // placeholder 대신 커스텀 처리
-        disabled={disabled}
-      />
+      <label>
+        <input
+          ref={inputRef}
+          type="text"
+          id={id}
+          name={name}
+          className={cn('block w-full h-10 p-2.5 bg-transparent text-black outline-none transition-colors',lineClass, errorClass, focusClass, disabled && 'cursor-not-allowed bg-gray-100 text-gray-400')}
+          value={val}
+          onFocus={handleFocusIn}
+          onBlur={handleFocusOut}
+          onKeyUp={handleKeyUp}
+          onChange={handleOnChange}
+          autoComplete="off"
+          title={placeholder ?? title ?? '입력 해주세요'}
+          placeholder={undefined} // placeholder 대신 커스텀 처리
+          disabled={disabled}
+        />
+      </label>
       {placeholder && val.length === 0 && (
         <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-600 pointer-events-none select-none">
           {placeholder}
         </span>
       )}
-      {
-        val.length > 0 && ( 
-          <button
-            type="button"
-            onClick={handleValRemove}
-            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-opacity"
-            aria-label="입력 삭제"
-          >
-            <IconCloseCircle />
-          </button>
-        )
-      }
-      
+      {val.length > 0 && ( 
+        <button
+          type="button"
+          onClick={handleValRemove}
+          className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-opacity"
+          aria-label="입력 삭제"
+        >
+          <IconCloseCircle />
+        </button>
+      )}
     </div>
   );
 });
