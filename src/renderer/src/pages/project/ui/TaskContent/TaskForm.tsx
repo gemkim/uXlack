@@ -10,8 +10,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 export default function TaskForm({confirm}:{confirm: () => void}) {
   const { addToast } = useToast();
   const selectedProject = useSelectedProject() // project
-  const myProfile = useMyProfile() // 
-  const profileList = useProfileList() // 
+  const myProfile = useMyProfile()
+  const profileList = useProfileList()
   const titleRef = useRef<InputTextRefType>(null);
   const descRef = useRef<HTMLTextAreaElement | null>(null);
   const dateRef = useRef<HTMLInputElement | null>(null);
@@ -19,7 +19,6 @@ export default function TaskForm({confirm}:{confirm: () => void}) {
   const assigneeRefs = useRef<Record<string, HTMLInputElement | null>>({});
   const errorTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  console.log(profileList)
   const [errorMessage, setErrorMessage] = useState({
     isOpen: false,
     message: '',
@@ -86,8 +85,8 @@ export default function TaskForm({confirm}:{confirm: () => void}) {
       resetForm();
       confirm();
     } catch (error: any) {
-      console.error('❌ 일정 등록 실패:', error);
       addToast("일정 등록 실패했어요.😫", "error");
+      console.error(error); // error 확인용
     }
   },[selectedProject, myProfile, showError]);
 
