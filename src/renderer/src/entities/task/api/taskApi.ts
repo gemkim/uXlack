@@ -3,15 +3,15 @@ import { API_ENDPOINT } from '../../../shared/constants/api-endpoint'
 import { fetchApi } from '../../../shared/lib/api'
 
 export const taskApi = {
-   getList: async (): Promise<TaskDto[]> => {
-    try {
-      const res = await fetchApi.get(API_ENDPOINT.task.getList)
-      console.log('일정 목록:', res.data)
-      return res.data
-    } catch (error: any) {
-      throw new Error(error.response.data.message || '일정 목록 조회 실패')
-    }
-  },
+  //  getList: async (): Promise<TaskDto[]> => { 등록한 일정 리스트를 가져오는 API란?!
+  //   try {
+  //     const res = await fetchApi.get(API_ENDPOINT.task.getList)
+  //     console.log('일정 목록:', res.data)
+  //     return res.data
+  //   } catch (error: any) {
+  //     throw new Error(error.response.data.message || '일정 목록 조회 실패')
+  //   }
+  // },
   create: async (data: TaskDto): Promise<TaskDto> => {
     try {
       const res = await fetchApi.post(API_ENDPOINT.task.create, data)
