@@ -1,4 +1,5 @@
 import useOnOutsideClick from '@renderer/shared/hooks/useOnOutsideClick'
+import useOverlay from '@renderer/shared/hooks/useOverlay'
 import { cn } from '@renderer/shared/lib/utils/utils'
 import { PopoverProps } from '@renderer/shared/types/overlayProps'
 import { AnimatePresence, Variants, motion } from 'motion/react'
@@ -25,16 +26,13 @@ const popoverVariants: Variants = {
 }
 
 export default function Popover(props: PopoverProps) {
-  const { isOpen, close, unmount, triggerRect, children } = props
+  const { isOpen, triggerRect, children, overlayId } = props
   const { x, y, width } = triggerRect
 
+  const { closeOverlay } = useOverlay()
+
   const ref = useOnOutsideClick(() => {
-    close()
-    if (unmount) {
-      setTimeout(() => {
-        unmount()
-      }, 600)
-    }
+    closeOverlay(overlayId)
   })
 
   const isToLeft = x > window.innerWidth / 2

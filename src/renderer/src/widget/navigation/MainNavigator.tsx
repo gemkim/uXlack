@@ -11,18 +11,19 @@ import { cn } from '@renderer/shared/lib/utils/utils'
 import { Button } from '@renderer/shared/ui/Button/Button'
 import Frame from '@renderer/shared/ui/Frame/Frame'
 
+import { useInviteList } from '@renderer/entities/invite/model/slice'
 import ProfileIcon from '@renderer/features/auth/ui/ProfileIcon'
+import useOverlay from '@renderer/shared/hooks/useOverlay'
 import AlarmPopover from '@renderer/widget/alarm/AlarmPopover'
-import { overlay } from 'overlay-kit'
 import { useNavigate } from 'react-router'
 import SettingModal from '../setting/SettingModal'
-import { useInviteList } from '@renderer/entities/invite/model/slice'
 
 export default function MainNavigator() {
   const myProfile = useMyProfile()
   const projectList = useProjectList()
   const navigate = useNavigate()
 
+  const { toggleModal, togglePopover } = useOverlay()
   const selectedProject = useSelectedProject()
 
   const { setSelectedProjectId } = useProjectActions()
@@ -30,11 +31,7 @@ export default function MainNavigator() {
   const inviteList = useInviteList()
 
   function handleNewProjectClick(event: React.MouseEvent<HTMLButtonElement>) {
-    const rect = event.currentTarget.getBoundingClientRect()
-
-    overlay.open((controller) => (
-      <CreateNewProjectPopover {...controller} triggerRect={rect}></CreateNewProjectPopover>
-    ))
+    togglePopover(CreateNewProjectPopover, event, 'project-create-project')
   }
 
   function handleHomeClick() {
@@ -48,13 +45,11 @@ export default function MainNavigator() {
   }
 
   function handleMyProfileClick() {
-    overlay.open((controller) => <SettingModal {...controller} />)
+    toggleModal(SettingModal, 'setting-modal')
   }
 
   function handleAlarmClick(event: React.MouseEvent<HTMLButtonElement>) {
-    const rect = event.currentTarget.getBoundingClientRect()
-
-    overlay.open((controller) => <AlarmPopover {...controller} triggerRect={rect}></AlarmPopover>)
+    togglePopover(AlarmPopover, event, 'alarm-popover')
   }
 
   const isSelectedProject = (id: string) => id === selectedProject?._id

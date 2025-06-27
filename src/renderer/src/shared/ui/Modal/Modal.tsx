@@ -1,16 +1,14 @@
+import useOverlay from '@renderer/shared/hooks/useOverlay'
 import { cn } from '@renderer/shared/lib/utils/utils'
 import { OverlayProps } from '@renderer/shared/types/overlayProps'
 
 export default function Modal(props: OverlayProps) {
-  const { isOpen, close, children, unmount } = props
+  const { isOpen, children, overlayId } = props
+
+  const { closeOverlay } = useOverlay()
 
   function handleBackgroundClick() {
-    close()
-    if (unmount) {
-      setTimeout(() => {
-        unmount()
-      }, 1000)
-    }
+    closeOverlay(overlayId)
   }
 
   function stopEvent(event: React.MouseEvent) {

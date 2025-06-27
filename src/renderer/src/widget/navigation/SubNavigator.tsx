@@ -1,9 +1,9 @@
 import { useSelectedProject } from '@renderer/entities/project/model/slice'
 import { ProjectContent } from '@renderer/pages/project/types'
 import { IconCalendar, IconFile, IconMessage, IconUser } from '@renderer/shared/assets/svgs'
+import useOverlay from '@renderer/shared/hooks/useOverlay'
 import { Button } from '@renderer/shared/ui/Button/Button'
 import ProjectMemberPopover from '@renderer/widget/project/ProjectMemberPopover'
-import { overlay } from 'overlay-kit'
 
 interface SubNavigatorProps {
   content: ProjectContent
@@ -15,12 +15,12 @@ export default function SubNavigator(props: SubNavigatorProps) {
 
   const selectedProject = useSelectedProject()
 
+  const { togglePopover } = useOverlay()
+
   const isSelectedContent = (c: ProjectContent) => c === content
 
   function handleProjectMemberClick(event: React.MouseEvent<HTMLButtonElement>) {
-    const rect = event.currentTarget.getBoundingClientRect()
-
-    overlay.open((controller) => <ProjectMemberPopover {...controller} triggerRect={rect} />)
+    togglePopover(ProjectMemberPopover, event, 'project-member-popover')
   }
 
   return (
