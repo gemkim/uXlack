@@ -54,7 +54,7 @@ export default function ChatContent() {
   return (
     <div className="flex flex-col relative max-h-full h-full">
       {/* 채팅 내용 */}
-      <div ref={chatContainerRef} className="flex-1 overflow-auto p-4">
+      <div ref={chatContainerRef} className="flex-1 overflow-y-auto overflow-x-hidden p-4">
         {/* 메세지가 없을 경우 */}
         {currentProjectMessageList.length < 1 && (
           <p className="absolute x-center y-center">새로운 메세지를 작성해보세요!</p>

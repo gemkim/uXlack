@@ -1,7 +1,8 @@
+import { MessageDto } from '@renderer/entities/message/types'
 import { useMyProfile, useProfileList } from '@renderer/entities/profile/model/slice'
-import { MessageDto } from '@renderer/shared/lib/socket'
 
 import ProfileIcon from '@renderer/features/auth/ui/ProfileIcon'
+import { format, isSameDay } from 'date-fns'
 
 interface ChatMessageProps {
   chat: MessageDto
@@ -21,12 +22,14 @@ export default function ChatMessage(props: ChatMessageProps) {
   if (!senderProfile) return
   if (!createdAt) return
 
-  const Formatted = new Date(createdAt).toLocaleString()
+  const currentDate = new Date()
+  const _isSameDay = isSameDay(currentDate, new Date(createdAt))
+  const Formatted = format(new Date(createdAt), _isSameDay ? 'HH:mm' : 'yyyy.MM.dd HH:mm')
 
   return (
-    <div className="flex w-full gap-4 text-sm rounded-sm">
+    <div className="flex w-full gap-4 text-sm rounded-sm break-all">
       {/* 프사 */}
-      <div>
+      <div className="shrink-0">
         <div className="size-[40px] overflow-hidden rounded-full">
           <ProfileIcon seed={senderProfile.iconSeed ?? senderProfile.name} />
         </div>
@@ -38,7 +41,7 @@ export default function ChatMessage(props: ChatMessageProps) {
           {/* 이 부분 date-fns로 수정 필요 */}
           <span className="text-xs opacity-70">{Formatted}</span>
         </div>
-        <span>{content}</span>
+        <span className="whitespace-pre-wrap">{content}</span>
       </div>
     </div>
   )
