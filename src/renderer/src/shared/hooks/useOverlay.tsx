@@ -47,12 +47,19 @@ export default function useOverlay() {
    * 모달 오버레이 토글
    * @param ModalComponent 모달 컴포넌트
    * @param overlayId 모달 오버레이 아이디
+   * @param additionalProps 모달에 전달할 추가 props
    */
-  function toggleModal(ModalComponent: React.ComponentType<any>, overlayId: string) {
+  function toggleModal(
+    ModalComponent: React.ComponentType<any>,
+    overlayId: string,
+    additionalProps?: Record<string, any>
+  ) {
     if (isOverlayOpen(overlayId)) {
       closeOverlay(overlayId)
     } else {
-      overlay.open((controller) => <ModalComponent {...controller} />, { overlayId })
+      overlay.open((controller) => <ModalComponent {...controller} {...additionalProps} />, {
+        overlayId
+      })
     }
   }
 
@@ -61,20 +68,25 @@ export default function useOverlay() {
    * @param PopoverComponent 팝오버 컴포넌트
    * @param event 팝오버 트리거 이벤트
    * @param overlayId 팝오버 오버레이 아이디
+   * @param additionalProps 팝오버에 전달할 추가 props
    */
   function togglePopover(
     PopoverComponent: React.ComponentType<any>,
-    event: React.MouseEvent<HTMLButtonElement>,
-    overlayId: string
+    event: React.MouseEvent<HTMLButtonElement | HTMLDivElement>,
+    overlayId: string,
+    additionalProps?: Record<string, any>
   ) {
     const rect = event.currentTarget.getBoundingClientRect()
 
     if (isOverlayOpen(overlayId)) {
       closeOverlay(overlayId)
     } else {
-      overlay.open((controller) => <PopoverComponent {...controller} triggerRect={rect} />, {
-        overlayId
-      })
+      overlay.open(
+        (controller) => (
+          <PopoverComponent {...controller} triggerRect={rect} {...additionalProps} />
+        ),
+        { overlayId }
+      )
     }
   }
 
