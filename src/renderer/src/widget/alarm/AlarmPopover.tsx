@@ -7,7 +7,7 @@ import { respondInvite } from '@renderer/entities/project/api/projectApi'
 
 import { useProjectActions } from '@renderer/entities/project/model/slice'
 import { ProjectDto } from '@renderer/entities/project/types/types'
-import ProfileIcon from '@renderer/features/auth/ui/ProfileIcon'
+import ProfileIcon from '@renderer/features/profile/ui/ProfileIcon'
 import { IconCheck, IconClose } from '@renderer/shared/assets/svgs'
 import { PopoverProps } from '@renderer/shared/types/overlayProps'
 import { Button } from '@renderer/shared/ui/Button/Button'

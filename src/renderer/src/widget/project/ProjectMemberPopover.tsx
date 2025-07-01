@@ -4,7 +4,7 @@ import { ProfileDto } from '@renderer/entities/profile/types'
 import { useSelectedProject } from '@renderer/entities/project/model/slice'
 import { ProjectDto } from '@renderer/entities/project/types/types'
 
-import ProfileIcon from '@renderer/features/auth/ui/ProfileIcon'
+import ProfileIcon from '@renderer/features/profile/ui/ProfileIcon'
 import { IconCheck, IconClose, IconNewUser } from '@renderer/shared/assets/svgs'
 import { API_ENDPOINT } from '@renderer/shared/constants/api-endpoint'
 import { fetchApi } from '@renderer/shared/lib/api'
@@ -16,6 +16,7 @@ import LoadingSpinner from '@renderer/shared/ui/LoadingSpinner/LoadingSpinner'
 import Popover from '@renderer/shared/ui/Popover/Popover'
 
 import { useEffect, useState } from 'react'
+import { p } from 'react-router/dist/development/fog-of-war-CGNKxM4z'
 
 const SEARCH_MSG = {
   default: '예) 홍길동#1234',
@@ -90,7 +91,7 @@ function MemberList(props: MemberListProps) {
             key={`${selectedProject._id}-member-${profile._id}`}
           >
             <div className="size-[32px] rounded-full overflow-hidden">
-              <ProfileIcon seed={profile.iconSeed ?? profile.name} />
+              <ProfileIcon profile={profile} />
             </div>
             <div className="ml-2">
               <span>

@@ -1,7 +1,7 @@
 import { MessageDto } from '@renderer/entities/message/types'
 import { useMyProfile, useProfileList } from '@renderer/entities/profile/model/slice'
 
-import ProfileIcon from '@renderer/features/auth/ui/ProfileIcon'
+import ProfileIcon from '@renderer/features/profile/ui/ProfileIcon'
 import { format, isSameDay } from 'date-fns'
 
 interface ChatMessageProps {
@@ -31,7 +31,7 @@ export default function ChatMessage(props: ChatMessageProps) {
       {/* 프사 */}
       <div className="shrink-0">
         <div className="size-[40px] overflow-hidden rounded-full">
-          <ProfileIcon seed={senderProfile.iconSeed ?? senderProfile.name} />
+          <ProfileIcon profile={senderProfile} />
         </div>
       </div>
       {/* 메세지 영역 */}

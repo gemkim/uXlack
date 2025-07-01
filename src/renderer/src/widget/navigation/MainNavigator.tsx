@@ -12,7 +12,7 @@ import { Button } from '@renderer/shared/ui/Button/Button'
 import Frame from '@renderer/shared/ui/Frame/Frame'
 
 import { useInviteList } from '@renderer/entities/invite/model/slice'
-import ProfileIcon from '@renderer/features/auth/ui/ProfileIcon'
+import ProfileIcon from '@renderer/features/profile/ui/ProfileIcon'
 import useOverlay from '@renderer/shared/hooks/useOverlay'
 import AlarmPopover from '@renderer/widget/alarm/AlarmPopover'
 import { useNavigate } from 'react-router'
@@ -124,7 +124,7 @@ export default function MainNavigator() {
             {myProfile && (
               <div className="flex gap-2 items-center">
                 <div className="size-[32px] rounded-full bg-black overflow-hidden flex justify-center items-center">
-                  <ProfileIcon />
+                  <ProfileIcon seed={myProfile.iconSeed ?? myProfile.name} />
                 </div>
                 <div className="flex flex-col items-start">
                   <div className="flex items-center gap-1">

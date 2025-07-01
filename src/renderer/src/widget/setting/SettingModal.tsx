@@ -3,7 +3,7 @@ import { useMyProfile, useProfileActions } from '@renderer/entities/profile/mode
 import { ProfileDto } from '@renderer/entities/profile/types'
 
 import LogoutButton from '@renderer/features/auth/ui/LogoutButton'
-import ProfileIcon from '@renderer/features/auth/ui/ProfileIcon'
+import ProfileIcon from '@renderer/features/profile/ui/ProfileIcon'
 import { IconCheck, IconDice, IconQuestion, IconReturn } from '@renderer/shared/assets/svgs'
 import { useHandleOption } from '@renderer/shared/hooks/useHandleOption'
 import { cn, generateString } from '@renderer/shared/lib/utils/utils'
