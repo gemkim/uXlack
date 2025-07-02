@@ -1,8 +1,10 @@
 import { thumbs } from '@dicebear/collection'
 import { createAvatar } from '@dicebear/core'
 import { ProfileDto } from '@renderer/entities/profile/types'
+import useOverlay from '@renderer/shared/hooks/useOverlay'
 import { cn } from '@renderer/shared/lib/utils/utils'
 import React from 'react'
+import ProfilePopover from './ProfilePopover'
 
 interface ProfileIconProps extends React.HTMLAttributes<HTMLDivElement> {
   profile?: ProfileDto
@@ -20,6 +22,8 @@ interface ProfileIconProps extends React.HTMLAttributes<HTMLDivElement> {
 export default function ProfileIcon(props: ProfileIconProps) {
   const { className, seed: _seed, profile } = props
 
+  const { togglePopover } = useOverlay()
+
   if (!_seed && !profile) return
 
   const avatarSvgStr = createAvatar(thumbs, {
@@ -27,11 +31,10 @@ export default function ProfileIcon(props: ProfileIconProps) {
     scale: 70
   }).toString()
 
-  function handleIconClick() {
+  function handleIconClick(event: React.MouseEvent<HTMLDivElement>) {
     if (!profile) return
 
-    console.log(profile, 'profile')
-    // togglePopover(SettingModal, event, 'setting-modal')
+    togglePopover(ProfilePopover, event, 'profile-popover', { profile })
   }
 
   return (
