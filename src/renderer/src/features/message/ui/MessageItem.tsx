@@ -52,10 +52,10 @@ export default function MessageItem(props: MessageItemProps) {
           {/* 이 부분 date-fns로 수정 필요 */}
           <span className="text-xs opacity-70">{Formatted}</span>
         </div>
-        <div className="flex flex-col pt-1 gap-1">
-          <div className="flex gap-1 flex-wrap">
-            {assigneeIdList &&
-              assigneeList.map((profile) => (
+        <div className="flex flex-col gap-1">
+          {assigneeIdList && (
+            <div className="flex gap-1 flex-wrap">
+              {assigneeList.map((profile) => (
                 <Button
                   key={profile._id}
                   className="text-[12px] !py-0 !px-0.5 shadow-md border whitespace-nowrap"
@@ -64,7 +64,9 @@ export default function MessageItem(props: MessageItemProps) {
                   @ {profile.name}
                 </Button>
               ))}
-          </div>
+            </div>
+          )}
+
           <span className="whitespace-pre-wrap">{content}</span>
         </div>
       </div>
