@@ -1,19 +1,30 @@
 import { MessageDto } from '@renderer/entities/message/types'
-import { useMyProfile, useProfileList } from '@renderer/entities/profile/model/slice'
+import {
+  useMyProfile,
+  useProfileList,
+  useSelectedProjectProfileList
+} from '@renderer/entities/profile/model/slice'
 
 import ProfileIcon from '@renderer/features/profile/ui/ProfileIcon'
+import { Button } from '@renderer/shared/ui/Button/Button'
 import { format, isSameDay } from 'date-fns'
+import { useMemo } from 'react'
 
-interface ChatMessageProps {
-  chat: MessageDto
+interface MessageItemProps {
+  message: MessageDto
 }
 
-export default function ChatMessage(props: ChatMessageProps) {
-  const { chat } = props
-  const { senderId, content, createdAt } = chat
+export default function MessageItem(props: MessageItemProps) {
+  const { message } = props
+  const { senderId, content, createdAt, assigneeIdList } = message
 
   const myProfile = useMyProfile()
   const profileList = useProfileList()
+  const selectedProjectProfileList = useSelectedProjectProfileList()
+
+  const assigneeList = useMemo(() => {
+    return selectedProjectProfileList?.filter((p) => assigneeIdList?.includes(p._id))
+  }, [assigneeIdList, selectedProjectProfileList])
 
   if (!myProfile) return
 
@@ -41,7 +52,21 @@ export default function ChatMessage(props: ChatMessageProps) {
           {/* 이 부분 date-fns로 수정 필요 */}
           <span className="text-xs opacity-70">{Formatted}</span>
         </div>
-        <span className="whitespace-pre-wrap">{content}</span>
+        <div className="flex flex-col pt-1 gap-1">
+          <div className="flex gap-1 flex-wrap">
+            {assigneeIdList &&
+              assigneeList.map((profile) => (
+                <Button
+                  key={profile._id}
+                  className="text-[12px] !py-0 !px-0.5 shadow-md border whitespace-nowrap"
+                  type="button"
+                >
+                  @ {profile.name}
+                </Button>
+              ))}
+          </div>
+          <span className="whitespace-pre-wrap">{content}</span>
+        </div>
       </div>
     </div>
   )

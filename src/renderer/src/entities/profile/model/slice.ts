@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { ProfileDto } from '../types'
 import { useMemo } from 'react'
+import { useSelectedProject } from '@renderer/entities/project/model/slice'
 
 interface ProfileStore {
   myProfile: ProfileDto | null
@@ -35,6 +36,15 @@ export const useProfileList = () => {
 }
 export const useProfileById = (id: string) => {
   return useProfileStore((state) => state.profileMap[id])
+}
+export const useSelectedProjectProfileList = () => {
+  const selectedProject = useSelectedProject()
+  const profileList = useProfileList()
+
+  return useMemo(() => {
+    if (!selectedProject) return []
+    return profileList.filter((p) => selectedProject?.memberList.includes(p._id))
+  }, [profileList, selectedProject])
 }
 
 export const useProfileActions = () => useProfileStore((state) => state.actions)

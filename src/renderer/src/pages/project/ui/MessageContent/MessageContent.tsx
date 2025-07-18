@@ -1,23 +1,12 @@
-import { useMyProfile } from '@renderer/entities/profile/model/slice'
-
-import { SOCKET_EVENT } from '@renderer/shared/lib/socket/conetants/socket-event'
-import { useSocket } from '@renderer/shared/lib/socket/model/slice'
-
-import ChatMessage from '@renderer/features/chat/ui/ChatMessage'
-
 import { useMessageListByProjectId } from '@renderer/entities/message/model/slice'
-import { MessageDto } from '@renderer/entities/message/types'
 import { useSelectedProject } from '@renderer/entities/project/model/slice'
+import MessageItem from '@renderer/features/\bmessage/ui/MessageItem'
+import MessageForm from '@renderer/features/\bmessage/ui/MessageForm'
 import { useEffect, useMemo, useRef } from 'react'
-import { useForm } from 'react-hook-form'
 
-export default function ChatContent() {
-  const myProfile = useMyProfile()
-
+export default function MessageContent() {
   const selectedProject = useSelectedProject()
-  const socket = useSocket()
 
-  const { register, handleSubmit, reset } = useForm<{ message: string }>()
   const chatContainerRef = useRef<HTMLDivElement>(null)
 
   const messageListByProjectId = useMessageListByProjectId()
@@ -27,23 +16,6 @@ export default function ChatContent() {
   }, [messageListByProjectId, selectedProject?._id])
 
   console.log('currentProjectMessageList', currentProjectMessageList)
-
-  function onSubmit(msg: { message: string }) {
-    if (!myProfile) return
-    if (!selectedProject) return
-    if (!socket) return
-
-    const newMessage: MessageDto = {
-      projectId: selectedProject._id,
-      senderId: myProfile._id!,
-      content: msg.message,
-      type: 'text',
-      status: 'sent'
-    }
-
-    socket.emit(SOCKET_EVENT.sendMessage, selectedProject._id, newMessage)
-    reset()
-  }
 
   useEffect(() => {
     if (chatContainerRef.current) {
@@ -60,19 +32,14 @@ export default function ChatContent() {
           <p className="absolute x-center y-center">새로운 메세지를 작성해보세요!</p>
         )}
         <div className="gap-6 flex flex-col max-w-[90%] size-full">
-          {currentProjectMessageList.map((chat) => (
-            <ChatMessage chat={chat} key={`${selectedProject!._id}-${chat._id}`} />
+          {currentProjectMessageList.map((message) => (
+            <MessageItem message={message} key={`${selectedProject!._id}-${message._id}`} />
           ))}
         </div>
       </div>
       {/* 입력창 */}
       <div className="flex-0 shrink-0 flex items-end p-4">
-        <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
-          <input
-            className="w-full p-2 bg-white/20 border shadow-md rounded-md outline-0"
-            {...register('message')}
-          />
-        </form>
+        <MessageForm />
       </div>
     </div>
   )

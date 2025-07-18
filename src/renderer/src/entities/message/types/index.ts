@@ -8,6 +8,7 @@ export interface MessageDto {
   content: string
   type: MessageType
   status: MessageStatus
+  assigneeIdList?: string[]
   createdAt?: string
   updatedAt?: string
 }
