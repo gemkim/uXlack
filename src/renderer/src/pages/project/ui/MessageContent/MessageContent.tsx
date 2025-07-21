@@ -1,7 +1,7 @@
 import { useMessageListByProjectId } from '@renderer/entities/message/model/slice'
 import { useSelectedProject } from '@renderer/entities/project/model/slice'
-import MessageItem from '@renderer/features/\bmessage/ui/MessageItem'
-import MessageForm from '@renderer/features/\bmessage/ui/MessageForm'
+import MessageItem from '@renderer/features/message/ui/MessageItem'
+import MessageForm from '@renderer/features/message/ui/MessageForm'
 import { useEffect, useMemo, useRef } from 'react'
 
 export default function MessageContent() {
