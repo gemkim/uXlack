@@ -23,7 +23,7 @@ export default function Modal(props: OverlayProps) {
         !isOpen && 'opacity-0 pointer-events-none'
       )}
     >
-      <div onClick={stopEvent} className="p-4 bg-white rounded-sm">
+      <div onClick={stopEvent} className='p-4 bg-white rounded-sm'>
         {children}
       </div>
     </div>

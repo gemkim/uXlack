@@ -48,7 +48,7 @@ export default function Popover(props: PopoverProps) {
   }
 
   return (
-    <div className="fixed left-0 top-0 w-screen h-screen z-[90] pointer-events-none">
+    <div className='fixed left-0 top-0 w-screen h-screen z-[90] pointer-events-none'>
       {/* popover */}
       <AnimatePresence>
         {isOpen && (
@@ -57,9 +57,9 @@ export default function Popover(props: PopoverProps) {
             variants={popoverVariants}
             ref={ref}
             custom={{ isToLeft, isToTop }}
-            initial="initial"
-            animate="animate"
-            exit="exit"
+            initial='initial'
+            animate='animate'
+            exit='exit'
             className={cn(
               'p-4 bg-white rounded-md max-w-[50%] w-max max-h-[50%] pointer-events-auto shadow-md border'
             )}

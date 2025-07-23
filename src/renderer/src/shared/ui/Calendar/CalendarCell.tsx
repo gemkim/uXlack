@@ -41,7 +41,7 @@ export function CalendarCell(props: CalendarCellProps) {
         isBottomRight && 'rounded-br-md'
       )}
     >
-      <div className="flex w-full mt-1">
+      <div className='flex w-full mt-1'>
         <span
           className={cn(
             'ml-auto mr-2',

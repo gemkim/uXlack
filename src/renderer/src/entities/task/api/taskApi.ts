@@ -20,7 +20,7 @@ export const taskApi = {
     } catch (error: any) {
       throw new Error(error.response.data.message || '일정 생성 실패')
     }
-  },
+  }
   // update: async (taskId: string, data: Partial<TaskDto>): Promise<TaskDto> => {
   //   try {
   //     const res = await fetchApi.put(API_ENDPOINT.task.update, { taskId, ...data })

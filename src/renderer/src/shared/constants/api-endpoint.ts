@@ -28,9 +28,9 @@ export const API_ENDPOINT = {
     respond: '/respond'
   }),
   task: withPrefix('/task', {
-    // getList: '/get-list', 
-    create: '/create',
-    // update: '/update',  
+    // getList: '/get-list',
+    create: '/create'
+    // update: '/update',
     // delete: '/delete',
   })
 }

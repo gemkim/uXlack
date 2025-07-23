@@ -24,21 +24,21 @@ export default function MessageContent() {
   }, [currentProjectMessageList]) // messages가 변경될 때 실행
 
   return (
-    <div className="flex flex-col relative max-h-full h-full">
+    <div className='flex flex-col relative max-h-full h-full'>
       {/* 채팅 내용 */}
-      <div ref={chatContainerRef} className="flex-1 overflow-y-auto overflow-x-hidden p-4">
+      <div ref={chatContainerRef} className='flex-1 overflow-y-auto overflow-x-hidden p-4'>
         {/* 메세지가 없을 경우 */}
         {currentProjectMessageList.length < 1 && (
-          <p className="absolute x-center y-center">새로운 메세지를 작성해보세요!</p>
+          <p className='absolute x-center y-center'>새로운 메세지를 작성해보세요!</p>
         )}
-        <div className="gap-6 flex flex-col max-w-[90%] size-full">
+        <div className='gap-6 flex flex-col max-w-[90%] size-full'>
           {currentProjectMessageList.map((message) => (
             <MessageItem message={message} key={`${selectedProject!._id}-${message._id}`} />
           ))}
         </div>
       </div>
       {/* 입력창 */}
-      <div className="flex-0 shrink-0 flex items-end p-4">
+      <div className='flex-0 shrink-0 flex items-end p-4'>
         <MessageForm />
       </div>
     </div>

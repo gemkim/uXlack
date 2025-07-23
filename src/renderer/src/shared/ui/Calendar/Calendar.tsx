@@ -11,32 +11,32 @@ const DAY_LIST = ['월', '화', '수', '목', '금', '토', '일']
 export default function Calendar() {
   const { today, currentDate, daysOfMonth, prevMonth, nextMonth, setCurrentDate } = useCalendar()
   return (
-    <div className="size-full flex flex-col">
+    <div className='size-full flex flex-col'>
       {/* 컨트롤러 */}
-      <div className="flex justify-between">
-        <span className="font-semibold">{format(currentDate, 'yyyy년 M월')}</span>
-        <div className="flex">
+      <div className='flex justify-between'>
+        <span className='font-semibold'>{format(currentDate, 'yyyy년 M월')}</span>
+        <div className='flex'>
           <Button onClick={prevMonth}>
-            <IconAngleBracket className="rotate-90" />
+            <IconAngleBracket className='rotate-90' />
           </Button>
           <Button onClick={() => setCurrentDate(today)}>오늘</Button>
           <Button onClick={nextMonth}>
-            <IconAngleBracket className="rotate-270" />
+            <IconAngleBracket className='rotate-270' />
           </Button>
         </div>
       </div>
-      <div className="flex-1 mt-2">
-        <div className="text-xs size-full flex flex-col ">
+      <div className='flex-1 mt-2'>
+        <div className='text-xs size-full flex flex-col '>
           {/* MTWTFSS */}
-          <div className="grid grid-cols-7">
+          <div className='grid grid-cols-7'>
             {DAY_LIST.map((week, idx) => (
-              <div key={week} className="flex justify-center">
+              <div key={week} className='flex justify-center'>
                 <span className={cn(idx === DAY_LIST.length - 1 && 'text-red-300')}>{week}</span>
               </div>
             ))}
           </div>
           {/* days */}
-          <div className="grid grid-cols-7 mt-2 flex-1">
+          <div className='grid grid-cols-7 mt-2 flex-1'>
             {daysOfMonth.map((day, index) => (
               <CalendarCell
                 today={today}

@@ -9,9 +9,9 @@ export default function Form(props: FormProps) {
   const isRequired = (bool: boolean | undefined) => (bool === undefined ? true : bool)
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="h-full flex flex-col gap-4">
+    <form onSubmit={handleSubmit(onSubmit)} className='h-full flex flex-col gap-4'>
       {fieldList.map((field, idx) => (
-        <div className="flex flex-col" key={idx}>
+        <div className='flex flex-col' key={idx}>
           <label>{field.displayName}</label>
           <Input
             register={register(field.registerName, {
@@ -24,7 +24,7 @@ export default function Form(props: FormProps) {
       {children ? (
         children
       ) : (
-        <button className="ml-auto mt-4 " type="submit">
+        <button className='ml-auto mt-4 ' type='submit'>
           확인
         </button>
       )}

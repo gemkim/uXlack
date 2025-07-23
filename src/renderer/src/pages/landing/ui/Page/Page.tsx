@@ -19,19 +19,19 @@ export default function LandingPage() {
   }, [myProfile])
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-zinc-50 flex-col relative">
+    <div className='w-screen h-screen flex justify-center items-center bg-zinc-50 flex-col relative'>
       <div
-        className="absolute top-0 left-0 w-full h-[50px]"
+        className='absolute top-0 left-0 w-full h-[50px]'
         style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}
       ></div>
-      <div className="bg-white min-w-[350px] min-h-[200px] px-4 py-8 rounded-sm shadow-md flex gap-4">
-        <div className="basis-[40%] flex items-center justify-center border-r">
-          <h1 className="font-bold">uXlack</h1>
+      <div className='bg-white min-w-[350px] min-h-[200px] px-4 py-8 rounded-sm shadow-md flex gap-4'>
+        <div className='basis-[40%] flex items-center justify-center border-r'>
+          <h1 className='font-bold'>uXlack</h1>
         </div>
-        <div className="flex-1 flex flex-col">
+        <div className='flex-1 flex flex-col'>
           {isRegistering ? <RegisterForm setIsRegistering={setIsRegistering} /> : <LoginForm />}
 
-          <div className="mt-4 flex justify-center">
+          <div className='mt-4 flex justify-center'>
             <Button onClick={() => setIsRegistering((prev) => !prev)}>
               {isRegistering ? '로그인으로' : '회원가입으로'}{' '}
             </Button>

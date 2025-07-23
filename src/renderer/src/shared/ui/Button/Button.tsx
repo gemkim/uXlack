@@ -20,10 +20,7 @@ const buttonColorStyles = {
   blue: 'bg-blue-550 hover:bg-blue-650 text-white'
 }
 
-function ButtonRef(
-  props: ButtonProps,
-  ref: React.Ref<HTMLButtonElement>
-) {
+function ButtonRef(props: ButtonProps, ref: React.Ref<HTMLButtonElement>) {
   const { className, children, isActive, colorScheme = 'gray', ...attrs } = props
 
   const highlightColorClassName = buttonColorStyles[colorScheme]
@@ -47,4 +44,4 @@ function ButtonRef(
   )
 }
 
-export const Button = forwardRef(ButtonRef);
+export const Button = forwardRef(ButtonRef)
