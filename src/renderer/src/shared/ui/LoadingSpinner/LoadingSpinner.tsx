@@ -23,9 +23,9 @@ export default function LoadingSpinner(props: LoadingSpinnerProps) {
           'shadow-lg inline-block h-8 w-8 animate-spin rounded-full border-2 border-solid border-gray-400 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]',
           white && 'border-white'
         )}
-        role="status"
+        role='status'
       >
-        <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+        <span className='!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]'>
           Loading...
         </span>
       </div>
@@ -33,7 +33,7 @@ export default function LoadingSpinner(props: LoadingSpinnerProps) {
   )
 
   if (container) {
-    return <div className="flex min-h-[100vh] items-center inner">{renderSpinner()}</div>
+    return <div className='flex min-h-[100vh] items-center inner'>{renderSpinner()}</div>
   }
 
   return renderSpinner()

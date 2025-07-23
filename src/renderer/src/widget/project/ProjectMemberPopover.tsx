@@ -49,8 +49,8 @@ export default function ProjectMemberPopover(props: PopoverProps) {
 
   return (
     <Popover {...props}>
-      <div className="text-white/70 text-sm min-w-[150px] min-h-[100px] max-w-[200px] flex flex-col">
-        <div className="flex-1 flex flex-col">
+      <div className='text-white/70 text-sm min-w-[150px] min-h-[100px] max-w-[200px] flex flex-col'>
+        <div className='flex-1 flex flex-col'>
           {isInvite ? (
             <Invite
               selectedProject={selectedProject}
@@ -80,23 +80,23 @@ function MemberList(props: MemberListProps) {
   const { memberList, handleToggleClick, selectedProject } = props
   return (
     <>
-      <Button onClick={handleToggleClick} className="flex gap-2 items-center w-full">
+      <Button onClick={handleToggleClick} className='flex gap-2 items-center w-full'>
         <IconNewUser />
         <span>새 멤버</span>{' '}
       </Button>
-      <div className="flex flex-col mt-4">
+      <div className='flex flex-col mt-4'>
         {memberList.map((profile) => (
           <div
-            className="flex items-center p-2"
+            className='flex items-center p-2'
             key={`${selectedProject._id}-member-${profile._id}`}
           >
-            <div className="size-[32px] rounded-full overflow-hidden">
+            <div className='size-[32px] rounded-full overflow-hidden'>
               <ProfileIcon profile={profile} />
             </div>
-            <div className="ml-2">
+            <div className='ml-2'>
               <span>
                 {profile.name}
-                <span className="text-xs text-gray-400 ml-1">#{profile.tag}</span>
+                <span className='text-xs text-gray-400 ml-1'>#{profile.tag}</span>
               </span>
             </div>
           </div>
@@ -216,26 +216,26 @@ function Invite(props: InviteProps) {
 
   return (
     <>
-      <div className="flex gap-2 items-center">
-        <Input placeholder="이름#태그" onChange={handleInputChange} value={searchValue} />
+      <div className='flex gap-2 items-center'>
+        <Input placeholder='이름#태그' onChange={handleInputChange} value={searchValue} />
         <Button onClick={handleToggleClick}>
           <IconClose />
         </Button>
       </div>
-      <div className="flex flex-col h-full flex-1 justify-center mt-4">
-        {!isLoading && !searchedProfile && <p className="text-gray-400">{searchMsg}</p>}
+      <div className='flex flex-col h-full flex-1 justify-center mt-4'>
+        {!isLoading && !searchedProfile && <p className='text-gray-400'>{searchMsg}</p>}
         {isLoading && !searchedProfile && <LoadingSpinner />}
 
         {searchedProfile && (
-          <div className="flex items-center">
-            <div className="size-[32px] rounded-full overflow-hidden">
+          <div className='flex items-center'>
+            <div className='size-[32px] rounded-full overflow-hidden'>
               <ProfileIcon seed={searchedProfile.iconSeed ?? searchedProfile.name} />
             </div>
-            <span className="ml-2">{searchedProfile.name}</span>
-            <span className="ml-1 text-gray-400 text-xs">#{searchedProfile.tag}</span>
-            <span className="ml-auto">
+            <span className='ml-2'>{searchedProfile.name}</span>
+            <span className='ml-1 text-gray-400 text-xs'>#{searchedProfile.tag}</span>
+            <span className='ml-auto'>
               <Button disabled={isInviteSuccess} onClick={handleInviteClick}>
-                {isInviteSuccess ? <IconCheck className="fill-blue-400" /> : <IconNewUser />}
+                {isInviteSuccess ? <IconCheck className='fill-blue-400' /> : <IconNewUser />}
               </Button>
             </span>
           </div>

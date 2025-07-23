@@ -66,17 +66,17 @@ export default function MessageForm() {
   }, [selectedProject])
 
   return (
-    <form className="w-full relative " onSubmit={handleSubmit(onSubmit)}>
+    <form className='w-full relative ' onSubmit={handleSubmit(onSubmit)}>
       {isTagVisible && (
-        <div className="absolute bottom-full left-0 mb-2 w-[200px] bg-white border flex flex-col rounded-md shadow-md">
+        <div className='absolute bottom-full left-0 mb-2 w-[200px] bg-white border flex flex-col rounded-md shadow-md'>
           {projectProfileList.map((profile, idx) => (
             <div key={profile._id} className={cn('gap-2', idx !== 0 && 'border-t')}>
               <Button
-                className="flex items-center gap-2 w-full size-full"
-                type="button"
+                className='flex items-center gap-2 w-full size-full'
+                type='button'
                 onClick={() => handleAddAssignee(profile)}
               >
-                <div className="size-8 rounded-full overflow-hidden">
+                <div className='size-8 rounded-full overflow-hidden'>
                   <ProfileIcon profile={profile} />
                 </div>
                 <span>{profile.name}</span>
@@ -85,20 +85,20 @@ export default function MessageForm() {
           ))}
         </div>
       )}
-      <div className="absolute bottom-full right-0 flex gap-2 mb-2">
+      <div className='absolute bottom-full right-0 flex gap-2 mb-2'>
         {assigneeList.map((profile) => (
           <Button
             key={profile._id}
-            className="text-xs !py-0.5 !px-1 shadow-md border"
-            type="button"
+            className='text-xs !py-0.5 !px-1 shadow-md border'
+            type='button'
             onClick={() => handleRemoveAssignee(profile._id)}
           >
             @ {profile.name}
           </Button>
         ))}
       </div>
-      <div className="flex w-full p-2 bg-white/20 border shadow-md rounded-md outline-0 gap-2">
-        <input className="flex-1" {...register('message')} />
+      <div className='flex w-full p-2 bg-white/20 border shadow-md rounded-md outline-0 gap-2'>
+        <input className='flex-1' {...register('message')} />
       </div>
     </form>
   )

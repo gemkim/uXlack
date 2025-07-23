@@ -30,7 +30,7 @@ export default function LogoutButton(props: LogoutButtionProps) {
     closeAllOverlay()
   }
   return (
-    <Button onClick={handleOnClick} className="text-red-300 font-semibold">
+    <Button onClick={handleOnClick} className='text-red-300 font-semibold'>
       {children ? children : '로그아웃'}
     </Button>
   )

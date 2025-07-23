@@ -58,7 +58,7 @@ export const CreateTaskPopover = (props: PopoverProps) => {
 
   return (
     <Popover {...props}>
-      <div className="text-white/70 text-sm w-[300px]">
+      <div className='text-white/70 text-sm w-[300px]'>
         <Form fieldList={FORM_FIELD_LIST} onSubmit={onSubmit} />
       </div>
     </Popover>

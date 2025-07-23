@@ -21,7 +21,7 @@ export default function AlarmPopover(props: PopoverProps) {
   console.log(inviteList)
   return (
     <Popover {...props}>
-      <div className="text-white/70 text-sm w-[300px]">
+      <div className='text-white/70 text-sm w-[300px]'>
         {alarmLength < 0 && <p>새로운 알림이 없습니다.</p>}
         <InviteAlarm inviteList={inviteList} />
       </div>
@@ -64,28 +64,28 @@ function InviteAlarm({ inviteList }: { inviteList: InviteDto[] }) {
 
   return (
     <div>
-      <span className="text-xs text-gray-400">초대</span>
-      <div className="flex flex-col mt-2 gap-4">
+      <span className='text-xs text-gray-400'>초대</span>
+      <div className='flex flex-col mt-2 gap-4'>
         {inviteList.map((invite) => (
-          <div className="flex flex-col" key={invite._id}>
-            <div className="flex items-center">
-              <div className="size-[32px] rounded-full overflow-hidden shrink-0">
+          <div className='flex flex-col' key={invite._id}>
+            <div className='flex items-center'>
+              <div className='size-[32px] rounded-full overflow-hidden shrink-0'>
                 <ProfileIcon seed={invite.inviter.iconSeed ?? invite.inviter.name} />
               </div>
-              <p className="ml-4 text-xs">
-                <span className="font-semibold text-xs">
+              <p className='ml-4 text-xs'>
+                <span className='font-semibold text-xs'>
                   {invite.inviter.name}#{invite.inviter.tag}
                 </span>
-                님이 <span className="text-xs font-semibold">{invite.project.name}</span> 프로젝트에
+                님이 <span className='text-xs font-semibold'>{invite.project.name}</span> 프로젝트에
                 초대했습니다.
               </p>
             </div>
-            <div className="flex justify-end text-xs gap-4">
+            <div className='flex justify-end text-xs gap-4'>
               <Button onClick={() => handleInviteRespondClick(invite._id, false)}>
-                <IconClose className="size-[12px] fill-red-400" />
+                <IconClose className='size-[12px] fill-red-400' />
               </Button>
               <Button onClick={() => handleInviteRespondClick(invite._id, true)}>
-                <IconCheck className="size-[12px] fill-blue-400" />
+                <IconCheck className='size-[12px] fill-blue-400' />
               </Button>
             </div>
           </div>

@@ -24,20 +24,20 @@ export default function SubNavigator(props: SubNavigatorProps) {
   }
 
   return (
-    <div className="flex flex-col min-w-[220px] h-full">
+    <div className='flex flex-col min-w-[220px] h-full'>
       {selectedProject && (
         <>
-          <div className="border-r h-full px-4 bg-zinc-50">
-            <div className="flex items-center px-1.5 py-1 mt-4 justify-between">
+          <div className='border-r h-full px-4 bg-zinc-50'>
+            <div className='flex items-center px-1.5 py-1 mt-4 justify-between'>
               <div>
-                <span className="font-bold">{selectedProject.name}</span>
+                <span className='font-bold'>{selectedProject.name}</span>
               </div>
-              <Button className="flex items-center gap-2" onClick={handleProjectMemberClick}>
+              <Button className='flex items-center gap-2' onClick={handleProjectMemberClick}>
                 <IconUser />
-                <span className="text-sm">{selectedProject.memberList.length}</span>
+                <span className='text-sm'>{selectedProject.memberList.length}</span>
               </Button>
             </div>
-            <div className="flex flex-col mt-4 gap-2">
+            <div className='flex flex-col mt-4 gap-2'>
               <Button isActive={isSelectedContent('chat')} onClick={() => setContent('chat')}>
                 <IconMessage />
                 메세지

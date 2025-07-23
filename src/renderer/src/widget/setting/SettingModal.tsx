@@ -38,9 +38,9 @@ export default function SettingModal(props: OverlayProps) {
 
   return (
     <Modal {...props}>
-      <div className="w-[80vw] h-[80vh] flex">
+      <div className='w-[80vw] h-[80vh] flex'>
         {/* 메뉴 패널 */}
-        <div className="border-r pr-4 h-full min-w-[120px] flex flex-col gap-0.5">
+        <div className='border-r pr-4 h-full min-w-[120px] flex flex-col gap-0.5'>
           {SETTING_CONTENTS.map((option) => (
             <Button
               key={option.name}
@@ -51,13 +51,13 @@ export default function SettingModal(props: OverlayProps) {
             </Button>
           ))}
 
-          <Button className="mt-auto">
+          <Button className='mt-auto'>
             <IconQuestion />
             도움말
           </Button>
         </div>
         {/* 컨텐츠 패널 */}
-        <div className="flex-1">
+        <div className='flex-1'>
           {selectedOption.name === 'profile' && myProfile && <Profile profile={myProfile} />}
           {selectedOption.name === 'setting' && <Setting />}
         </div>
@@ -104,14 +104,14 @@ function Profile({ profile }: { profile: ProfileDto }) {
   }
 
   return (
-    <div className="flex flex-col px-4 size-full">
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col gap-2">
-          <label className="font-bold">프로필 이미지</label>
-          <div className="flex gap-4">
+    <div className='flex flex-col px-4 size-full'>
+      <div className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-2'>
+          <label className='font-bold'>프로필 이미지</label>
+          <div className='flex gap-4'>
             <div
               onClick={handleProfileImageClick}
-              className="size-[112px] overflow-hidden rounded-full border flex items-center justify-center cursor-pointer hover:brightness-75 transition-all"
+              className='size-[112px] overflow-hidden rounded-full border flex items-center justify-center cursor-pointer hover:brightness-75 transition-all'
             >
               <ProfileIcon seed={seed} />
             </div>
@@ -121,11 +121,11 @@ function Profile({ profile }: { profile: ProfileDto }) {
                 isProfileEditing ? 'opacity-100' : 'opacity-0 pointer-events-none'
               )}
             >
-              <div className="flex gap-4">
+              <div className='flex gap-4'>
                 <Button onClick={hnadleProfileRandomClick}>
                   <IconDice />
                 </Button>
-                <div className="flex gap-2">
+                <div className='flex gap-2'>
                   <Button onClick={handleReturnClick}>
                     <IconReturn />
                   </Button>
@@ -137,18 +137,18 @@ function Profile({ profile }: { profile: ProfileDto }) {
             </div>
           </div>
         </div>
-        <div className="flex gap-4">
-          <div className="flex flex-col gap-2 basis-1/3">
-            <label className="font-bold">이름</label>
+        <div className='flex gap-4'>
+          <div className='flex flex-col gap-2 basis-1/3'>
+            <label className='font-bold'>이름</label>
             <Input value={name} disabled />
           </div>
-          <div className="flex flex-col gap-2 basis-1/3">
-            <label className="font-bold">태그</label>
+          <div className='flex flex-col gap-2 basis-1/3'>
+            <label className='font-bold'>태그</label>
             <Input value={`#${tag}`} disabled />
           </div>
         </div>
       </div>
-      <div className="mt-auto flex justify-end">
+      <div className='mt-auto flex justify-end'>
         <LogoutButton />
       </div>
     </div>
@@ -156,5 +156,5 @@ function Profile({ profile }: { profile: ProfileDto }) {
 }
 
 function Setting() {
-  return <div className="px-4">세팅</div>
+  return <div className='px-4'>세팅</div>
 }

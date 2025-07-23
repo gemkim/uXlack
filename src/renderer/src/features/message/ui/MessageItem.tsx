@@ -38,28 +38,28 @@ export default function MessageItem(props: MessageItemProps) {
   const Formatted = format(new Date(createdAt), _isSameDay ? 'HH:mm' : 'yyyy.MM.dd HH:mm')
 
   return (
-    <div className="flex w-full gap-4 text-sm rounded-sm break-all">
+    <div className='flex w-full gap-4 text-sm rounded-sm break-all'>
       {/* 프사 */}
-      <div className="shrink-0">
-        <div className="size-[40px] overflow-hidden rounded-full">
+      <div className='shrink-0'>
+        <div className='size-[40px] overflow-hidden rounded-full'>
           <ProfileIcon profile={senderProfile} />
         </div>
       </div>
       {/* 메세지 영역 */}
-      <div className="flex-1">
-        <div className="flex items-center gap-2">
-          <span className="font-semibold">{senderProfile.name}</span>
+      <div className='flex-1'>
+        <div className='flex items-center gap-2'>
+          <span className='font-semibold'>{senderProfile.name}</span>
           {/* 이 부분 date-fns로 수정 필요 */}
-          <span className="text-xs opacity-70">{Formatted}</span>
+          <span className='text-xs opacity-70'>{Formatted}</span>
         </div>
-        <div className="flex flex-col gap-1">
+        <div className='flex flex-col gap-1'>
           {assigneeIdList && (
-            <div className="flex gap-1 flex-wrap">
+            <div className='flex gap-1 flex-wrap'>
               {assigneeList.map((profile) => (
                 <Button
                   key={profile._id}
-                  className="text-[12px] !py-0 !px-0.5 shadow-md border whitespace-nowrap"
-                  type="button"
+                  className='text-[12px] !py-0 !px-0.5 shadow-md border whitespace-nowrap'
+                  type='button'
                 >
                   @ {profile.name}
                 </Button>
@@ -67,7 +67,7 @@ export default function MessageItem(props: MessageItemProps) {
             </div>
           )}
 
-          <span className="whitespace-pre-wrap">{content}</span>
+          <span className='whitespace-pre-wrap'>{content}</span>
         </div>
       </div>
     </div>

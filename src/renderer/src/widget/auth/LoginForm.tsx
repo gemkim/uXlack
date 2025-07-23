@@ -40,12 +40,12 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="h-full">
+    <div className='h-full'>
       <Form fieldList={FORM_FIELD_LIST} onSubmit={onSubmit}>
-        <Button colorScheme="blue" type="submit" className="mt-auto ml-auto">
+        <Button colorScheme='blue' type='submit' className='mt-auto ml-auto'>
           로그인
         </Button>
-        {errorMsg && <p className="text-red-400">{errorMsg ?? ''}</p>}
+        {errorMsg && <p className='text-red-400'>{errorMsg ?? ''}</p>}
       </Form>
     </div>
   )
