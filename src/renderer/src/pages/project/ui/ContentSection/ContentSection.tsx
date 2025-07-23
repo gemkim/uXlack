@@ -1,5 +1,6 @@
 import { ProjectContent } from '../../types'
 import MessageContent from '../MessageContent/MessageContent'
+import ResourceContent from '../ResourceContent/ResourceContent'
 import TaskContent from '../TaskContent/TaskContent'
 
 interface ContentSectionProps {
@@ -15,6 +16,6 @@ export default function ContentSection(props: ContentSectionProps) {
     case 'task':
       return <TaskContent />
     case 'resource':
-      return <></>
+      return <ResourceContent />
   }
 }

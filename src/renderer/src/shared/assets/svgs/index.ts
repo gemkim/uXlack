@@ -21,4 +21,6 @@ export { AiOutlineRollback as IconReturn } from 'react-icons/ai'
 export { AiOutlineCheck as IconCheck } from 'react-icons/ai'
 export { LuDice5 as IconDice } from 'react-icons/lu'
 export { AiOutlineUserAdd as IconNewUser } from 'react-icons/ai'
-export { AiFillCloseCircle as IconCloseCircle } from "react-icons/ai";
+export { AiFillFileZip as IconZip } from 'react-icons/ai'
+export { AiOutlineFileImage as IconImgFile } from 'react-icons/ai'
+export { AiFillCloseCircle as IconCloseCircle } from 'react-icons/ai'

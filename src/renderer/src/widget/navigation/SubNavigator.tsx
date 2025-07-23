@@ -46,7 +46,10 @@ export default function SubNavigator(props: SubNavigatorProps) {
                 <IconCalendar />
                 일정
               </Button>
-              <Button>
+              <Button
+                isActive={isSelectedContent('resource')}
+                onClick={() => setContent('resource')}
+              >
                 <IconFile />
                 자료
               </Button>
